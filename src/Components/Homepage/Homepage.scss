@@ -1,0 +1,123 @@
+@import '../../index';
+
+main {
+
+  h2 {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .Cover {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 10px;
+    height: 600px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 0;
+
+    .CoverDetails {
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem;
+      position: relative;
+
+      .Overlay {
+        width: 72%;
+        height: 90%;
+        position: absolute;
+        left: -25px;
+        top: 83px;
+  
+        transform: skew(-20deg, 0deg);
+        // background-image: linear-gradient(to top, #F5F6FA 20%, #D6D6D6 100%);
+      }
+      
+
+      h1 {
+        font-weight: 800;
+        font-size: 3.25rem;
+        padding-bottom: .5rem;
+        color: $text-color;
+        z-index: 1;
+      }
+
+      p {
+        padding-bottom: 1.5rem;
+        z-index: 1;
+
+      }
+
+      button {
+        background: $primary-color;
+        padding: 15px 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+        border: 1px solid #C3003E;
+        z-index: 1;
+      }
+
+      button:hover {
+        background: #C3003E;
+        transition: .7s;
+      }
+    }
+
+    .CoverIcons {
+      position: relative;
+
+      img {
+        width: 20rem;
+        height: 20rem;
+        position: absolute; 
+        bottom: 0;
+        right: 0;
+      
+      }
+    }
+  }
+
+  .Features {
+    background: #f6f6f6;
+    padding: 2rem 0;
+    border-top: 1px solid #ccc;
+
+    h2 {
+      padding-bottom: 1.5rem;
+      font-weight: 800;
+      font-size: 2.0rem;
+    }
+
+    .FeatureCard {
+      background: none;
+      border: none;
+      display: flex;
+      height: 15rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: .5rem;
+      margin-bottom: 1rem;
+      border-radius: 0;
+
+      .CardHeader {
+        font-weight: 700;
+      }
+
+      p {
+        text-align: left;
+      }
+
+      img {
+        width: 75px;
+        height: 75px;
+        margin-top: .75rem;
+      }
+    }
+  }
+}
+
