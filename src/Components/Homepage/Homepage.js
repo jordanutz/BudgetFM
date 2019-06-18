@@ -39,7 +39,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Budget</Card.Title>
                   <Card.Text>
-                    <p>Set a budget for each category of expense and receive a reminder when you are close to exceed your budget.</p>
+                    Set a budget for each category of expense and receive a reminder when you are close to exceed your budget.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -51,7 +51,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Credit Card</Card.Title>
                   <Card.Text>
-                    <p>Manage all your credit cards to not get charged interest on everything on your card. Plan to pay off in full each month.</p>
+                    Manage all your credit cards to not get charged interest on everything on your card. Plan to pay off in full each month.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -63,7 +63,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Categories</Card.Title>
                   <Card.Text>
-                    <p>Create categories for your expenses and incomes. Choose an icon and color making it unique for you.</p>
+                    Create categories for your expenses and incomes. Choose an icon and color making it unique for you.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -75,7 +75,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Dreams Tool</Card.Title>
                   <Card.Text>
-                    <p>Create dreams, save money and make it come true.</p>
+                    Create dreams, save money and make it come true.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -87,7 +87,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Reminder</Card.Title>
                   <Card.Text>
-                    <p>BudgetFM will remind you when your bills are due so you'll never miss a payment again.</p>
+                    BudgetFM will remind you when your bills are due so you'll never miss a payment again.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -99,7 +99,7 @@ const Homepage = (props) => {
                 <Card.Body>
                   <Card.Title className="CardHeader">Charts</Card.Title>
                   <Card.Text>
-                    <p>See where you are spending all your money with powerful charts.</p>
+                    See where you are spending all your money with powerful charts.
                   </Card.Text>
                 </Card.Body>
               </Card>

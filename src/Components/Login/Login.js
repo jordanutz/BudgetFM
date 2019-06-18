@@ -1,35 +1,80 @@
-import React, {Component} from 'react'
+import React from 'react'
 import './Login.scss'
 
-class Login extends Component {
-  constructor () {
-    super()
-    this.state = {
-      signIn: false, 
-      
-    }
-  }
+import {Formik} from 'formik'
+import * as Yup from 'yup';
 
-  toggleSignIn = () => {
-    this.setState({
-      signIn: true
-    })
-  }
 
-  toggleSignUp = () => {
-    this.setState({
-      signIn: false
-    })
-  }
+const Login = (props) => (
 
-  render () {
+  <Formik
+    initialValues={{email: '', password: ''}}
+    onSubmit={ (values, {setSubmitting}) => {
+    console.log('Submitting')
+    console.log(values)
+  }}
 
-    return (
-      <div className="Login">
-       
-      </div>
-    )
-  }
-}
+  validationSchema = { Yup.object().shape({
+    email: Yup.string()
+    .email()
+    .required('Required'),
+    password: Yup.string()
+    .required('Required')
+    .min(8, "Password is too short. Should be 8 character minimum")
+    .matches(/(?=.*[0-9])/, "Password must contain a number")
+  })}
+  >
+
+    {props => {
+        const {
+          values, 
+          touched, 
+          errors, 
+          isSubmitting, 
+          handleChange, 
+          handleBlur, 
+          handleSubmit
+      } = props
+
+      return (
+
+        <form onSubmit={handleSubmit}>
+          <label> Email: </label> 
+          <input 
+            type='text' 
+            placeholder="Email" 
+            value={values.email} 
+            onChange={handleChange} 
+            name='email' 
+            onBlur={handleBlur}
+            className={errors.email && touched.email && 'error'} 
+          />
+          {errors.email && touched.email && (
+            <div className="input-feedback">{errors.email}</div>
+          )}
+        
+    
+          <label>Password:</label> 
+          <input 
+            type='password' 
+            placeholder="Password" 
+            value={values.password} 
+            onChange={handleChange} 
+            name='password'
+            onBlur={handleBlur}
+            className={errors.password && touched.password && 'error'}  
+          />
+          {errors.password && touched.password && (
+            <div className="input-feedback">{errors.password}</div>
+          )}
+          
+    
+          <p>Forgot password?</p>
+          <button type="submit" disabled={isSubmitting}>Login</button>
+        </form>
+      )
+    }}
+  </Formik>
+)
 
 export default Login

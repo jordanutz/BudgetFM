@@ -11,11 +11,12 @@ import Navigation from './Components/Navigation/Navigation'
 class App extends Component {
   render () {
 
-    const displayNavigation = this.props.location.pathname === '/' ? <Header /> : <Navigation />
+    const displayNavigation = this.props.location.pathname === '/' || 
+      this.props.location.pathname === '/login' ? <Header /> : <Navigation />
 
     return (
       <div className="App">
-        {this.props.location.pathname === '/login' ? null : displayNavigation}
+        {displayNavigation}
         {routes}
         <Footer />
       </div>
