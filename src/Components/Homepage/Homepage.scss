@@ -30,7 +30,6 @@ main {
         position: absolute;
         left: -25px;
         top: 83px;
-  
         transform: skew(-20deg, 0deg);
         // background-image: linear-gradient(to top, #F5F6FA 20%, #D6D6D6 100%);
       }
@@ -51,13 +50,14 @@ main {
       }
 
       button {
+        min-width: 150px;
         background: $primary-color;
         padding: 15px 20px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
         color: white;
         border: 1px solid #C3003E;
         z-index: 1;
+        font-weight: 700;
+
       }
 
       button:hover {

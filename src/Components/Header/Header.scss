@@ -52,13 +52,14 @@ header {
       }
       
       button {
+        min-width: 150px;
         background: $primary-color;
-        padding: 15px 30px;
+        padding: 15px 20px;
         border: 1px solid #C3003E;
-        font-size: .85rem;
-        letter-spacing: 1px;
+        font-size: 1rem;
+
         color: white;
-        text-transform: uppercase;
+        font-weight: 700;
       }
 
       button:hover {
@@ -67,4 +68,9 @@ header {
       }
     }
   }
+}
+
+.LoginStyling {
+  background: #fff;
+  border: 1px solid #ccc;
 }
