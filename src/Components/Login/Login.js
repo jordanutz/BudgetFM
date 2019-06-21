@@ -7,13 +7,7 @@ import * as Yup from 'yup'
 
 const Login = (props) => (
 
-  <div className="Login">
-
-    <div className="LoginModule">
-
-      <h1>Sign In</h1>
-
-      <Formik
+     <Formik
         initialValues={{email: '', password: ''}}
         onSubmit={ (values, {setSubmitting}) => {
         console.log(values)
@@ -80,8 +74,6 @@ const Login = (props) => (
           )
         }}
       </Formik>
-    </div>
-  </div>
 )
 
 export default Login

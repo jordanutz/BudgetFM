@@ -12,7 +12,7 @@ class App extends Component {
   render () {
 
     const displayNavigation = this.props.location.pathname === '/' || 
-      this.props.location.pathname === '/login' ? <Header /> : <Navigation />
+      this.props.location.pathname === '/auth' ? <Header /> : <Navigation />
 
     return (
       <div className="App">

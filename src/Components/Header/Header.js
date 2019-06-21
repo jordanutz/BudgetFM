@@ -8,7 +8,7 @@ import Microphone from './assets/microphone.svg'
 const Header = (props) => {
 
   return (
-    <header className={props.location.pathname === '/login' ? 'LoginStyling' : null }>
+    <header className={props.location.pathname === '/auth' ? 'LoginStyling' : null }>
       <Link to='/' style={{color: 'white', textDecoration: 'none'}}><div className="Logo">
         <img src={Microphone} alt="Main" />
         <h1>BudgetFM</h1>
@@ -16,9 +16,9 @@ const Header = (props) => {
       <nav>
         <ul>
           {
-            props.location.pathname === '/login' ?  
-            <Link to='/login'><button>Create Account</button></Link> : 
-            <Link to='/login'><button>Log In</button></Link>
+            props.location.pathname === '/auth' ?  
+            null : 
+            <Link to='/auth'><button>Log In</button></Link>
           }
         </ul>
       </nav>
