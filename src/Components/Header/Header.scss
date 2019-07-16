@@ -2,7 +2,7 @@
 
 header {
   min-width: 100vw;
-  padding: 1.15rem;
+  padding: 1rem 2rem;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -31,12 +31,22 @@ header {
   }
 
   nav {
-    min-width: 23rem;
+    min-width: 275px;
+
 
     ul {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
+
+      a {
+        color: $text-color;
+      }
+
+      a:hover {
+        color: $primary-color;
+        text-decoration: none;
+      }
 
       li {
         list-style-type: none;
@@ -52,14 +62,15 @@ header {
       }
       
       button {
-        min-width: 150px;
+        min-width: 100px;
         background: $primary-color;
-        padding: 15px 20px;
+        padding: 12px 15px;
         border: 1px solid #C3003E;
-        font-size: 1rem;
-
+        font-size: .8rem;
+        border-radius: 3px;
         color: white;
-        font-weight: 700;
+        font-weight: 600;
+        text-transform: uppercase;
       }
 
       button:hover {

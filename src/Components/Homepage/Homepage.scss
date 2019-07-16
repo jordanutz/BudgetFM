@@ -8,32 +8,242 @@ main {
   }
 
   .Cover {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-column-gap: 10px;
-    height: 600px;
+    display: flex;
+    flex-direction: column;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 1rem 0 2rem 0;
+    position: relative;
+    min-height: 450px;
+
+    i {
+      position: absolute;
+      font-size: 1.5rem;
+    }
+
+    #DollarSign {
+      color: #19FD62;
+      top: 30px;
+      animation: dollar-sign 7s infinite linear;
+    }
+
+    @keyframes dollar-sign {
+      from {
+        transform: rotate(0deg)
+                   translate(-20px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg)
+                   translate(-20px) 
+                   rotate(-360deg);
+      }
+    }
+
+    #RedComment {
+      color: #D92747;
+      left: 90px;;
+      top: 150px;
+      animation: red-comment 9s infinite linear;
+    }
+
+    @keyframes red-comment {
+      from {
+        transform: rotate(0deg)
+                   translate(-35px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg)
+                   translate(-35px) 
+                   rotate(360deg);
+      }
+    }
+
+    #MoneyCheck {
+      color: $secondary-color;
+      top: 40px;
+      right: 100px;
+      animation: money-check 8s infinite linear;
+    }
+
+    @keyframes money-check {
+      from {
+        transform: rotate(0deg)
+                   translate(-15px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg)
+                   translate(-15px) 
+                   rotate(360deg);
+      }
+    }
+
+    #Modx {
+      color: #6A27D9;
+      right: -80px;
+      top: 150px;
+      animation: modx 12s infinite linear;
+    }
+
+    @keyframes modx {
+      from {
+        transform: rotate(0deg)
+                   translate(-40px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg)
+                   translate(-40px) 
+                   rotate(-360deg);
+      }
+    }
+
+    #BlueComment {
+      color: $primary-accent;
+      right: 150px;
+      top: 250px;
+      animation: blue-comment 10s infinite linear;
+    }
+
+    @keyframes blue-comment {
+      from {
+        transform: rotate(-360deg)
+                   translate(-20px)
+                   rotate(360deg);
+      }
+      to {
+        transform: rotate(0deg)
+                   translate(-20px) 
+                   rotate(0deg);
+      }
+    }
+
+    #Game {
+      color: #275AD9;
+      left: 0;
+      top: 300px;
+      animation: game 8s infinite linear;
+    }
+
+    @keyframes game {
+      from {
+        transform: rotate(0deg)
+                   translate(-10px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg)
+                   translate(-10px) 
+                   rotate(360deg);
+      }
+    }
+
+
+    #Headphones {
+      color: #343434;
+      right: 300px;
+      top: 350px;
+      animation: headphones 9s infinite linear;
+    }
+
+    @keyframes headphones {
+      from {
+        transform: rotate(0deg)
+                   translate(-20px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg)
+                   translate(-20px) 
+                   rotate(-360deg);
+      }
+    }
+
+    #Pizza {
+      color: #FD5F00;
+      top: 325px;
+      left: 300px;
+      animation: pizza 11s infinite linear;
+    }
+
+    @keyframes pizza {
+      from {
+        transform: rotate(360deg)
+                   translate(-40px)
+                   rotate(360deg);
+      }
+      to {
+        transform: rotate(0deg)
+                   translate(-40px) 
+                   rotate(0deg);
+      }
+    }
+
+    #YellowComment {
+      color: #FDD019;
+      right: 500px;
+      top: 325px;
+      animation: yellow-comment 9s infinite linear;
+    }
+
+    @keyframes yellow-comment {
+      from {
+        transform: rotate(0deg)
+                   translate(-40px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg)
+                   translate(-40px) 
+                   rotate(360deg);
+      }
+    }
+
+    #Plane {
+      color: #FD19E5;
+      right: 0;
+      top: 300px;
+      transform: rotate(-20deg);
+      animation: plane 14s infinite linear;
+    }
+
+    @keyframes plane {
+      from {
+        transform: rotate(0deg)
+                   translate(-50px)
+                   rotate(0deg);
+      }
+      to {
+        transform: rotate(-360deg)
+                   translate(-50px) 
+                   rotate(360deg);
+      }
+    }
+
 
     .CoverDetails {
       max-width: 80%;
+      padding: 2rem 3rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 3.5rem;
-      position: relative;
+      margin: 0 auto;
 
-      .Overlay {
-        width: 72%;
-        height: 90%;
-        position: absolute;
-        left: -25px;
-        top: 83px;
-        transform: skew(-20deg, 0deg);
-        // background-image: linear-gradient(to top, #F5F6FA 20%, #D6D6D6 100%);
+      .CoverInput {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        input {
+          width: 40%;
+          margin-right: 15px;
+          padding: .75rem;
+          border-radius: 3px;
+          border: 1px solid #ccc;
+        }
       }
-      
 
       h1 {
         font-weight: 800;
@@ -44,6 +254,8 @@ main {
       }
 
       p {
+        max-width: 65%;
+        margin: 0 auto;
         padding-bottom: 1.5rem;
         z-index: 1;
 
@@ -57,25 +269,15 @@ main {
         border: 1px solid #C3003E;
         z-index: 1;
         font-weight: 700;
+        border-radius: 3px;
+        font-size: .8rem;
+        text-transform: uppercase;
 
       }
 
       button:hover {
         background: #C3003E;
         transition: .7s;
-      }
-    }
-
-    .CoverIcons {
-      position: relative;
-
-      img {
-        width: 20rem;
-        height: 20rem;
-        position: absolute; 
-        bottom: 0;
-        right: 0;
-      
       }
     }
   }
