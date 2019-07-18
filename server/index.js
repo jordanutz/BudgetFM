@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const massive = require('massive')
 require('dotenv').config()
 const session = require('express-session')
+const bcrypt = require('bcryptjs')
 const app = express()
 
 app.use(bodyParser.json())
@@ -22,6 +23,16 @@ massive(process.env.CONNECTION_STRING).then(db => {
 })
 
 // Controllers 
+const auth = require('./controllers/auth_controller')
+
+
+// Endpoints 
+
+// Authentication 
+app.post('/api/register', auth.registerUser)
+
+
+
 
 PORT = 6800;
 

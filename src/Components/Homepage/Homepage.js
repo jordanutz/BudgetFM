@@ -8,7 +8,6 @@ import Credit from './assets/credit.svg'
 import Dream from './assets/idea.svg'
 import Feature from './assets/money.svg'
 import Reminder from './assets/reminder.svg'
-import Radio from '../Header/assets/radio.svg'
 
 
 // React Bootstrap
@@ -32,16 +31,16 @@ class Homepage extends Component {
     return (
       <main>
         <div className="Cover">
-            <i class="fas fa-dollar-sign" id="DollarSign"></i>
-            <i class="fas fa-comment" id="RedComment"></i>
-            <i class="fas fa-money-check" id="MoneyCheck"></i>
-            <i class="fab fa-modx" id="Modx"></i>
-            <i class="fas fa-comment" id="BlueComment"></i>
-            <i class="fas fa-gamepad" id="Game"></i>
-            <i class="fas fa-headphones" id="Headphones"></i>
-            <i class="fas fa-pizza-slice" id="Pizza"></i>
-            <i class="fas fa-comment" id="YellowComment"></i>
-            <i class="fas fa-plane" id="Plane"></i>
+            <i className="fas fa-dollar-sign" id="DollarSign"></i>
+            <i className="fas fa-comment" id="RedComment"></i>
+            <i className="fas fa-money-check" id="MoneyCheck"></i>
+            <i className="fab fa-modx" id="Modx"></i>
+            <i className="fas fa-comment" id="BlueComment"></i>
+            <i className="fas fa-gamepad" id="Game"></i>
+            <i className="fas fa-headphones" id="Headphones"></i>
+            <i className="fas fa-pizza-slice" id="Pizza"></i>
+            <i className="fas fa-comment" id="YellowComment"></i>
+            <i className="fas fa-plane" id="Plane"></i>
 
             <section className="CoverDetails">
                 <h1>Where budgeting happens.</h1>

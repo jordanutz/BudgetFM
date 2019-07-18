@@ -3,13 +3,16 @@ import '../Login/Login.scss'
 
 import {Formik} from 'formik'
 import * as Yup from 'yup'
+import axios from 'axios'
 
 const Register = (props) => (
 
   <Formik
         initialValues={{name: '', email: '', password: ''}}
         onSubmit={ (values, {setSubmitting}) => {
-        console.log(values)
+          axios.post('/api/register', values).then(res => {
+            console.log(res.data)
+          })
       }}
 
   validationSchema = { Yup.object().shape({

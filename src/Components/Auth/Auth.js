@@ -7,7 +7,6 @@ import Register from '../Register/Register'
 
 // MaterialUI
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -24,18 +23,9 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    textColorPrimary: 'blue'  
-  },
-
-}));
 
 const Auth = (props) => {
 
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
