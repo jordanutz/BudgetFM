@@ -29,10 +29,8 @@ const auth = require('./controllers/auth_controller')
 // Endpoints 
 
 // Authentication 
-app.post('/api/register', auth.registerUser)
-
-
-
+app.post('/api/register', auth.userRegister)
+app.post('/api/login', auth.userLogin)
 
 PORT = 6800;
 

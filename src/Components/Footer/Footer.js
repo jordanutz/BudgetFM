@@ -9,8 +9,7 @@ const Footer = (props) => {
     <footer>
       <Container>
         <Row>
-
-          <Col xs={6} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <h4 className="PrimaryText">Company</h4>
             <ul>
               <li>About Us</li>
@@ -19,10 +18,7 @@ const Footer = (props) => {
               <li>Careers</li>
             </ul>
           </Col>
-
-  
-
-          <Col xs={6} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <h4 className="PrimaryAccent">Product</h4>
             <ul>
               <li>Enterprise</li>
@@ -31,8 +27,7 @@ const Footer = (props) => {
               <li>Testimonials</li>
             </ul>
           </Col>
-
-          <Col xs={6} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <h4 className="SecondaryAccent">Legal</h4>
             <ul>
               <li>Privacy</li>
@@ -41,8 +36,7 @@ const Footer = (props) => {
               <li>Terms of Service</li>
             </ul>
           </Col>
-
-          <Col xs={6} lg={3}>
+          <Col xs={12} sm={6} md={6} lg={3}>
             <h4 className="SecondaryText">Resources</h4>
             <ul>
               <li>Directory</li>

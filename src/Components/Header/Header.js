@@ -15,11 +15,13 @@ const Header = (props) => {
       </div></Link>
       <nav>
         <ul>
-          <Link to='/auth'>Sign In</Link>
           {
             props.location.pathname === '/auth' ?  
             null : 
-            <Link to='/auth'><button>Get Started</button></Link>
+            <div className="NavigationMenu">
+              <Link to='/auth'>Sign In</Link>
+              <Link to='/auth'><button>Get Started</button></Link>
+            </div>
           }
         </ul>
       </nav>

@@ -3,6 +3,7 @@ import './Login.scss'
 
 import {Formik} from 'formik'
 import * as Yup from 'yup'
+import axios from 'axios'
 
 
 const Login = (props) => (
@@ -10,7 +11,9 @@ const Login = (props) => (
      <Formik
         initialValues={{email: '', password: ''}}
         onSubmit={ (values, {setSubmitting}) => {
-        console.log(values)
+          axios.post('/api/login', values).then(res => {
+            console.log(res.data)
+          })
       }}
 
       validationSchema = { Yup.object().shape({

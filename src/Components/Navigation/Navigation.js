@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './Navigation.scss'
 
-const Navigation = (props) => {
-  return (
-    <nav>
-      Navigation
-    </nav>
-  )
+class Navigation extends Component {
+
+  render () {
+    return (
+      <nav>
+        Navigation
+      </nav>
+    )
+  }
 }
 
 export default Navigation

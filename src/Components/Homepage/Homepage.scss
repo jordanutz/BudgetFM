@@ -2,6 +2,8 @@
 
 main {
 
+  overflow: hidden;
+
   h2 {
     text-align: center;
     font-weight: 700;
@@ -24,7 +26,7 @@ main {
     #DollarSign {
       color: #19FD62;
       top: 30px;
-      animation: dollar-sign 7s infinite linear;
+      animation: fade 1.5s, dollar-sign 7s infinite linear;
     }
 
     @keyframes dollar-sign {
@@ -42,9 +44,9 @@ main {
 
     #RedComment {
       color: #D92747;
-      left: 90px;;
-      top: 150px;
-      animation: red-comment 9s infinite linear;
+      left: 90px;
+      top: 175px;
+      animation: fade 1.5s, red-comment 9s infinite linear;
     }
 
     @keyframes red-comment {
@@ -64,7 +66,7 @@ main {
       color: $secondary-color;
       top: 40px;
       right: 100px;
-      animation: money-check 8s infinite linear;
+      animation: fade 1.5s, money-check 8s infinite linear;
     }
 
     @keyframes money-check {
@@ -84,7 +86,7 @@ main {
       color: #6A27D9;
       right: -80px;
       top: 150px;
-      animation: modx 12s infinite linear;
+      animation: fade 1.5s, modx 12s infinite linear;
     }
 
     @keyframes modx {
@@ -104,7 +106,7 @@ main {
       color: $primary-accent;
       right: 150px;
       top: 250px;
-      animation: blue-comment 10s infinite linear;
+      animation: fade 1.5s, blue-comment 10s infinite linear;
     }
 
     @keyframes blue-comment {
@@ -124,7 +126,7 @@ main {
       color: #275AD9;
       left: 0;
       top: 300px;
-      animation: game 8s infinite linear;
+      animation: fade 1.5s, game 8s infinite linear;
     }
 
     @keyframes game {
@@ -145,7 +147,7 @@ main {
       color: #343434;
       right: 300px;
       top: 350px;
-      animation: headphones 9s infinite linear;
+      animation: fade 1.5s, headphones 9s infinite linear;
     }
 
     @keyframes headphones {
@@ -165,7 +167,7 @@ main {
       color: #FD5F00;
       top: 325px;
       left: 300px;
-      animation: pizza 11s infinite linear;
+      animation: fade 1.5s, pizza 11s infinite linear;
     }
 
     @keyframes pizza {
@@ -185,7 +187,7 @@ main {
       color: #FDD019;
       right: 500px;
       top: 325px;
-      animation: yellow-comment 9s infinite linear;
+      animation: fade 1.5s, yellow-comment 9s infinite linear;
     }
 
     @keyframes yellow-comment {
@@ -206,7 +208,7 @@ main {
       right: 0;
       top: 300px;
       transform: rotate(-20deg);
-      animation: plane 14s infinite linear;
+      animation: fade 1.5s, plane 14s infinite linear;
     }
 
     @keyframes plane {
@@ -219,6 +221,15 @@ main {
         transform: rotate(-360deg)
                    translate(-50px) 
                    rotate(360deg);
+      }
+    }
+
+    @keyframes fade {
+      from { 
+        opacity: 0; 
+      }
+      to { 
+        opacity: 1; 
       }
     }
 
