@@ -26,10 +26,20 @@ TabContainer.propTypes = {
 
 const Auth = (props) => {
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState( retrieveIndex() );
 
   function handleChange(event, newValue) {
     setValue(newValue);
+  }
+
+  function retrieveIndex () {
+    if (!props.location.state) {
+      return 0;
+    } else if (props.location.state.signIn) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   return (
@@ -41,7 +51,6 @@ const Auth = (props) => {
             <Tab label="Sign In" />
           </Tabs>
         </section> 
-
         {value === 0 && <TabContainer><Register/></TabContainer>}
         {value === 1 && <TabContainer><Login /></TabContainer>}
       </div>

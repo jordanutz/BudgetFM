@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './Homepage.scss'
 
 // Images
@@ -13,6 +13,7 @@ import Reminder from './assets/reminder.svg'
 import {Container, Row, Col, Card} from 'react-bootstrap'
 
 const Homepage = () => {
+
   const [email, setEmail] = useState('')
 
   return (

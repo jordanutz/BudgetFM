@@ -1,15 +1,25 @@
-import React, {Component} from 'react'
+import React, {useContext, useEffect} from 'react'
 import './Navigation.scss'
+import axios from 'axios'
 
-class Navigation extends Component {
+import {AuthContext} from '../../Context/AuthContext'
 
-  render () {
-    return (
-      <nav>
-        Navigation
-      </nav>
-    )
-  }
+const Navigation = () => {
+
+  const {setUser} = useContext(AuthContext)
+
+  useEffect(() => {
+    axios.get('/api/user')
+    .then(res => setUser(res.data))
+    .catch(err => console.log(err))
+  }, [])
+
+  return (
+    <nav>
+      Navigation
+    </nav>
+  )
 }
+
 
 export default Navigation

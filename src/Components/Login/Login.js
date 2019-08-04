@@ -1,18 +1,25 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Login.scss'
 
 import {Formik} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
+// Context 
+import {AuthContext} from '../../Context/AuthContext'
 
-const Login = (props) => (
+const Login = (props) => {
 
-     <Formik
+  const {user, setUser} = useContext(AuthContext)
+
+  return (
+    <Formik
         initialValues={{email: '', password: ''}}
         onSubmit={ (values, {setSubmitting}) => {
           axios.post('/api/login', values).then(res => {
-            console.log(res.data)
+            setUser(res.data)
+            props.history.push(`/dashboard/${res.data.id}`)
           })
       }}
 
@@ -77,6 +84,7 @@ const Login = (props) => (
           )
         }}
       </Formik>
-)
+    )
+  }
 
-export default Login
+export default withRouter(Login)

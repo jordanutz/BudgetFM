@@ -36,10 +36,22 @@ module.exports = {
       req.session.user = { id: findExistingUser[0].id, 
                            name: findExistingUser[0].name, 
                            email: findExistingUser[0].email }
-      console.log(req.session.user)
       return res.status(200).send(req.session.user)
     } else {
       return res.status(401).send('Incorrect email or password')
     }
+  }, 
+  getUser: (req, res) => {
+    console.log(req.session.user)
+    if (req.session.user) {
+      res.status(200).send(req.session.user)
+    } else {
+      res.sendStatus(401)
+    }
+  }, 
+  userLogout: (req, res) => {
+    req.session.destroy();
+    // console.log(req.session.user)
+    res.sendStatus(200);
   }
 }
