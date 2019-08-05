@@ -24,7 +24,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 
 // Controllers 
 const auth = require('./controllers/auth_controller')
-
+const budget = require('./controllers/budget_controller')
 
 // Endpoints 
 
@@ -33,6 +33,8 @@ app.post('/api/register', auth.userRegister)
 app.post('/api/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
 app.get('/api/logout', auth.userLogout)
+
+// Dashboard
 
 PORT = 6800;
 

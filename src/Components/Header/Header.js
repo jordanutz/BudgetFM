@@ -34,10 +34,10 @@ const Header = (props) => {
           {
             props.location.pathname === '/auth' ?  
             null : 
-            <div className="NavigationMenu">
+            <div className="HeaderMenu">
               {user && user.id  ? 
                 <Link to='/'><button onClick={userLogout}>Sign Out</button></Link> : 
-                <section className="NavigationLinks">
+                <section className="HeaderLinks">
                   <Link to={{ pathname: '/auth', state: {signIn: true} }}>Sign In</Link> 
                   <Link to={{ pathname: '/auth', state: {signIn: false} }}><button>Get Started</button></Link>
                 </section>

@@ -1,1 +1,57 @@
 @import '../../index';
+
+.Navigation {
+  min-width: 100vw;
+  display: flex;
+  background: #FBFBFB;
+  border-bottom: 1px solid #ccc;
+  height: 12vh;
+
+
+  .NavigationMenu {
+    background: #3B3F44;
+    min-width: 7vw;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      color: #64686C;
+      font-size: 2.25em;
+    }
+  }
+
+
+  .NavigationLinks {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 4rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    
+
+    img {
+      width: 3.75rem;
+      height: 3.75rem;
+
+    }
+ 
+    .NavigationUser {
+      width: 150px;
+      background: #F0F0F0;
+      padding: .5rem 1.5rem;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      align-items: center;
+
+      i {
+        color: $secondary-color;
+        cursor: pointer;
+      }
+    }
+  }
+}

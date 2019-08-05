@@ -37,3 +37,9 @@ a:hover {
 	color: $primary-accent;
 }
 
+@media (min-width: 1200px) {
+	.container {
+		max-width: 975px !important;
+	}
+}
+
