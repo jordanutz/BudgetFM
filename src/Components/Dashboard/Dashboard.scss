@@ -41,8 +41,13 @@
         text-transform: uppercase;
         color: white;
         letter-spacing: .5px;
-        font-size: .9rem;
+        font-size: .8rem;
         cursor: pointer;
+        border-radius: 3px;
+
+        h3 {
+          font-weight: 500;
+        }
       }
     }
 

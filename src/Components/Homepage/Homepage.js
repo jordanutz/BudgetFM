@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
 import './Homepage.scss'
+import {Link} from 'react-router-dom'
 
 // Images
 import Category from './assets/clipboard.svg'
@@ -12,9 +13,28 @@ import Reminder from './assets/reminder.svg'
 // React Bootstrap
 import {Container, Row, Col, Card} from 'react-bootstrap'
 
+// Context
+import {AuthContext} from '../../Context/AuthContext'
+
 const Homepage = () => {
 
   const [email, setEmail] = useState('')
+
+  const {user} = useContext(AuthContext)
+
+  const displayTab = user ? 
+
+    <section className="CoverInput">
+      <Link to={`/dashboard/${user.id}`}><button>My Profile</button></Link>
+    </section>
+
+    :
+
+    <section className="CoverInput">
+      <input type="text" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} value={email} />
+      <Link to='/auth'><button>Try for Free</button></Link>
+    </section>
+
 
   return (
       <main>
@@ -32,10 +52,7 @@ const Homepage = () => {
           <section className="CoverDetails">
               <h1>Where budgeting happens.</h1>
               <p>Expense tracker that works anywhere, anytime. Whatever budgeting means to you, BudgetFM brings all the pieces and tools you need together, so you can actually meet your goals.</p>
-              <section className="CoverInput">
-                <input type="text" placeholder="Your Email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                <button>Try for Free</button>
-              </section>
+              {displayTab}
           </section>
         </div>
       <section className="Features">

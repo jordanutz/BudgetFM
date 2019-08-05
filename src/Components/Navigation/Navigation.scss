@@ -7,7 +7,6 @@
   border-bottom: 1px solid #ccc;
   height: 12vh;
 
-
   .NavigationMenu {
     background: #3B3F44;
     min-width: 7vw;
@@ -39,18 +38,32 @@
     }
  
     .NavigationUser {
-      width: 150px;
+      width: 160px;
       background: #F0F0F0;
       padding: .5rem 1.5rem;
       border-radius: 20px;
       display: flex;
       justify-content: space-between;
-
       align-items: center;
+      position: relative;
+    
 
-      i {
-        color: $secondary-color;
-        cursor: pointer;
+      button {
+        background: none;
+        border: none;
+
+        i {
+          color: $secondary-color;
+          cursor: pointer;
+
+        }
+      }
+      .DashboardDrop {
+        width: 100%;
+        background: white;
+        position: absolute;
+        bottom: -25px;
+        right: 0;
       }
     }
   }

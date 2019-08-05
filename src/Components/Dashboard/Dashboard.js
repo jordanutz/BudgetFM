@@ -26,7 +26,6 @@ const Dashboard = () => {
                     <h3>Details</h3>
                   </section>
                 </section>
-    
               </Col>
               <Col xs={12} sm={12} md={6} lg={4}>
                 <section id="Income" className="DashboardModule">
