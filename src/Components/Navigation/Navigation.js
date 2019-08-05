@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import './Navigation.scss'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Header from '../Header/Header'
 
 // Images
 import Microphone from '../Header/assets/microphone.svg'
@@ -19,20 +20,27 @@ const Navigation = () => {
     .catch(err => console.log(err))
   }, [])
 
-  return (
+  const displayPortal = user ?
     <nav className="Navigation">
-      <section className="NavigationMenu">
-        <i class="fas fa-bars"></i>
-      </section>
-
-      <section className="NavigationLinks">
-        <Link to='/'><img src={Microphone} /></Link>
-        <section className="NavigationUser">
-          <h2>{user && user.name}</h2>
-          <i class="fas fa-chevron-down"></i>
+        <section className="NavigationMenu">
+          <i className="fas fa-bars"></i>
         </section>
-      </section>
-    </nav>
+        <section className="NavigationLinks">
+          <Link to='/'><img src={Microphone} /></Link>
+          <section className="NavigationUser">
+            <h2>{user && user.name}</h2>
+            <i className="fas fa-chevron-down"></i>
+          </section>
+        </section>
+      </nav>
+     : 
+     <Header />
+    
+
+  return (
+    <div>
+      {displayPortal}
+    </div>
   )
 }
 
