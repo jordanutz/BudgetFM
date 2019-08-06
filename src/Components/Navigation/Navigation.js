@@ -43,14 +43,16 @@ const Navigation = () => {
           <i className="fas fa-bars"></i>
         </section>
         <section className="NavigationLinks">
-          <Link to='/'><img src={Microphone} /></Link>
+          <section className="NavigationLogo">
+            <Link to='/'><img src={Microphone} /></Link>
+            <h1>BudgetFM</h1>
+          </section>
           <section className="NavigationUser">
             <h2>{user && user.name}</h2>
             <button onClick={toggleDropdown}><i className="fas fa-chevron-down"></i></button>
             {displayToggle}
           </section>
         </section>
-
       </nav>
      : 
      <Header />

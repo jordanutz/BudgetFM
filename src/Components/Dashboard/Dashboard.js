@@ -2,7 +2,10 @@ import React, {useContext} from 'react'
 import './Dashboard.scss'
 import {AuthContext} from '../../Context/AuthContext'
 
+
+// Components
 import {Container, Row, Col} from 'react-bootstrap'
+import Menu from '../Menu/Menu'
 
 // Images
 import Current from './assets/current.svg'
@@ -17,74 +20,68 @@ const Dashboard = () => {
 
   const displayDashboard = user ? 
     <div className="Dashboard">
-        <section className="DashboardMenu">
-          <i class="fas fa-home"></i>
-          <i class="fas fa-play-circle"></i>
-          <i class="fas fa-signal"></i>
-          <i class="fas fa-pause-circle"></i>
-          <i class="fas fa-user"></i>
-          <i class="fas fa-power-off"></i>
-        
-
-        </section>
-        <section className="DashboardMain">
-          <Container>
-            <Row className="DashboardDetails">
-              <Col xs={12}>
-                <h1>Dashboard</h1>
-                <h2>Welcome back, {user.name && user.name}</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12} sm={12} md={6} lg={4}>
-                <section id="Balance" className="DashboardModule">
-                  <h2>$21</h2>
-                  <img src={Current} />
-                  <section id="BalanceDarken" className="ModuleFooter">
-                    <h3>Details</h3>
-                  </section>
+      <Menu />
+      <section className="DashboardMain">
+        <Container>
+          <Row className="DashboardDetails">
+            <Col xs={12}>
+              <h1>Dashboard</h1>
+              <h2>Welcome back, {user.name && user.name}</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={12} md={6} lg={4}>
+              <section id="Balance" className="DashboardModule">
+                <h2>$21</h2>
+                <h3><span>Current</span> Balance</h3>
+                <img src={Current} />
+                <section id="BalanceDarken" className="ModuleFooter">
+                  <h4>Details</h4>
                 </section>
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={4}>
-                <section id="Income" className="DashboardModule">
-                  <h2>$136</h2>
-                  <img src={Income} />
-                  <section id="IncomeDarken" className="ModuleFooter">
-                    <h3>Details</h3>
-                  </section>
+              </section>
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={4}>
+              <section id="Income" className="DashboardModule">
+                <h2>$136</h2>
+                <h3><span>Monthly</span> Income</h3>
+                <img src={Income} />
+                <section id="IncomeDarken" className="ModuleFooter">
+                  <h4>Details</h4>
                 </section>
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={4}>
-                <section id="Expenses" className="DashboardModule">
-                  <h2>$169</h2>
-                  <img src={Expenses} />
-                  <section id="ExpensesDarken" className="ModuleFooter">
-                    <h3>Details</h3>
-                  </section>
+              </section>
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={4}>
+              <section id="Expenses" className="DashboardModule">
+                <h2>$169</h2>
+                <h3><span>Monthly</span> Expenses</h3>
+                <img src={Expenses} />
+                <section id="ExpensesDarken" className="ModuleFooter">
+                  <h4>Details</h4>
                 </section>
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={8}>
-                <section id="SpendingGraph" className="DashboardModule">
-                  <img src={User} />
-                  <h2 id="SpendingHeader">37%</h2>
-                  <section id="SpendingDarken" className="ModuleFooter">
-                    <h3>Details</h3>
-                  </section>
+              </section>
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={8}>
+              <section id="SpendingGraph" className="DashboardModule">
+                <img src={User} />
+                <h2 id="SpendingHeader">37%</h2>
+                <section id="SpendingDarken" className="ModuleFooter">
+                  <h4>Details</h4>
                 </section>
-              </Col>
-              <Col xs={12} sm={12} md={12} lg={4}>
-                <section id="Goals" className="DashboardModule">
-                  <h2>8/19</h2>
-                  <img src={Calendar} />
-                  <section id="GoalsDarken" className="ModuleFooter">
-                      <h3>View Calendar</h3>
-                  </section>
+              </section>
+            </Col>
+            <Col xs={12} sm={12} md={12} lg={4}>
+              <section id="Goals" className="DashboardModule">
+                <h2>8/19</h2>
+                <img src={Calendar} />
+                <section id="GoalsDarken" className="ModuleFooter">
+                    <h4>View Calendar</h4>
                 </section>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      </div> 
+              </section>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </div> 
 
     : 
 

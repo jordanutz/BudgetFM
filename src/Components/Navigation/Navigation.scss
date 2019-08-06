@@ -21,6 +21,12 @@
     }
   }
 
+  @media screen and (max-width: 991px) {
+    .NavigationMenu {
+      display: none;
+    }
+  }
+
 
   .NavigationLinks {
     width: 100%;
@@ -29,13 +35,27 @@
     padding: 0 4rem 0 2rem;
     display: flex;
     justify-content: space-between;
-    
 
-    img {
-      width: 3.75rem;
-      height: 3.75rem;
+    .NavigationLogo {
+      display: flex; 
+      align-items: center;
 
+      img {
+        width: 3.75rem;
+        height: 3.75rem;
+        margin-right: 20px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        letter-spacing: -.1rem;
+        color: #253039;
+        font-weight: 800;
+      }
     }
+  
+
+
  
     .NavigationUser {
       width: 160px;

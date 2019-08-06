@@ -1,0 +1,33 @@
+@import '../../index'; 
+
+.DashboardMenu {
+  background: $dashboard-menu;
+  min-width: 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2.5rem;
+
+  i {
+    font-size: 35px;
+    color: #383B3F;
+    transition: .5s;
+    cursor: pointer;
+    margin-bottom: 25px;
+  }
+
+  i:hover {
+    color: #35BAA0;
+  }
+
+  button {
+    background: none;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .DashboardMenu {
+    display: none;
+  }
+}
