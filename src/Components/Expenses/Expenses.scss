@@ -3,4 +3,91 @@
 .Expenses {
   min-height: 90vh;
   display: flex;
+
+  .ExpensesMain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+
+    .ExpensesHeader {
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        background: $primary-color;
+        min-width: 150px;
+        padding: 15px 20px;
+        color: white;
+        z-index: 1;
+        font-weight: 700;
+        border-radius: 3px;
+        font-size: .9rem;
+        text-transform: uppercase;
+        font-family: 'Encode Sans Semi Condensed', sans-serif;
+      }
+    }
+
+    .ExpensesDetails {
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .ExpensesList {
+        padding: 1rem;
+
+        h2 {
+          text-transform: uppercase;
+          font-size: .9rem;
+          font-family: 'Encode Sans Semi Condensed', sans-serif;
+          font-weight: 600;
+          letter-spacing: .5px;
+          color: $text-color;
+        }
+
+        .ExpensesSearch {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 20px;
+
+          input {
+            width: 40%;
+            padding: .5rem;
+            text-transform: uppercase;
+            font-family: 'Encode Sans Semi Condensed', sans-serif;
+            letter-spacing: .5px;
+            color: #DDDDDD;
+            border-radius: 5px;
+            border: 0;
+            border: 1px solid #DDDDDD;
+          }
+        }
+
+        .HeadingRow {
+          width: 100%;
+          border-top: 1px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .BalanceCard {
+    height: 30vh;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.05), 0px 1px 10px 0px rgba(0, 0, 0, 0.05);
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: $primary-color;
+  }
+  
 }

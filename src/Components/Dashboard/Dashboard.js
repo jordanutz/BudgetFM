@@ -51,7 +51,7 @@ const Dashboard = () => {
                 <h3><span>Current</span> Balance</h3>
                 <img src={Current} />
                 <section id="BalanceDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/balance`}><h4>Details</h4></Link>
+                  <Link to={`/user/${user.id}/balance`}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>

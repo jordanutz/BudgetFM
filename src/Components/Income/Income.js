@@ -20,8 +20,11 @@ const Income = () => {
       <section className="IncomeMain">
         <Container>
           <Row className="IncomeDetails">
-            <Col xs={12} sm={12} md={8} lg={8}>
-              <h1>Income</h1>
+            <Col xs={12} sm={12} md={8} lg={8} style={{padding: '0'}}>
+              <section className="IncomeHeader">
+                <h1>Income</h1>
+                <button>Add New Income</button>    
+              </section>
               <Row className="IncomeList">
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="IncomeSearch">
@@ -46,8 +49,9 @@ const Income = () => {
                 </Row>
             </Col>
             <Col xs={12} sm={12} md={4} lg={4}>
-              <UserCalendar />
-              <UserCalendar />
+              <section className="BalanceCard"></section>
+              <section className="BalanceCard"></section>
+        
               <UserCalendar />
             </Col>
           </Row>
