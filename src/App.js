@@ -10,6 +10,7 @@ import Navigation from './Components/Navigation/Navigation'
 
 // Context
 import AuthContextProvider from './Context/AuthContext'
+import ProfileContextProvider from './Context/ProfileContext'
 
 const App = (props) => {
 
@@ -19,9 +20,11 @@ const App = (props) => {
   return (
       <div className="App">
         <AuthContextProvider>
-          {displayNavigation}
-          {routes}
-          <Footer />
+          <ProfileContextProvider>
+            {displayNavigation}
+            {routes}
+            <Footer />
+          </ProfileContextProvider>
         </AuthContextProvider>
       </div>
 

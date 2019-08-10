@@ -25,11 +25,11 @@ const Menu = (props) => {
 
   return (
     <section className="DashboardMenu">
-      <Link to={`/dashboard/${user.id}`}><i className="fas fa-home"></i></Link>
-      <i className="fas fa-play-circle"></i>
-      <i className="fas fa-signal"></i>
-      <i className="fas fa-pause-circle"></i>
-      <i className="fas fa-user"></i>
+      <Link to={`/user/${user.id}`}><i className="fas fa-home"></i></Link>
+      <Link to={`/user/${user.id}/balance`}><i className="fas fa-play-circle"></i></Link>
+      <Link to={`/user/${user.id}/income`}><i className="fas fa-signal"></i></Link>
+      <Link to={`/user/${user.id}/expenses`}><i className="fas fa-pause-circle"></i></Link>
+      <Link to={`/user/${user.id}/previous-goals`}><i className="fas fa-user"></i></Link>
       <button onClick={userLogout}><i className="fas fa-power-off"></i></button>
     </section>
   )

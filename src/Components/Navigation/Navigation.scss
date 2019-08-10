@@ -37,8 +37,16 @@
     justify-content: space-between;
 
     .NavigationLogo {
-      display: flex; 
-      align-items: center;
+
+
+      a {
+        display: flex; 
+        align-items: center; 
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
 
       img {
         width: 3.75rem;

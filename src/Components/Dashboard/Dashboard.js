@@ -1,18 +1,26 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import './Dashboard.scss'
+import {Link} from 'react-router-dom'
+
+// Context
 import {AuthContext} from '../../Context/AuthContext'
 
+// Packages
+import CountUp from 'react-countup'
+import axios from 'axios'
 
 // Components
 import {Container, Row, Col} from 'react-bootstrap'
 import Menu from '../Menu/Menu'
+import Calendar from 'react-calendar'
+import NoAccess from '../NoAccess/NoAccess'
+import UserCalendar from '../UserCalendar/UserCalendar'
 
 // Images
 import Current from './assets/current.svg'
 import Expenses from './assets/expenses.svg'
 import Income from './assets/income.svg'
 import User from './assets/user.svg'
-import Calendar from './assets/calendar.svg'
 
 const Dashboard = () => {
 
@@ -32,51 +40,73 @@ const Dashboard = () => {
           <Row>
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Balance" className="DashboardModule">
-                <h2>$21</h2>
+                <h2>$<CountUp
+                  start={1}
+                  end={21}
+                  delay={0}
+                  decimals={0}
+                  duration={1.75}
+                >
+                </CountUp></h2>
                 <h3><span>Current</span> Balance</h3>
                 <img src={Current} />
                 <section id="BalanceDarken" className="ModuleFooter">
-                  <h4>Details</h4>
+                  <Link to={`/user/${user.id}/balance`}><h4>Details</h4></Link>
                 </section>
               </section>
             </Col>
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Income" className="DashboardModule">
-                <h2>$136</h2>
+                <h2>$<CountUp
+                  start={1}
+                  end={136}
+                  delay={0}
+                  decimals={0}
+                  duration={1.75}
+                >
+                </CountUp></h2>
                 <h3><span>Monthly</span> Income</h3>
                 <img src={Income} />
                 <section id="IncomeDarken" className="ModuleFooter">
-                  <h4>Details</h4>
+                  <Link to={`/user/${user.id}/income`}><h4>Details</h4></Link>
                 </section>
               </section>
             </Col>
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Expenses" className="DashboardModule">
-                <h2>$169</h2>
+              <h2>$<CountUp
+                  start={1}
+                  end={169}
+                  delay={0}
+                  decimals={0}
+                  duration={1.75}
+                >
+                </CountUp></h2>
                 <h3><span>Monthly</span> Expenses</h3>
                 <img src={Expenses} />
                 <section id="ExpensesDarken" className="ModuleFooter">
-                  <h4>Details</h4>
+                  <Link to={`/user/${user.id}/expenses`}><h4>Details</h4></Link>
                 </section>
               </section>
             </Col>
             <Col xs={12} sm={12} md={6} lg={8}>
               <section id="SpendingGraph" className="DashboardModule">
                 <img src={User} />
-                <h2 id="SpendingHeader">37%</h2>
+                <h2 id="SpendingHeader">$<CountUp
+                  start={1}
+                  end={37}
+                  delay={0}
+                  decimals={0}
+                  duration={1.75}
+                >
+                </CountUp>%</h2>
                 <section id="SpendingDarken" className="ModuleFooter">
-                  <h4>Details</h4>
+                  <Link to={`/user/${user.id}/previous-goals`}><h4>Details</h4></Link>
                 </section>
               </section>
             </Col>
             <Col xs={12} sm={12} md={12} lg={4}>
-              <section id="Goals" className="DashboardModule">
-                <h2>8/19</h2>
-                <img src={Calendar} />
-                <section id="GoalsDarken" className="ModuleFooter">
-                    <h4>View Calendar</h4>
-                </section>
-              </section>
+              <UserCalendar />
             </Col>
           </Row>
         </Container>
@@ -85,9 +115,7 @@ const Dashboard = () => {
 
     : 
 
-    <div className="NoAccess">
-      <h3>Please login to access account details.</h3>
-    </div>
+    <NoAccess />
 
   return (
     <React.Fragment>

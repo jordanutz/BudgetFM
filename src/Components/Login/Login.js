@@ -19,7 +19,7 @@ const Login = (props) => {
         onSubmit={ (values, {setSubmitting}) => {
           axios.post('/api/login', values).then(res => {
             setUser(res.data)
-            props.history.push(`/dashboard/${res.data.id}`)
+            props.history.push(`/user/${res.data.id}`)
           })
       }}
 

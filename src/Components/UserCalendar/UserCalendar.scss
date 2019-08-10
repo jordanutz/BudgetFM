@@ -1,0 +1,81 @@
+@import '../../index';
+
+.CalendarModule {
+  height: 30vh;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.05), 0px 1px 10px 0px rgba(0, 0, 0, 0.05);
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #B4B4B4;
+
+  h2 {
+    padding: 1rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 56px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+
+    span {
+      font-family: 'Encode Sans Semi Condensed', sans-serif;
+    }
+  }
+
+  h3 {
+    color: #fff;
+    padding-right: 1rem;
+    font-family: 'Encode Sans Semi Condensed', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .9rem;
+    letter-spacing: .2px;
+
+    span {
+      font-weight: 400;
+      font-family: 'Encode Sans Semi Condensed', sans-serif;
+    }
+  }
+
+  img {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 30px;
+    top: 25px;
+  }
+
+  .CalendarFooter {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: .5rem 1rem;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: .5px;
+    font-size: .8rem;
+    border-radius: 3px;
+    height: 5vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    a {
+      color: #fff;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    h4 {
+      font-weight: 600;
+      font-family: 'Encode Sans Semi Condensed', sans-serif;
+    }
+  }
+
+}

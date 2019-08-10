@@ -1,0 +1,22 @@
+@import '../../index';
+
+.Balance {
+  min-height: 90vh;
+  display: flex;
+
+  .BalanceMain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .BalanceDetails {
+      margin-bottom: 15px;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

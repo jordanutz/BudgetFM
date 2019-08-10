@@ -25,7 +25,7 @@ const Homepage = () => {
   const displayTab = user ? 
 
     <section className="CoverInput">
-      <Link to={`/dashboard/${user.id}`}><button>My Profile</button></Link>
+      <Link to={`/user/${user.id}`}><button>My Profile</button></Link>
     </section>
 
     :

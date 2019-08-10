@@ -49,6 +49,10 @@
         top: 0;
         right: 0;
         font-family: 'Encode Sans Semi Condensed', sans-serif;
+
+        span {
+          font-family: 'Encode Sans Semi Condensed', sans-serif;
+        }
       }
 
       h3 {
@@ -84,12 +88,19 @@
         color: white;
         letter-spacing: .5px;
         font-size: .8rem;
-        cursor: pointer;
         border-radius: 3px;
         height: 5vh;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+
+        a {
+          color: #fff;
+        }
+
+        a:hover {
+          text-decoration: none;
+        }
 
         h4 {
           font-weight: 600;
@@ -105,11 +116,11 @@
     }
 
     #Balance {
-      background: $primary-color;
+      background: $primary-accent;
     } 
 
     #BalanceDarken {
-      background: darken($primary-color, 20%);
+      background: darken($primary-accent, 20%);
     }
 
     #Income {
@@ -121,11 +132,11 @@
     }
 
     #Expenses {
-      background: $primary-accent;
+      background: $primary-color;
     }
 
     #ExpensesDarken {
-      background: darken($primary-accent, 20%);
+      background: darken($primary-color, 20%);
     }
 
     #SpendingGraph {
@@ -136,25 +147,12 @@
       background: darken($secondary-accent, 20%);
     }
 
-    #Goals {
+    #Calendar {
       background: #B4B4B4;
     }
 
-    #GoalsDarken {
+    #CalendarDarken {
       background: darken(#B4B4B4, 20%);
     }
-  }
-}
-
-.NoAccess {
-  min-height: 65vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:  #fff;
-  border-top: 1px solid #ccc;
-
-  h3 {
-    font-size: 16px;
   }
 }

@@ -15,7 +15,7 @@ const Header = (props) => {
     axios.get('/api/user')
     .then(res => setUser(res.data))
     .catch(err => console.log(err))
-  }, [])
+  }, [setUser])
 
   const userLogout = () => {
     axios.get('/api/logout')

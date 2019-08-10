@@ -19,7 +19,7 @@ const Navigation = () => {
     axios.get('/api/user')
     .then(res => setUser(res.data))
     .catch(err => console.log(err))
-  }, [])
+  }, [setUser])
 
   const toggleDropdown = () => {
     console.log('hit')
@@ -44,8 +44,9 @@ const Navigation = () => {
         </section>
         <section className="NavigationLinks">
           <section className="NavigationLogo">
-            <Link to='/'><img src={Microphone} /></Link>
+            <Link to='/'><img src={Microphone} />
             <h1>BudgetFM</h1>
+            </Link>
           </section>
           <section className="NavigationUser">
             <h2>{user && user.name}</h2>

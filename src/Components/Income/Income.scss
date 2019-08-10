@@ -1,0 +1,61 @@
+@import '../../index';
+
+.Income {
+  min-height: 90vh;
+  display: flex;
+
+  .IncomeMain {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+
+    .IncomeDetails {
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .IncomeList {
+        padding: 2rem;
+
+        h2 {
+          text-transform: uppercase;
+          font-size: .9rem;
+          font-family: 'Encode Sans Semi Condensed', sans-serif;
+          font-weight: 600;
+          letter-spacing: .5px;
+          color: $text-color;
+        }
+
+        .IncomeSearch {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 20px;
+
+          input {
+            width: 40%;
+            padding: .5rem;
+            text-transform: uppercase;
+            font-family: 'Encode Sans Semi Condensed', sans-serif;
+            letter-spacing: .5px;
+            color: #DDDDDD;
+            border-radius: 5px;
+            border: 0;
+            border: 1px solid #DDDDDD;
+          }
+        }
+
+        .HeadingRow {
+          width: 100%;
+          border-top: 1px solid #DDDDDD;
+          border-bottom: 1px solid #DDDDDD;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
