@@ -11,7 +11,7 @@ import {AuthContext} from '../../Context/AuthContext'
 
 const Login = (props) => {
 
-  const {user, setUser} = useContext(AuthContext)
+  const {setUser} = useContext(AuthContext)
 
   return (
     <Formik

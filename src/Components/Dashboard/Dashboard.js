@@ -12,7 +12,6 @@ import axios from 'axios'
 // Components
 import {Container, Row, Col} from 'react-bootstrap'
 import Menu from '../Menu/Menu'
-import Calendar from 'react-calendar'
 import NoAccess from '../NoAccess/NoAccess'
 import UserCalendar from '../UserCalendar/UserCalendar'
 
@@ -25,6 +24,7 @@ import User from './assets/user.svg'
 const Dashboard = () => {
 
   const {user} = useContext(AuthContext)
+  console.log(user)
 
   const displayDashboard = user ? 
     <div className="Dashboard">
@@ -41,8 +41,8 @@ const Dashboard = () => {
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Balance" className="DashboardModule">
                 <h2>$<CountUp
-                  start={1}
-                  end={21}
+                  start={0}
+                  end={user.balance}
                   delay={0}
                   decimals={0}
                   duration={1.75}

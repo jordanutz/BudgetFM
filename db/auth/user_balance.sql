@@ -1,0 +1,1 @@
+select balance from user_balance where id = $1;

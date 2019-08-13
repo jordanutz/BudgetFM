@@ -1,11 +1,13 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import './Income.scss'
+import CountUp from 'react-countup'
 
 // Components
 import Menu from '../Menu/Menu'
 import NoAccess from '../NoAccess/NoAccess'
 import {Container, Row, Col} from 'react-bootstrap'
 import UserCalendar from '../UserCalendar/UserCalendar'
+import AddIncome from '../AddIncome/AddIncome'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -13,6 +15,21 @@ import {AuthContext} from '../../Context/AuthContext'
 const Income = () => {
 
   const {user} = useContext(AuthContext)
+
+  const [toggle, setToggle] = useState(false)
+
+  const toggleAdd = () => {
+    setToggle(!toggle)
+  }
+
+  const displayToggle = toggle &&
+    <div className="ToggleOverlay">
+      <div className="AddIncomeModule">
+        <h2>Add Income</h2>
+        
+      </div>
+    </div>
+
 
   const displayIncome = user ? 
     <div className="Income">
@@ -23,7 +40,7 @@ const Income = () => {
             <Col xs={12} sm={12} md={8} lg={8} style={{padding: '0'}}>
               <section className="IncomeHeader">
                 <h1>Income</h1>
-                <button>Add New Income</button>    
+                <button onClick={toggleAdd}>Add New Income</button>    
               </section>
               <Row className="IncomeList">
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
@@ -49,14 +66,24 @@ const Income = () => {
                 </Row>
             </Col>
             <Col xs={12} sm={12} md={4} lg={4}>
-              <section className="BalanceCard"></section>
-              <section className="BalanceCard"></section>
+              <section className="IncomeCard">
+                <h3>$<span><CountUp
+                    start={0}
+                    end={136}
+                    delay={0}
+                    decimals={0}
+                    duration={1.75}
+                  >
+                  </CountUp></span></h3>
+              </section>
+              <section className="IncomeCard"></section>
         
               <UserCalendar />
             </Col>
           </Row>
         </Container>  
       </section>
+      {displayToggle}
     </div>
 
     : 

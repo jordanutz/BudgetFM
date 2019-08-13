@@ -5,32 +5,38 @@ CREATE TABLE users (
   password text not null
 )
 
-CREATE TABLE balance (
+CREATE TABLE user_balance (
   id serial primary key, 
-  user_id references users(id), 
+  user_id integer references users(id), 
   balance integer not null
 )
 
-CREATE TABLE income (
+CREATE TABLE user_income (
   id serial primary key, 
-  user_id references users(id)
+  user_id integer references users(id)
   date_posted text not null, 
   description varchar(255), 
   category_id references categories(id), 
   amount integer not null, 
 )
 
-CREATE TABLE expenses (
+CREATE TABLE user_expenses (
   id serial primary key, 
-  user_id references users(id)
+  user_id integer references users(id)
   date_posted text not null, 
   description varchar(255), 
   category_id references categories(id), 
   amount integer not null, 
 )
 
-CREATE TABLE categories (
+CREATE TABLE expense_categories (
   id serial primary key, 
   type text not null, 
   icon text not null
+)
+
+INSERT INTO expense_categories (
+  (type, icon)
+  values, 
+  ('')
 )
