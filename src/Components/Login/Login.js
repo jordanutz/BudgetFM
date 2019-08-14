@@ -8,18 +8,21 @@ import {withRouter} from 'react-router-dom'
 
 // Context 
 import {AuthContext} from '../../Context/AuthContext'
+import {ProfileContext} from '../../Context/ProfileContext'
 
 const Login = (props) => {
 
   const {setUser} = useContext(AuthContext)
+  const {setBalance} = useContext(ProfileContext)
 
   return (
     <Formik
         initialValues={{email: '', password: ''}}
         onSubmit={ (values, {setSubmitting}) => {
           axios.post('/api/login', values).then(res => {
-            setUser(res.data)
-            props.history.push(`/user/${res.data.id}`)
+            setUser(res.data[0])
+            setBalance(res.data[1].balance)
+            props.history.push(`/user/${res.data[0].id}`)
           })
       }}
 

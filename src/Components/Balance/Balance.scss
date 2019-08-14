@@ -46,6 +46,10 @@
         margin-bottom: 15px;
       }
 
+      input::placeholder {
+        color: $text-color;
+      }
+
       span {
         font-size: 64px;
         font-weight: 200;

@@ -13,7 +13,10 @@ const Header = (props) => {
 
   useEffect(() => {
     axios.get('/api/user')
-    .then(res => setUser(res.data))
+    .then(res => {
+      console.log('hit login header')
+      setUser(res.data[0])
+    })
     .catch(err => console.log(err))
   }, [setUser])
 

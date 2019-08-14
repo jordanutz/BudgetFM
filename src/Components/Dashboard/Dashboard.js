@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
+import {ProfileContext} from '../../Context/ProfileContext'
 
 // Packages
 import CountUp from 'react-countup'
@@ -24,7 +25,7 @@ import User from './assets/user.svg'
 const Dashboard = () => {
 
   const {user} = useContext(AuthContext)
-  console.log(user)
+  const {balance} = useContext(ProfileContext)
 
   const displayDashboard = user ? 
     <div className="Dashboard">
@@ -42,7 +43,7 @@ const Dashboard = () => {
               <section id="Balance" className="DashboardModule">
                 <h2>$<CountUp
                   start={0}
-                  end={user.balance}
+                  end={balance}
                   delay={0}
                   decimals={0}
                   duration={1.75}

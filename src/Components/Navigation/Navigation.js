@@ -15,16 +15,17 @@ const Navigation = () => {
   const {user, setUser} = useContext(AuthContext)
   const [dropdown, setDropdown] = useState(false)
 
-  useEffect(() => {
-    axios.get('/api/user')
-    .then(res => setUser(res.data))
-    .catch(err => console.log(err))
-  }, [setUser])
-
   const toggleDropdown = () => {
-    console.log('hit')
     setDropdown(!dropdown);
   }
+
+  useEffect(() => {
+    axios.get('/api/user')
+    .then(res => {
+      setUser(res.data[0])
+    })
+    .catch(err => console.log(err))
+  }, [setUser])
 
   const userLogout = () => {
     axios.get('/api/logout')

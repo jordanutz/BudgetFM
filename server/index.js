@@ -33,6 +33,7 @@ app.post('/api/register', auth.userRegister)
 app.post('/api/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
 app.get('/api/logout', auth.userLogout)
+app.put('/api/balance', budget.updateBalance)
 
 // Dashboard
 

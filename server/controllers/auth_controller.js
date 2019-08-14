@@ -19,8 +19,6 @@ module.exports = {
           email: newUser[0].email, 
           balance: initialBalance[0].balance
         }
-
-        console.log(newUser)
         req.session.user = newUser 
         return res.status(200).send(req.session.user)
       } catch (err) {
@@ -44,18 +42,23 @@ module.exports = {
 
       const findBalance = await db.auth.user_balance([findExistingUser[0].id])
 
-      req.session.user = { id: findExistingUser[0].id, 
-                           name: findExistingUser[0].name, 
-                           email: findExistingUser[0].email, 
-                           balance: findBalance[0].balance }
-
+      req.session.user = [
+        { 
+          id: findExistingUser[0].id, 
+          name: findExistingUser[0].name, 
+          email: findExistingUser[0].email
+        },
+      {   
+          balance: findBalance[0].balance 
+        }
+      ]
+      
       return res.status(200).send(req.session.user)
     } else {
       return res.status(401).send('Incorrect email or password')
     }
   }, 
   getUser: (req, res) => {
-    console.log(req.session.user)
     if (req.session.user) {
       res.status(200).send(req.session.user)
     } else {
