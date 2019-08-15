@@ -1,1 +1,74 @@
 @import '../../index';
+
+.AddIncome {
+  min-width: 500px;
+  max-width: 600px;
+  height: 500px;
+  background: #eee;
+  border-radius: 3px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1), 0px 4px 5px 0px rgba(0, 0, 0, 0.1), 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .IncomeDetails {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    input {
+      border: 0;
+      background: none;
+      border-bottom: 1px solid #ccc;
+      width: 100%;
+      font-size: 20px;
+    }
+
+    #dropdown-basic-button {
+      background: $secondary-color;
+      border: none;
+      min-width: 150px;
+      display:flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .btn-income {
+      min-width: 200px;
+      height: 50px;
+      margin: 0 auto;
+      background: $secondary-color;
+      padding: 15px 20px;
+      color: white;
+      z-index: 1;
+      font-weight: 700;
+      border-radius: 3px;
+      font-size: .9rem;
+      text-transform: uppercase;
+      font-family: 'Encode Sans Semi Condensed', sans-serif;
+    }
+
+    
+
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: -30px;
+    right: -25px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 50%;
+  }
+}

@@ -47,7 +47,7 @@ const Balance = () => {
                   end={balance}
                   delay={0}
                   decimals={0}
-                  duration={1.75}
+                  duration={1}
                 >
                 </CountUp></span></h3>
               </section>

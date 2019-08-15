@@ -46,7 +46,7 @@ const Dashboard = () => {
                   end={balance}
                   delay={0}
                   decimals={0}
-                  duration={1.75}
+                  duration={1}
                 >
                 </CountUp></h2>
                 <h3><span>Current</span> Balance</h3>
@@ -63,7 +63,7 @@ const Dashboard = () => {
                   end={136}
                   delay={0}
                   decimals={0}
-                  duration={1.75}
+                  duration={1}
                 >
                 </CountUp></h2>
                 <h3><span>Monthly</span> Income</h3>
@@ -80,7 +80,7 @@ const Dashboard = () => {
                   end={169}
                   delay={0}
                   decimals={0}
-                  duration={1.75}
+                  duration={1}
                 >
                 </CountUp></h2>
                 <h3><span>Monthly</span> Expenses</h3>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                   end={37}
                   delay={0}
                   decimals={0}
-                  duration={1.75}
+                  duration={1}
                 >
                 </CountUp>%</h2>
                 <section id="SpendingDarken" className="ModuleFooter">

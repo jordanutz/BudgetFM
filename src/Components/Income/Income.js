@@ -24,10 +24,7 @@ const Income = () => {
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <div className="AddIncomeModule">
-        <h2>Add Income</h2>
-        
-      </div>
+      <AddIncome setToggle={setToggle} />
     </div>
 
 
