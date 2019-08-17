@@ -8,17 +8,15 @@
   height: 11vh;
 
   .NavigationMenu {
-    background: #3B3F44;
+    background: #FBFBFB;
     min-width: 6vw;
-    height: 12vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    i {
-      color: #64686C;
-      font-size: 2.25em;
-    }
+
+
   }
 
   @media screen and (max-width: 991px) {

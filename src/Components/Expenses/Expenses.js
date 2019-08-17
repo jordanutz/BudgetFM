@@ -24,11 +24,9 @@ const Expenses = (props) => {
   }
 
   const displayToggle = toggle &&
-  <div className="ToggleOverlay">
-    <div className="AddExpenseModule">
-      <h2>Add Expense</h2>
+    <div className="ToggleOverlay">
+      <AddExpense setToggle={setToggle} />
     </div>
-  </div>
 
   const displayExpenses = user ? 
     <div className="Expenses">

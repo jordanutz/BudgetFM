@@ -40,9 +40,7 @@ const Navigation = () => {
 
   const displayPortal = user ?
     <nav className="Navigation">
-        <section className="NavigationMenu">
-          <i className="fas fa-bars"></i>
-        </section>
+        <section className="NavigationMenu"></section>
         <section className="NavigationLinks">
           <section className="NavigationLogo">
             <Link to='/'><img src={Microphone} />
