@@ -3,15 +3,10 @@ import './UserCalendar.scss'
 import Calendar from 'react-calendar'
 import CalendarIcon from '../Dashboard/assets/calendar.svg'
 
-// Context
-import {ProfileContext} from '../../Context/ProfileContext'
-
-const UserCalendar = () => {
-
-  const {date, setDate} = useContext(ProfileContext)
+const UserCalendar = (props) => {
 
   const selectDate = (active) => {
-    setDate(active.activeStartDate)
+    props.setDate(active.activeStartDate)
    }
 
   return (
@@ -21,7 +16,7 @@ const UserCalendar = () => {
       <img src={CalendarIcon} />
       <section id="GoalsDarken" className="CalendarFooter" style={{padding: '0'}}>
       <Calendar 
-        value={date} 
+        value={props.date} 
         onActiveDateChange={ (activeStartDate) => selectDate(activeStartDate) }
       />
       </section>

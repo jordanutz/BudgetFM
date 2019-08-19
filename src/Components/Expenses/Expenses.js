@@ -16,8 +16,8 @@ import {AuthContext} from '../../Context/AuthContext'
 const Expenses = (props) => {
 
   const {user} = useContext(AuthContext)
-
   const [toggle, setToggle] = useState(false)
+  const [date, setDate] = useState(new Date())
 
   const toggleAdd = () => {
     setToggle(!toggle)
@@ -69,12 +69,15 @@ const Expenses = (props) => {
                       end={169}
                       delay={0}
                       decimals={0}
-                      duration={1.75}
+                      duration={1}
                     >
                     </CountUp></span></h3>
                 </section>
               <section className="ExpenseCard"></section>  
-              <UserCalendar />
+              <UserCalendar 
+                date={date}
+                setDate={setDate}
+              />
             </Col>
           </Row>
         </Container>  

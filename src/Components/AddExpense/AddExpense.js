@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './AddExpense.scss'
+import axios from 'axios'
 
 // Components
 import {Dropdown, DropdownButton} from 'react-bootstrap'
@@ -11,9 +12,21 @@ const AddExpense = (props) => {
 const [description, setDescription] = useState('')
 const [category, setCategory] = useState(null)
 const [amount, setAmount] = useState('')
+const [date, setDate] = useState(new Date())
 
-const submitIncome = (e) => {
+const submitExpense = (e, description, category, amount, date) => {
   e.preventDefault()
+
+  let expense = {
+    description, 
+    category, 
+    amount, 
+    date
+  }
+
+  axios.post('/api/expense', {expense})
+  .then(res => console.log(res.data))
+  .catch(err => console.log(err))
 }
 
 const colorSelection = {
@@ -27,42 +40,55 @@ const colorSelection = {
   other: '#FFE826'
 }
 
+const expenseCategory = {
+  payments: 1, 
+  food: 2, 
+  home: 3, 
+  clohing: 4, 
+  education: 5, 
+  recreation: 6, 
+  transporation: 7, 
+  other: 8
+}
+
+console.log(expenseCategory[category])
+
   return (
     <div className="AddIncome">
       <h1>Add Expense</h1>
       <section className="IncomeDetails">
         <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-        <DropdownButton id="dropdown-basic-button" title={category ? category : 'Category'} >
-          <Dropdown.Item name="Payments" onClick={(e) => setCategory(e.target.name)}>
-            <span>Payments</span>
+        <DropdownButton id="dropdown-basic-button" title={category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Category'} >
+          <Dropdown.Item name="payments" onClick={(e) => setCategory(e.target.name)}>
+            Payments
             <div className="ColorLabel" style={{backgroundColor: colorSelection['payments'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Food" onClick={(e) => setCategory(e.target.name)}>
-            <span>Food</span>  
+          <Dropdown.Item name="food" onClick={(e) => setCategory(e.target.name)}>
+            Food  
             <div className="ColorLabel" style={{backgroundColor: colorSelection['food'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Home" onClick={(e) => setCategory(e.target.name)}>
-            <span>Home</span>
+          <Dropdown.Item name="home" onClick={(e) => setCategory(e.target.name)}>
+            Home
             <div className="ColorLabel" style={{backgroundColor: colorSelection['home'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Clothing" onClick={(e) => setCategory(e.target.name)}>
-            <span>Clothing</span>
+          <Dropdown.Item name="clothing" onClick={(e) => setCategory(e.target.name)}>
+            Clothing
             <div className="ColorLabel" style={{backgroundColor: colorSelection['clothing'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Education" onClick={(e) => setCategory(e.target.name)}>
-            <span>Education</span>
+          <Dropdown.Item name="education" onClick={(e) => setCategory(e.target.name)}>
+            Education
             <div className="ColorLabel" style={{backgroundColor: colorSelection['education'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Recreation" onClick={(e) => setCategory(e.target.name)}>
-            <span>Recreation</span>
+          <Dropdown.Item name="recreation" onClick={(e) => setCategory(e.target.name)}>
+            Recreation
             <div className="ColorLabel" style={{backgroundColor: colorSelection['recreation'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Transporation" onClick={(e) => setCategory(e.target.name)}>
-            <span>Transportation</span>
+          <Dropdown.Item name="transporation" onClick={(e) => setCategory(e.target.name)}>
+            Transportation
             <div className="ColorLabel" style={{backgroundColor: colorSelection['transportation'] }}></div>
           </Dropdown.Item>
-          <Dropdown.Item name="Other" onClick={(e) => setCategory(e.target.name)}>
-            <span>Other</span>
+          <Dropdown.Item name="other" onClick={(e) => setCategory(e.target.name)}>
+            Other
             <div className="ColorLabel" style={{backgroundColor: colorSelection['other'] }}></div>      
           </Dropdown.Item>
         </DropdownButton>
@@ -70,7 +96,7 @@ const colorSelection = {
           <span>$</span>
           <input placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </section>
-        <button className="btn-expense" onClick={(e) => submitIncome(e)}>Submit</button>
+        <button className="btn-expense" onClick={(e) => submitExpense(e, description, expenseCategory[category], amount, date)}>Submit</button>
       </section>
       <img onClick={() => props.setToggle(false)} src={Delete}/>
     </div>

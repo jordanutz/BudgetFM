@@ -26,6 +26,7 @@ const Dashboard = () => {
 
   const {user} = useContext(AuthContext)
   const {balance} = useContext(ProfileContext)
+  const [date, setDate] = useState(new Date())
 
   const displayDashboard = user ? 
     <div className="Dashboard">
@@ -107,7 +108,10 @@ const Dashboard = () => {
               </section>
             </Col>
             <Col xs={12} sm={12} md={12} lg={4}>
-              <UserCalendar />
+              <UserCalendar 
+                date={date}
+                setDate={setDate}
+              />
             </Col>
           </Row>
         </Container>

@@ -27,15 +27,24 @@ const auth = require('./controllers/auth_controller')
 const budget = require('./controllers/budget_controller')
 
 // Endpoints 
+app.put('/api/balance', budget.updateBalance)
 
 // Authentication 
 app.post('/api/register', auth.userRegister)
 app.post('/api/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
 app.get('/api/logout', auth.userLogout)
-app.put('/api/balance', budget.updateBalance)
+
 
 // Dashboard
+
+
+// Income
+app.post('/api/income', budget.postIncome)
+
+// Expenses
+app.post('/api/expense', budget.postExpense)
+
 
 PORT = 6800;
 

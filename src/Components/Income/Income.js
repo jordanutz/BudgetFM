@@ -15,8 +15,8 @@ import {AuthContext} from '../../Context/AuthContext'
 const Income = () => {
 
   const {user} = useContext(AuthContext)
-
   const [toggle, setToggle] = useState(false)
+  const [date, setDate] = useState(new Date())
 
   const toggleAdd = () => {
     setToggle(!toggle)
@@ -24,9 +24,8 @@ const Income = () => {
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddIncome setToggle={setToggle} />
+      <AddIncome setToggle={setToggle}/>
     </div>
-
 
   const displayIncome = user ? 
     <div className="Income">
@@ -69,13 +68,15 @@ const Income = () => {
                     end={136}
                     delay={0}
                     decimals={0}
-                    duration={1.75}
+                    duration={1}
                   >
                   </CountUp></span></h3>
               </section>
               <section className="IncomeCard"></section>
-        
-              <UserCalendar />
+              <UserCalendar 
+                date={date}
+                setDate={setDate}
+              />
             </Col>
           </Row>
         </Container>  

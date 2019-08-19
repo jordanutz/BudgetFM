@@ -7,5 +7,18 @@ module.exports = {
       res.status(200).send(req.session.user[1])
     })
     .catch(err => console.log(err))
+  }, 
+  postIncome: (req, res) => {
+    const db = req.app.get('db')
+    const {income} = req.body
+
+    console.log(income)
+    
+  }, 
+  postExpense: (req, res) => {
+    const db = req.app.get('db')
+    const {expense} = req.body
+
+    console.log(expense)
   }
 }

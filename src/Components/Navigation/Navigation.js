@@ -33,10 +33,6 @@ const Navigation = () => {
     .catch(err => console.log(err))
   }
 
-  const displayToggle = dropdown && 
-    <div className="DashboardDrop">
-      <Link to='/'><button onClick={userLogout}>Sign Out</button></Link>
-    </div>
 
   const displayPortal = user ?
     <nav className="Navigation">
@@ -46,11 +42,6 @@ const Navigation = () => {
             <Link to='/'><img src={Microphone} />
             <h1>BudgetFM</h1>
             </Link>
-          </section>
-          <section className="NavigationUser">
-            <h2>{user && user.name}</h2>
-            <button onClick={toggleDropdown}><i className="fas fa-chevron-down"></i></button>
-            {displayToggle}
           </section>
         </section>
       </nav>

@@ -4,11 +4,10 @@ import axios from 'axios'
 export const ProfileContext = createContext()
 
 const ProfileContextProvider = (props) => {
-  const [date, setDate] = useState(new Date())
   const [balance, setBalance] = useState(null)
 
   return (
-    <ProfileContext.Provider value={{date, setDate, balance, setBalance}}>
+    <ProfileContext.Provider value={{balance, setBalance}}>
       {props.children}
     </ProfileContext.Provider>
   )
