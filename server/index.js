@@ -40,6 +40,7 @@ app.get('/api/logout', auth.userLogout)
 
 
 // Income
+app.get('/api/income', budget.getIncome)
 app.post('/api/income', budget.postIncome)
 
 // Expenses

@@ -13,20 +13,24 @@ CREATE TABLE user_balance (
 
 CREATE TABLE user_income (
   id serial primary key, 
-  user_id integer references users(id)
+  user_id integer references users(id),
   date_posted text not null, 
   description varchar(255), 
-  category_id references income_categories(id), 
-  amount integer not null, 
+  category_id integer references income_categories(id), 
+  amount integer not null
 )
+
+select * from user_income 
+join income_categories on user_income.category_id = income_categories.id
+where user_id = $1 and calendar = $2 
 
 CREATE TABLE user_expenses (
   id serial primary key, 
-  user_id integer references users(id)
+  user_id integer references users(id),
   date_posted text not null, 
   description varchar(255), 
-  category_id references expense_categories(id), 
-  amount integer not null, 
+  category_id integer references expense_categories(id), 
+  amount integer not null
 )
 
 CREATE TABLE income_categories (
@@ -41,19 +45,24 @@ CREATE TABLE expense_categories (
   icon text not null
 )
 
-Expenses: 
-Clothing: <i class="fas fa-tshirt"></i>
-Food: <i class="fas fa-ice-cream"></i>
-Payments: <i class="fas fa-money-check"></i>
-Home: <i class="fas fa-home"></i>
-Education: <i class="fas fa-graduation-cap"></i>
-Recreation: <i class="fas fa-futbol"></i>
-Transportation: <i class="fas fa-car"></i>
-Other: <i class="fab fa-superpowers"></i>
+insert into expense_categories 
+(type, icon)
+values
+('CLothing', 'fas fa-tshirt'), 
+('Food', 'fas fa-ice-cream'), 
+('Payments', 'fas fa-money-check'), 
+('Home', 'fas fa-home'), 
+('Education', 'fas fa-graduation-cap'), 
+('Recreation', 'fas fa-futbol'), 
+('Transporation', 'fas fa-car'), 
+('Other', 'fab fa-superpowers')
 
-Income: 
-Gift: <i class="fas fa-gift"></i>
-Salary: <i class="fas fa-dollar-sign"></i>
-Rewards: <i class="fas fa-seedling"></i>
-Coins: <i class="fas fa-coins"></i>
-Other: <i class="fab fa-superpowers"></i>
+insert into income_categories
+(type, icon)
+values
+('Gift', 'fas fa-gift'), 
+('Investment', 'fas fa-coins'), 
+('Rewards', 'fas fa-seedling'), 
+('Salary', 'fas fa-dollar-sign'),
+('Other', 'fab fa-superpowers')
+

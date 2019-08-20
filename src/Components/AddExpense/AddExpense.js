@@ -51,8 +51,6 @@ const expenseCategory = {
   other: 8
 }
 
-console.log(expenseCategory[category])
-
   return (
     <div className="AddIncome">
       <h1>Add Expense</h1>

@@ -1,6 +1,7 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import './Income.scss'
 import CountUp from 'react-countup'
+import axios from 'axios'
 
 // Components
 import Menu from '../Menu/Menu'
@@ -11,6 +12,7 @@ import AddIncome from '../AddIncome/AddIncome'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
+import {ProfileContext} from '../../Context/ProfileContext'
 
 const Income = () => {
 
@@ -21,6 +23,12 @@ const Income = () => {
   const toggleAdd = () => {
     setToggle(!toggle)
   }
+
+  useEffect( () => {
+    axios.get('/api/income')
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err))
+  })
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">

@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import './AddIncome.scss'
 import axios from 'axios'
 
 // Components
 import {Dropdown, DropdownButton} from 'react-bootstrap'
-
 import Delete from './assets/delete.svg'
+
+// Context
+import {ProfileContext} from '../../Context/ProfileContext'
 
 const AddIncome = (props) => {
 
@@ -13,6 +15,7 @@ const [description, setDescription] = useState('')
 const [category, setCategory] = useState(null)
 const [amount, setAmount] = useState('')
 const [date, setDate] = useState(new Date())
+const {setIncome} = useContext(ProfileContext)
 
 const submitIncome = (e, description, category, amount, date) => {
   e.preventDefault()
@@ -25,7 +28,10 @@ const submitIncome = (e, description, category, amount, date) => {
   }
 
   axios.post('/api/income', {income})
-  .then(res => console.log(res.data))
+  .then(res => {
+    setIncome(res.data)
+    props.setToggle(false)
+  })
   .catch(err => console.log(err))
 }
 
