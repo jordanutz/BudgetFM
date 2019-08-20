@@ -12,6 +12,9 @@ module.exports = {
   }, 
   getIncome: async (req, res) => {
     const db = req.app.get('db')
+    const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
+    const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
+    res.status(200).send(getIncome)
   },
   postIncome: async (req, res) => {
     const db = req.app.get('db')

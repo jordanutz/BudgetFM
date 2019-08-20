@@ -19,14 +19,15 @@ const Income = () => {
   const {user} = useContext(AuthContext)
   const [toggle, setToggle] = useState(false)
   const [date, setDate] = useState(new Date())
+  const [income, setIncome] = useState(null)
 
   const toggleAdd = () => {
     setToggle(!toggle)
   }
 
   useEffect( () => {
-    axios.get('/api/income')
-    .then(res => console.log(res.data))
+    axios.get(`/api/income?date=${date}`)
+    .then(res => setIncome(res.data))
     .catch(err => console.log(err))
   })
 
