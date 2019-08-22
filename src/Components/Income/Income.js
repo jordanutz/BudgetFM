@@ -26,15 +26,36 @@ const Income = () => {
   }
 
   useEffect( () => {
+    console.log(date)
     axios.get(`/api/income?date=${date}`)
     .then(res => setIncome(res.data))
     .catch(err => console.log(err))
-  })
+  }, [])
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
       <AddIncome setToggle={setToggle}/>
     </div>
+
+  const incomeLog = income && income.map(single => {
+    console.log(single)
+    return (
+      <Row className="HeadingRow" key={single.id}>
+        <Col xs={12} sm={12} md={3} lg={3}>
+          <h2>{single.date_posted}</h2>
+        </Col>
+        <Col xs={12} sm={12} md={3} lg={3}>
+          <h2>{single.description}</h2>
+        </Col>
+        <Col xs={12} sm={12} md={3} lg={3}>
+            <h2>{single.type}</h2>
+        </Col>
+        <Col xs={12} sm={12} md={3} lg={3}>
+          <h2>{single.amount}</h2>
+        </Col>
+      </Row>
+    )
+  })
 
   const displayIncome = user ? 
     <div className="Income">
@@ -56,46 +77,47 @@ const Income = () => {
                 </Col>
                 <Row className="HeadingRow">
                   <Col xs={12} sm={12} md={3} lg={3}>
-                      <h2>Date</h2>
-                    </Col>
-                    <Col xs={12} sm={12} md={3} lg={3}>
-                      <h2>Description</h2>
-                    </Col>
-                    <Col xs={12} sm={12} md={3} lg={3}>
+                    <h2>Date</h2>
+                  </Col>
+                  <Col xs={12} sm={12} md={3} lg={3}>
+                    <h2>Description</h2>
+                  </Col>
+                  <Col xs={12} sm={12} md={3} lg={3}>
                       <h2>Category</h2>
-                    </Col>
-                    <Col xs={12} sm={12} md={3} lg={3}>
-                      <h2>Amount</h2>
-                    </Col>
-                  </Row>
+                  </Col>
+                  <Col xs={12} sm={12} md={3} lg={3}>
+                    <h2>Amount</h2>
+                  </Col>
                 </Row>
-            </Col>
-            <Col xs={12} sm={12} md={4} lg={4}>
-              <section className="IncomeCard">
-                <h3>$<span><CountUp
-                    start={0}
-                    end={136}
-                    delay={0}
-                    decimals={0}
-                    duration={1}
-                  >
-                  </CountUp></span></h3>
-              </section>
-              <section className="IncomeCard"></section>
-              <UserCalendar 
-                date={date}
-                setDate={setDate}
-              />
-            </Col>
-          </Row>
-        </Container>  
-      </section>
-      {displayToggle}
-    </div>
+                {incomeLog}
+              </Row>
+          </Col>
+          <Col xs={12} sm={12} md={4} lg={4}>
+            <section className="IncomeCard">
+              <h3>$<span><CountUp
+                  start={0}
+                  end={136}
+                  delay={0}
+                  decimals={0}
+                  duration={1}
+                >
+                </CountUp></span></h3>
+            </section>
+            <section className="IncomeCard"></section>
+            <UserCalendar 
+              date={date}
+              setDate={setDate}
+            />
+          </Col>
+        </Row>
+      </Container>  
+    </section>
+    {displayToggle}
+  </div>
 
-    : 
+  : 
 
-    <NoAccess />
+  <NoAccess />
 
   return (
     <React.Fragment>
