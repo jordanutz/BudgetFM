@@ -70,10 +70,41 @@
         .HeadingRow {
           width: 100%;
           border-top: 1px solid #DDDDDD;
-          border-bottom: 1px solid #DDDDDD;
           padding-top: 15px;
           padding-bottom: 15px;
           margin: 0;
+        }
+
+        .IncomeLog {
+          font-size: .8rem;
+
+          h2  {
+            font-size: .9rem;
+            text-transform: none;
+          }
+
+          .IncomeCategory {
+            display: flex;
+
+            i {
+              margin-right: 15px;
+              color: #fff;
+              width: 25px;
+              height: 25px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1rem;
+              border-radius: 50%;
+            }
+          
+          }
+        }
+
+        .HeadingRow > div {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
         }
       }
     }

@@ -20,34 +20,64 @@ const Income = () => {
   const [toggle, setToggle] = useState(false)
   const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(null)
+  const [sum, setSum] = useState(0)
+
+  useEffect( () => {
+    axios.get(`/api/income?date=${date}`)
+    .then(res => { 
+      setIncome(res.data.getIncome)
+      setSum(res.data.sumIncome)
+    })
+    .catch(err => console.log(err))
+  }, [date])
 
   const toggleAdd = () => {
     setToggle(!toggle)
   }
 
-  useEffect( () => {
-    console.log(date)
-    axios.get(`/api/income?date=${date}`)
-    .then(res => setIncome(res.data))
-    .catch(err => console.log(err))
-  }, [])
+  const colorSelection = {
+    gift: '#F14135', 
+    investment: '#5218E1', 
+    rewards: '#18E12D', 
+    salary: '#18C6E1', 
+    other: '#FFE826'
+  }
 
+  const submitIncome = (e, description, category, amount, date) => {
+    e.preventDefault()
+  
+    let income = {
+      description, 
+      category, 
+      amount, 
+      date
+    }
+  
+    axios.post('/api/income', {income})
+    .then(res => {
+      setToggle(false)
+      setIncome(res.data.userIncome.getIncome)
+      setSum(res.data.userIncome.sumIncome)
+    })
+    .catch(err => console.log(err))
+  }
+  
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddIncome setToggle={setToggle}/>
+      <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} />
     </div>
 
   const incomeLog = income && income.map(single => {
-    console.log(single)
     return (
-      <Row className="HeadingRow" key={single.id}>
+      <Row className="HeadingRow IncomeLog" key={single.income}>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.date_posted}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
         </Col>
-        <Col xs={12} sm={12} md={3} lg={3}>
+        <Col xs={12} sm={12} md={3} lg={3} className="IncomeCategory">
+            <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
             <h2>{single.type}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
@@ -56,6 +86,8 @@ const Income = () => {
       </Row>
     )
   })
+
+  console.log(sum && sum[0].sum)
 
   const displayIncome = user ? 
     <div className="Income">
@@ -96,7 +128,7 @@ const Income = () => {
             <section className="IncomeCard">
               <h3>$<span><CountUp
                   start={0}
-                  end={136}
+                  end={sum ? sum[0].sum : 0}
                   delay={0}
                   decimals={0}
                   duration={1}
