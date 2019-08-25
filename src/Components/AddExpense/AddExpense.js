@@ -18,7 +18,7 @@ const expenseCategory = {
   payments: 1, 
   food: 2, 
   home: 3, 
-  clohing: 4, 
+  clothing: 4, 
   education: 5, 
   recreation: 6, 
   transporation: 7, 

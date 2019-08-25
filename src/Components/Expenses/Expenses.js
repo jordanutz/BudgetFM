@@ -22,10 +22,10 @@ const Expenses = () => {
   const [sum, setSum] = useState(0)
 
   useEffect( () => {
-    axios.get(`/api/expenses?date=${date}`)
+    axios.get(`/api/expense?date=${date}`)
     .then(res => { 
-      setExpenses(res.data.getExpenses)
-      setSum(res.data.sumExpenses)
+      setExpenses(res.data.getExpense)
+      setSum(res.data.sumExpense)
     })
     .catch(err => console.log(err))
   }, [date])
@@ -45,40 +45,40 @@ const Expenses = () => {
     other: '#FFE826'
   }
 
-  const submitExpenses = (e, description, category, amount, date) => {
+  const submitExpense = (e, description, category, amount, date) => {
     e.preventDefault()
   
-    let expenses = {
+    let expense = {
       description, 
       category, 
       amount, 
       date
     }
   
-    axios.post('/api/expenses', {expenses})
+    axios.post('/api/expense', {expense})
     .then(res => {
       setToggle(false)
-      setExpenses(res.data.userExpenses.getExpenses)
-      setSum(res.data.userExpenses.sumExpenses)
+      setExpenses(res.data.getExpense)
+      setSum(res.data.sumExpense)
     })
     .catch(err => console.log(err))
   }
   
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddExpense colorSelection={colorSelection} submitExpenses={submitExpenses} setToggle={setToggle} />
+      <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} />
     </div>
 
   const expensesLog = expenses && expenses.map(single => {
     return (
-      <Row className="HeadingRow IncomeLog" key={single.expenses}>
+      <Row className="HeadingRow ExpenseLog" key={single.expenses}>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.date_posted}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
         </Col>
-        <Col xs={12} sm={12} md={3} lg={3} className="IncomeCategory">
+        <Col xs={12} sm={12} md={3} lg={3} className="ExpenseCategory">
             <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
             <h2>{single.type}</h2>
         </Col>
@@ -90,19 +90,19 @@ const Expenses = () => {
   })
 
   const displayExpenses = user ? 
-    <div className="Income">
+    <div className="Expense">
       <Menu />
-      <section className="IncomeMain">
+      <section className="ExpenseMain">
         <Container>
-          <Row className="IncomeDetails">
+          <Row className="ExpenseDetails">
             <Col xs={12} sm={12} md={8} lg={8} style={{padding: '0'}}>
-              <section className="IncomeHeader">
+              <section className="ExpenseHeader">
                 <h1>Expenses</h1>
-                <button onClick={toggleAdd}>Add New Expenses</button>    
+                <button onClick={toggleAdd}>Add New Expense</button>    
               </section>
-              <Row className="IncomeList">
+              <Row className="ExpenseList">
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
-                  <section className="IncomeSearch">
+                  <section className="ExpenseSearch">
                     <input placeholder="Search" type="text" />
                     <h2>Pagination Here</h2>
                   </section>
@@ -125,7 +125,7 @@ const Expenses = () => {
               </Row>
           </Col>
           <Col xs={12} sm={12} md={4} lg={4}>
-            <section className="IncomeCard">
+            <section className="ExpenseCard">
               <h3>$<span><CountUp
                   start={0}
                   end={sum ? sum[0].sum : 0}
@@ -135,7 +135,7 @@ const Expenses = () => {
                 >
                 </CountUp></span></h3>
             </section>
-            <section className="IncomeCard"></section>
+            <section className="ExpenseCard"></section>
             <UserCalendar 
               date={date}
               setDate={setDate}

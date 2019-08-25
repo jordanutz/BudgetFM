@@ -1,17 +1,17 @@
 @import '../../index';
 
-.Expenses {
+.Expense {
   min-height: 90vh;
   display: flex;
   position: relative;
 
-  .ExpensesMain {
+  .ExpenseMain {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 2rem;
 
-    .ExpensesHeader {
+    .ExpenseHeader {
       display: flex; 
       justify-content: space-between;
       align-items: center;
@@ -30,13 +30,13 @@
       }
     }
 
-    .ExpensesDetails {
+    .ExpenseDetails {
 
       h1 {
         font-size: 2rem;
       }
 
-      .ExpensesList {
+      .ExpenseList {
         padding: 1rem;
 
         h2 {
@@ -48,7 +48,7 @@
           color: $text-color;
         }
 
-        .ExpensesSearch {
+        .ExpenseSearch {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
@@ -70,10 +70,41 @@
         .HeadingRow {
           width: 100%;
           border-top: 1px solid #DDDDDD;
-          border-bottom: 1px solid #DDDDDD;
           padding-top: 15px;
           padding-bottom: 15px;
           margin: 0;
+        }
+
+        .ExpenseLog {
+          font-size: .8rem;
+
+          h2  {
+            font-size: .9rem;
+            text-transform: none;
+          }
+
+          .ExpenseCategory {
+            display: flex;
+
+            i {
+              margin-right: 15px;
+              color: #fff;
+              width: 25px;
+              height: 25px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1rem;
+              border-radius: 50%;
+            }
+          
+          }
+        }
+
+        .HeadingRow > div {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
         }
       }
     }

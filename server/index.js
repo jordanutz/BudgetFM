@@ -44,6 +44,7 @@ app.get('/api/income', budget.getIncome)
 app.post('/api/income', budget.postIncome)
 
 // Expenses
+app.get('/api/expense', budget.getExpense)
 app.post('/api/expense', budget.postExpense)
 
 

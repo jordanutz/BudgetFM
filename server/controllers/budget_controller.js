@@ -40,8 +40,6 @@ module.exports = {
       sumIncome 
     }
 
-    console.log(userIncome)
-
     res.status(200).send(userIncome)
     
   }, 
@@ -52,21 +50,33 @@ module.exports = {
     const sumExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
 
     const userExpense = {
-      getIncome, 
-      sumIncome 
+      getExpense, 
+      sumExpense
     }
 
     res.status(200).send(userExpense)
   },
-  postExpense: (req, res) => {
+
+  postExpense: async (req, res) => {
     const db = req.app.get('db')
     const {expense} = req.body
-
+    const formatDate = moment(expense.date).format('MM/YYYY')
+    
     expense.date = moment(expense.date).format('MM/DD/YYYY')
     expense.amount = parseInt(expense.amount)
 
-    db.budget.post_expense([req.session.user[0].id, expense.date, expense.description, expense.category, expense.amount])
-    .then(total => console.log(total))
-    .catch(err => console.log(err))
+    const postExpense = await db.budget.post_expense([req.session.user[0].id, expense.date, expense.description, expense.category, expense.amount, formatDate])
+    const getExpense = await db.budget.get_monthly_expense([req.session.user[0].id, formatDate])
+    const sumExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
+
+    const userExpense = {
+      getExpense, 
+      sumExpense
+    }
+
+    console.log(userExpense)
+
+    res.status(200).send(userExpense)
+
   }
 }

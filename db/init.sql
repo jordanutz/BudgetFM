@@ -2,8 +2,8 @@ DROP TABLE user_account cascade
 DROP TABLE user_balance
 DROP TABLE user_income
 DROP TABLE user_expense
-DROP TABLE expense_categories
-DROP TABLE income_categories
+DROP TABLE expense_category
+DROP TABLE income_category
 
 CREATE TABLE user_account (
   id serial primary key,
@@ -53,13 +53,13 @@ CREATE TABLE expense_category (
 INSERT INTO expense_category
 (type, icon)
 values
-('Clothing', 'fas fa-tshirt'), 
-('Food', 'fas fa-pizza'), 
 ('Payments', 'fas fa-money-check'), 
+('Food', 'fas fa-pizza-slice'), 
 ('Home', 'fas fa-home'), 
+('Clothing', 'fas fa-tshirt'), 
 ('Education', 'fas fa-graduation-cap'), 
 ('Recreation', 'fas fa-futbol'), 
-('Transporation', 'fas fa-car'), 
+('Transportation', 'fas fa-car'), 
 ('Other', 'fab fa-superpowers')
 
 INSERT INTO income_category
