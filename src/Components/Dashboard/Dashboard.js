@@ -33,14 +33,11 @@ const Dashboard = () => {
   useEffect(() => {
     axios.get(`/api/dashboard?date=${date}`)
     .then(res => {
-      console.log(res.data)
       setIncome(res.data.getIncome)
       setExpense(res.data.getExpense)
     })
     .catch(err => console.log(err))
   }, [date])
-
-  console.log(income, expense)
 
   const displayDashboard = user ? 
     <div className="Dashboard">

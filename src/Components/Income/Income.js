@@ -17,6 +17,7 @@ import {ProfileContext} from '../../Context/ProfileContext'
 const Income = () => {
 
   const {user} = useContext(AuthContext)
+  const {setBalance} = useContext(ProfileContext)
   const [toggle, setToggle] = useState(false)
   const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(null)
@@ -58,6 +59,7 @@ const Income = () => {
       setToggle(false)
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
+      setBalance(res.data.updatedBalance)
     })
     .catch(err => console.log(err))
   }

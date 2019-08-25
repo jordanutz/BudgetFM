@@ -16,6 +16,7 @@ module.exports = {
     res.status(200).send(userDashboard)
 
   },
+
   updateBalance: (req, res) => {
     const db = req.app.get('db')
     db.budget.update_balance([req.session.user[0].id, req.body.balance])
@@ -25,6 +26,7 @@ module.exports = {
     })
     .catch(err => console.log(err))
   }, 
+
   getIncome: async (req, res) => {
     const db = req.app.get('db')
     const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
@@ -38,6 +40,7 @@ module.exports = {
 
     res.status(200).send(userIncome)
   },
+
   postIncome: async (req, res) => {
     const db = req.app.get('db')
     const {income} = req.body
@@ -50,14 +53,19 @@ module.exports = {
     const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
     const sumIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
 
+    const updatedBalance = await db.budget.add_income([req.session.user[0].id, income.amount])
+    req.session.user[1].balance = updatedBalance[0].balance
+
     const userIncome = {
       getIncome, 
-      sumIncome 
+      sumIncome, 
+      updatedBalance: updatedBalance[0].balance
     }
 
     res.status(200).send(userIncome)
     
   }, 
+
   getExpense: async (req, res) => {
     const db = req.app.get('db')
     const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
@@ -84,12 +92,17 @@ module.exports = {
     const getExpense = await db.budget.get_monthly_expense([req.session.user[0].id, formatDate])
     const sumExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
 
+    const updatedBalance = await db.budget.add_expense([req.session.user[0].id, expense.amount])
+    console.log(updatedBalance)
+    req.session.user[1].balance = updatedBalance[0].balance
+
     const userExpense = {
       getExpense, 
-      sumExpense
+      sumExpense, 
+      updatedBalance: updatedBalance[0].balance
     }
 
-    console.log(userExpense)
+
 
     res.status(200).send(userExpense)
 

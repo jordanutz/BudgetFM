@@ -12,10 +12,12 @@ import AddExpense from '../AddExpense/AddExpense'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
+import {ProfileContext} from '../../Context/ProfileContext'
 
 const Expenses = () => {
 
   const {user} = useContext(AuthContext)
+  const {setBalance} = useContext(ProfileContext)
   const [toggle, setToggle] = useState(false)
   const [date, setDate] = useState(new Date())
   const [expenses, setExpenses] = useState(null)
@@ -60,6 +62,7 @@ const Expenses = () => {
       setToggle(false)
       setExpenses(res.data.getExpense)
       setSum(res.data.sumExpense)
+      setBalance(res.data.updatedBalance)
     })
     .catch(err => console.log(err))
   }

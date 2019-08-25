@@ -1,0 +1,1 @@
+SELECT sum(amount) AS total_expense FROM user_expense WHERE user_id = $1
