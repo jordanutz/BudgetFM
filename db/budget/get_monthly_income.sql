@@ -1,3 +1,3 @@
-select user_income.id as income, date_posted, description, amount, calendar, type, icon from user_income 
-inner join income_categories on user_income.category_id = income_categories.id
-where user_id = $1 and calendar = $2
+SELECT user_income.id AS income, date_posted, description, amount, calendar, type, icon FROM user_income 
+INNER JOIN income_category ON user_income.category_id = income_category.id
+WHERE user_id = $1 AND calendar = $2

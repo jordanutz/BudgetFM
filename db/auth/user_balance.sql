@@ -1,1 +1,1 @@
-select balance from user_balance where id = $1;
+SELECT balance FROM user_balance WHERE id = $1;

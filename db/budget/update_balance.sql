@@ -1,2 +1,2 @@
-update user_balance set balance = $2 where id = $1
+UPDATE user_balance SET balance = $2 WHERE id = $1
 returning *;

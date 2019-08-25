@@ -70,7 +70,7 @@ const Dashboard = () => {
                 <h3><span>Monthly</span> Income</h3>
                 <img src={Income} />
                 <section id="IncomeDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/income`}><h4>Details</h4></Link>
+                  <Link to={`/user/${user.id}/income`}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>
@@ -87,7 +87,7 @@ const Dashboard = () => {
                 <h3><span>Monthly</span> Expenses</h3>
                 <img src={Expenses} />
                 <section id="ExpensesDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/expenses`}><h4>Details</h4></Link>
+                  <Link to={`/user/${user.id}/expenses`}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>

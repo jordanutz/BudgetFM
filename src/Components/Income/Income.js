@@ -56,8 +56,8 @@ const Income = () => {
     axios.post('/api/income', {income})
     .then(res => {
       setToggle(false)
-      setIncome(res.data.userIncome.getIncome)
-      setSum(res.data.userIncome.sumIncome)
+      setIncome(res.data.getIncome)
+      setSum(res.data.sumIncome)
     })
     .catch(err => console.log(err))
   }
@@ -86,8 +86,6 @@ const Income = () => {
       </Row>
     )
   })
-
-  console.log(sum && sum[0].sum)
 
   const displayIncome = user ? 
     <div className="Income">
@@ -128,7 +126,7 @@ const Income = () => {
             <section className="IncomeCard">
               <h3>$<span><CountUp
                   start={0}
-                  end={sum ? sum[0].sum : 0}
+                  end={sum ? parseInt(sum[0].sum) : 0}
                   delay={0}
                   decimals={0}
                   duration={1}
