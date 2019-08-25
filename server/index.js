@@ -37,7 +37,7 @@ app.get('/api/logout', auth.userLogout)
 
 
 // Dashboard
-
+app.get('/api/dashboard', budget.getDashboard)
 
 // Income
 app.get('/api/income', budget.getIncome)

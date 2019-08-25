@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import './Dashboard.scss'
 import {Link} from 'react-router-dom'
 
@@ -27,6 +27,20 @@ const Dashboard = () => {
   const {user} = useContext(AuthContext)
   const {balance} = useContext(ProfileContext)
   const [date, setDate] = useState(new Date())
+  const [income, setIncome] = useState(0)
+  const [expense, setExpense] = useState(0)
+
+  useEffect(() => {
+    axios.get(`/api/dashboard?date=${date}`)
+    .then(res => {
+      console.log(res.data)
+      setIncome(res.data.getIncome)
+      setExpense(res.data.getExpense)
+    })
+    .catch(err => console.log(err))
+  }, [date])
+
+  console.log(income, expense)
 
   const displayDashboard = user ? 
     <div className="Dashboard">
@@ -60,8 +74,8 @@ const Dashboard = () => {
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Income" className="DashboardModule">
                 <h2>$<CountUp
-                  start={1}
-                  end={136}
+                  start={0}
+                  end={income ? parseInt(income[0].sum) : 0}
                   delay={0}
                   decimals={0}
                   duration={1}
@@ -77,8 +91,8 @@ const Dashboard = () => {
             <Col xs={12} sm={12} md={6} lg={4}>
               <section id="Expenses" className="DashboardModule">
               <h2>$<CountUp
-                  start={1}
-                  end={169}
+                  start={0}
+                  end={expense ? parseInt(expense[0].sum) : 0}
                   delay={0}
                   decimals={0}
                   duration={1}

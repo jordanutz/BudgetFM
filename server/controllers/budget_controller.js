@@ -1,6 +1,21 @@
 const moment = require('moment')
 
 module.exports = {
+  getDashboard: async (req, res) => {
+    const db = req.app.get('db')
+
+    const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
+    const getIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
+    const getExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
+
+    const userDashboard = {
+      getIncome, 
+      getExpense
+    }
+
+    res.status(200).send(userDashboard)
+
+  },
   updateBalance: (req, res) => {
     const db = req.app.get('db')
     db.budget.update_balance([req.session.user[0].id, req.body.balance])
@@ -14,7 +29,7 @@ module.exports = {
     const db = req.app.get('db')
     const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
     const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
-    const sumIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
+    const sumIncome =  await db.budget.get_income_sum([req.session.user[0].id, formatDate])
 
     const userIncome = {
       getIncome, 

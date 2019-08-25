@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import './UserCalendar.scss'
 import Calendar from 'react-calendar'
 import CalendarIcon from '../Dashboard/assets/calendar.svg'
+import Moment from 'react-moment'
 
 const UserCalendar = (props) => {
 
@@ -9,9 +10,13 @@ const UserCalendar = (props) => {
     props.setDate(active.activeStartDate)
    }
 
+   console.log(props.date)
+
+  const timeStamp = <Moment format="M/YY" style={{fontWeight: '800'}}>{props.date}</Moment>
+
   return (
     <section id="Calendar" className="CalendarModule">
-      <h2>8/19</h2>
+      <h2>{timeStamp}</h2>
       <h3>Calendar</h3>
       <img src={CalendarIcon} />
       <section id="GoalsDarken" className="CalendarFooter" style={{padding: '0'}}>
