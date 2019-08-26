@@ -9,6 +9,8 @@ import NoAccess from '../NoAccess/NoAccess'
 import {Container, Row, Col} from 'react-bootstrap'
 import UserCalendar from '../UserCalendar/UserCalendar'
 import AddIncome from '../AddIncome/AddIncome'
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -22,14 +24,17 @@ const Income = () => {
   const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(null)
   const [sum, setSum] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(8)
+
 
   useEffect( () => {
-    axios.get(`/api/income?date=${date}`)
-    .then(res => { 
+    const getIncome = async () => {
+      const res = await axios.get(`/api/income?date=${date}`)
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
-    })
-    .catch(err => console.log(err))
+    }
+    getIncome();
   }, [date])
 
   const toggleAdd = () => {
@@ -42,6 +47,14 @@ const Income = () => {
     rewards: '#18E12D', 
     salary: '#18C6E1', 
     other: '#FFE826'
+  }
+
+  const lastIndex = currentPage * postsPerPage;
+  const firstIndex = lastIndex - postsPerPage;
+  const currentPosts = income && income.slice(firstIndex, lastIndex)
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
   }
 
   const submitIncome = (e, description, category, amount, date) => {
@@ -69,7 +82,7 @@ const Income = () => {
       <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} />
     </div>
 
-  const incomeLog = income && income.map(single => {
+  const incomeLog = currentPosts && currentPosts.map(single => {
     return (
       <Row className="HeadingRow IncomeLog" key={single.income}>
         <Col xs={12} sm={12} md={3} lg={3}>
@@ -77,7 +90,7 @@ const Income = () => {
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
-        </Col>
+        </Col>  
         <Col xs={12} sm={12} md={3} lg={3} className="IncomeCategory">
             <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
             <h2>{single.type}</h2>
@@ -104,7 +117,13 @@ const Income = () => {
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="IncomeSearch">
                     <input placeholder="Search" type="text" />
-                    <h2>Pagination Here</h2>
+                    <Pagination
+                      onChange={handlePageChange}
+                      current={currentPage}
+                      total={income && income.length}
+                      pageSize={postsPerPage}
+
+                    />
                   </section>
                 </Col>
                 <Row className="HeadingRow">
@@ -136,10 +155,7 @@ const Income = () => {
                 </CountUp></span></h3>
             </section>
             <section className="IncomeCard"></section>
-            <UserCalendar 
-              date={date}
-              setDate={setDate}
-            />
+            <UserCalendar date={date} setDate={setDate} />
           </Col>
         </Row>
       </Container>  
