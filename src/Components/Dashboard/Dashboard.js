@@ -102,7 +102,13 @@ const Dashboard = () => {
                 </section>
               </section>
             </Col>
-            <Col xs={12} sm={12} md={6} lg={8}>
+            <Col xs={12} sm={12} md={6} lg={4}>
+              <UserCalendar 
+                date={date}
+                setDate={setDate}
+              />
+            </Col>
+            <Col xs={12} sm={12} md={12} lg={8}>
               <section id="SpendingGraph" className="DashboardModule">
                 <img src={User} />
                 <h2 id="SpendingHeader">$<CountUp
@@ -117,12 +123,6 @@ const Dashboard = () => {
                   <Link to={`/user/${user.id}/previous-goals`}><h4>Details</h4></Link>
                 </section>
               </section>
-            </Col>
-            <Col xs={12} sm={12} md={12} lg={4}>
-              <UserCalendar 
-                date={date}
-                setDate={setDate}
-              />
             </Col>
           </Row>
         </Container>

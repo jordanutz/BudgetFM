@@ -2,6 +2,7 @@
 
 .Dashboard {
   min-height: 90vh;
+  position: relative;
   display: flex;
   background-image: linear-gradient(135deg,#F3F3F3 55%,#E3E4E4 0);
 
@@ -10,7 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 
     .DashboardDetails {
       margin-bottom: 15px;
@@ -21,7 +21,7 @@
     }
 
     .DashboardModule {
-      height: 30vh;
+      min-height: 250px;
       margin-bottom: 20px;
       border-radius: 3px;
       box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.05), 0px 1px 10px 0px rgba(0, 0, 0, 0.05);
@@ -140,19 +140,32 @@
     }
 
     #SpendingGraph {
-      background: $secondary-accent;
+      background: #1E1F22;
     }
 
     #SpendingDarken {
-      background: darken($secondary-accent, 20%);
+      background: darken(#1E1F22, 20%);
     }
 
     #Calendar {
-      background: #B4B4B4;
+      background: #818181;
     }
 
     #CalendarDarken {
-      background: darken(#B4B4B4, 20%);
+      background: darken(#818181, 20%);
     }
+  }
+}
+
+@media screen and (max-width: 767px) {
+	.DashboardMain {
+		padding-top: 25px;
+		padding-bottom: 25px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .Dashboard {
+    padding: 100px 0;
   }
 }

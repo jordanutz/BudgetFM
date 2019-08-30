@@ -30,8 +30,25 @@
   }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 767px) {
   .DashboardMenu {
     display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .DashboardMenu {
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    min-height: 70px;
+    justify-content: center;
+    padding-top: 0;
+
+    i {
+      margin-bottom: 0;
+      margin-right: 15px;
+    }
   }
 }
