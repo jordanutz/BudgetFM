@@ -9,6 +9,8 @@ import NoAccess from '../NoAccess/NoAccess'
 import {Container, Row, Col} from 'react-bootstrap'
 import UserCalendar from '../UserCalendar/UserCalendar'
 import AddExpense from '../AddExpense/AddExpense'
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -22,6 +24,9 @@ const Expenses = () => {
   const [date, setDate] = useState(new Date())
   const [expenses, setExpenses] = useState(null)
   const [sum, setSum] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(5)
+  
 
   useEffect( () => {
     axios.get(`/api/expense?date=${date}`)
@@ -36,6 +41,17 @@ const Expenses = () => {
     setToggle(!toggle)
   }
 
+  const deleteEntry = (e, id, amount) => {
+    e.preventDefault()
+    const deleteExpense = async () => {
+      const res = await axios.delete(`/api/expense?id=${id}&date=${date}&amount=${amount}`)
+      setExpenses(res.data.getExpense)
+      setSum(res.data.sumExpense)
+      setBalance(res.data.updatedBalance)
+    }
+    deleteExpense();
+  }
+
   const colorSelection = {
     payments: '#F14135', 
     food: '#E118A7', 
@@ -45,6 +61,14 @@ const Expenses = () => {
     recreation: '#18C6E1', 
     transportation: '#B318E1', 
     other: '#FFE826'
+  }
+
+  const lastIndex = currentPage * postsPerPage;
+  const firstIndex = lastIndex - postsPerPage;
+  const currentPosts = expenses && expenses.slice(firstIndex, lastIndex)
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
   }
 
   const submitExpense = (e, description, category, amount, date) => {
@@ -72,7 +96,7 @@ const Expenses = () => {
       <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} />
     </div>
 
-  const expensesLog = expenses && expenses.map(single => {
+  const expensesLog = currentPosts && currentPosts.map(single => {
     return (
       <Row className="HeadingRow ExpenseLog" key={single.expenses}>
         <Col xs={12} sm={12} md={3} lg={3}>
@@ -86,7 +110,8 @@ const Expenses = () => {
             <h2>{single.type}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
-          <h2>{single.amount}</h2>
+          <h2><span>$</span>{parseFloat(Math.round(single.amount * 100) / 100).toFixed(2)}</h2>
+          <i id="DeleteLog" className="fas fa-trash-alt" onClick={(e) => deleteEntry(e, single.expense, single.amount)}></i>
         </Col>
       </Row>
     )
@@ -107,7 +132,13 @@ const Expenses = () => {
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="ExpenseSearch">
                     <input placeholder="Search" type="text" />
-                    <h2>Pagination Here</h2>
+                    <Pagination
+                      onChange={handlePageChange}
+                      current={currentPage}
+                      total={expenses && expenses.length}
+                      pageSize={postsPerPage}
+
+                    />
                   </section>
                 </Col>
                 <Row className="HeadingRow">
@@ -138,7 +169,7 @@ const Expenses = () => {
                 >
                 </CountUp></span></h3>
             </section>
-            <section className="ExpenseCard"></section>
+ 
             <UserCalendar 
               date={date}
               setDate={setDate}

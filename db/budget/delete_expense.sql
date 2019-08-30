@@ -1,0 +1,1 @@
+DELETE FROM user_expense WHERE id = $1;

@@ -1,0 +1,1 @@
+DELETE FROM user_income WHERE id = $1;

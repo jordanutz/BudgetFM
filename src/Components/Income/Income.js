@@ -25,20 +25,32 @@ const Income = () => {
   const [income, setIncome] = useState(null)
   const [sum, setSum] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage] = useState(8)
-
+  const [postsPerPage] = useState(5)
+  const [results, setResults] = useState(0)
 
   useEffect( () => {
     const getIncome = async () => {
       const res = await axios.get(`/api/income?date=${date}`)
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
+      setResults(postsPerPage)
     }
     getIncome();
   }, [date])
 
   const toggleAdd = () => {
     setToggle(!toggle)
+  }
+
+  const deleteEntry = (e, id, amount) => {
+    e.preventDefault()
+    const deleteIncome = async () => {
+      const res = await axios.delete(`/api/income?id=${id}&date=${date}&amount=${amount}`)
+      setIncome(res.data.getIncome)
+      setSum(res.data.sumIncome)
+      setBalance(res.data.updatedBalance)
+    }
+    deleteIncome();
   }
 
   const colorSelection = {
@@ -76,7 +88,7 @@ const Income = () => {
     })
     .catch(err => console.log(err))
   }
-  
+
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
       <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} />
@@ -95,12 +107,15 @@ const Income = () => {
             <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
             <h2>{single.type}</h2>
         </Col>
-        <Col xs={12} sm={12} md={3} lg={3}>
-          <h2>{single.amount}</h2>
+        <Col xs={12} sm={12} md={3} lg={3} style={{position: 'relative'}}>
+          <h2><span>$</span>{parseFloat(Math.round(single.amount * 100) / 100).toFixed(2)}</h2>
+          <i id="DeleteLog" className="fas fa-trash-alt" onClick={(e) => deleteEntry(e, single.income, single.amount)}></i>
         </Col>
       </Row>
     )
   })
+
+  const totalPosts = income && income.length
 
   const displayIncome = user ? 
     <div className="Income">
@@ -122,8 +137,7 @@ const Income = () => {
                       current={currentPage}
                       total={income && income.length}
                       pageSize={postsPerPage}
-
-                    />
+                      />
                   </section>
                 </Col>
                 <Row className="HeadingRow">
@@ -154,7 +168,6 @@ const Income = () => {
                 >
                 </CountUp></span></h3>
             </section>
-            <section className="IncomeCard"></section>
             <UserCalendar date={date} setDate={setDate} />
           </Col>
         </Row>
