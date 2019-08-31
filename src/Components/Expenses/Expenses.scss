@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     padding: 2rem;
+    position: relative;
 
     .ExpenseHeader {
       display: flex; 
@@ -153,5 +154,99 @@
       padding: 1rem;
       box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.1), 0px 4px 5px 0px rgba(0, 0, 0, 0.1), 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
     }
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog {
+    position: relative;
+  }
+
+  .Expense .ExpenseCard {
+    max-width: 352px;
+    margin: 20px auto;
+  }
+
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog .ExpenseCategory i {
+    margin-bottom: .5rem;
+    width: 45px;
+    height: 45px;
+    margin-right: 5px;
+  }
+  
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog h2 {
+    font-size: 1.15rem;
+    margin-bottom: .5rem;
+  }
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog {
+    font-size: 1.15rem;
+  }
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseSearch input {
+    width: 70%;
+  }
+
+  .Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog .ExpenseCategory {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .Expense {
+    .col-12 {
+      padding: 0;
+    }
+  }
+
+  .MobilePosition {
+    position: relative;
+  }
+
+  .MobileNone {
+    display: none;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .Expense {
+    padding-top: 120px;
+
+    .ExpenseMain {
+      padding-top: 275px;
+    }
+
+    .ExpenseCard  {
+      width: 45%;
+      max-width: 352px;
+    }
+
+  
+  }
+
+  .MobileExpense {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .Expense {
+    min-height: 90vh;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .Expense {
+    padding: 100px 0 0 0;
   }
 }

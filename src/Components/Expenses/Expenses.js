@@ -107,7 +107,7 @@ const Expenses = () => {
         </Col>
         <Col xs={12} sm={12} md={3} lg={3} className="ExpenseCategory">
             <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
-            <h2>{single.type}</h2>
+            <h2 className="MobileNone">{single.type}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2><span>$</span>{parseFloat(Math.round(single.amount * 100) / 100).toFixed(2)}</h2>
@@ -121,9 +121,9 @@ const Expenses = () => {
     <div className="Expense">
       <Menu />
       <section className="ExpenseMain">
-        <Container>
+        <Container className="MobilePosition">
           <Row className="ExpenseDetails">
-            <Col xs={12} sm={12} md={8} lg={8} style={{padding: '0'}}>
+            <Col xs={12} sm={12} md={12} lg={8} style={{padding: '0'}}>
               <section className="ExpenseHeader">
                 <h1>Expenses</h1>
                 <button onClick={toggleAdd}>Add New Expense</button>    
@@ -141,7 +141,7 @@ const Expenses = () => {
                     />
                   </section>
                 </Col>
-                <Row className="HeadingRow">
+                <Row className="HeadingRow MobileNone">
                   <Col xs={12} sm={12} md={3} lg={3}>
                     <h2>Date</h2>
                   </Col>
@@ -158,7 +158,7 @@ const Expenses = () => {
                 {expensesLog}
               </Row>
           </Col>
-          <Col xs={12} sm={12} md={4} lg={4}>
+          <Col xs={12} sm={12} md={12} lg={4} className="MobileExpense">
             <section className="ExpenseCard">
               <h3>$<span><CountUp
                   start={0}

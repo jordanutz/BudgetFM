@@ -129,12 +129,13 @@
   }
 
   .BalanceCurrent {
-    max-width: 540px !important;
+    max-width: 352px !important;
     min-height: 250px;
+    margin: 0 auto;
   }
 }
 
-@media screen and (min-width: 767px) and (max-width: 991px) {
+@media screen and (min-width: 768px) and (max-width: 991px) {
   .Balance {
     min-height: 50vh;
     align-items: center;
@@ -144,12 +145,31 @@
       display: none;
     }
   }  
+
+  .Balance .BalanceMain {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+
   .Balance {
-    padding: 120px 0 75px 0;
-  
+    padding: 75px 0 0px 0;
+  }
+
+  .Balance .BalanceMain .BalanceCurrent {
+    min-height: 250px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .Balance .BalanceMain .BalanceUpdate {
+    height: 90%;
+  }
+
+  .Balance .BalanceMain .BalanceUpdate input {
+    margin-bottom: 0;
   }
 }
 
@@ -157,11 +177,20 @@
   .Balance  {
     min-height: 90vh;
 
+    .BalanceCard {
+      min-height: 250px;
+    }
   }
 }
 
 @media screen and (min-width: 1200px) {
   .BalanceMain {
     align-items: center;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .Balance .BalanceMain {
+    padding-top: 95px;
   }
 }

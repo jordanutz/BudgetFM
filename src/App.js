@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './Reset.scss'
 import routes from './routes'
 import {withRouter} from 'react-router-dom'
@@ -14,8 +14,14 @@ import ProfileContextProvider from './Context/ProfileContext'
 
 const App = (props) => {
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
+
   const displayNavigation = props.location.pathname === '/' || 
     props.location.pathname === '/auth' ? <Header /> : <Navigation />
+
+
 
   return (
       <div className="App">
