@@ -3,6 +3,7 @@ import './UserCalendar.scss'
 import Calendar from 'react-calendar'
 import CalendarIcon from '../Dashboard/assets/calendar.svg'
 import Moment from 'react-moment'
+import {withRouter} from 'react-router-dom'
 
 const UserCalendar = (props) => {
 
@@ -13,8 +14,13 @@ const UserCalendar = (props) => {
 
   const timeStamp = <Moment format="M/YY" style={{fontWeight: '800'}}>{props.date}</Moment>
 
+  console.log(props)
+
   return (
-    <section id="Calendar" className="CalendarModule">
+    <section id="Calendar" className={ 
+      props.match.path === '/user/:id/income' || 
+      props.match.path === '/user/:id/expenses' ? 
+      'CalendarModule CalendarIncome' : 'CalendarModule'}>
       <h2>{timeStamp}</h2>
       <h3>Calendar</h3>
       <img src={CalendarIcon} />
@@ -28,4 +34,4 @@ const UserCalendar = (props) => {
   )
 }
 
-export default UserCalendar
+export default withRouter(UserCalendar)

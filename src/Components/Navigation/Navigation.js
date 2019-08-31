@@ -20,6 +20,7 @@ const Navigation = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     axios.get('/api/user')
     .then(res => {
       setUser(res.data[0])

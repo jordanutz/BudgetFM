@@ -1,15 +1,13 @@
 @import '../../index';
 
 .Balance {
-  min-height: 90vh;
   display: flex;
-
+  position: relative;
 
   .BalanceMain {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 
     .BalanceHeader {
       display: flex; 
@@ -18,7 +16,7 @@
 
       button {
         background: $secondary-color;
-        min-width: 150px;
+        min-width: 125px;
         padding: 15px 20px;
         color: white;
         z-index: 1;
@@ -35,7 +33,7 @@
       flex-direction: column;
       justify-content: flex-start;
       height: 100%;
-      position: realtive;
+      position: relative;
     
       h1 {
         font-size: 2rem;
@@ -67,12 +65,13 @@
         font-family: 'Encode Sans Semi Condensed', sans-serif;
         color: $text-color;
         width: 100%;
+        margin-bottom: 50px;
       }
 
       button {
         background: $primary-accent;
-        width: 95%;
-        padding: 15px 20px;
+        width: 100%;
+        padding: 15px 0;
         color: white;
         z-index: 1;
         font-weight: 700;
@@ -82,15 +81,13 @@
         font-family: 'Encode Sans Semi Condensed', sans-serif;
         position: absolute;
         bottom: 0;
-
       }
 
     }
 
     .BalanceCurrent {
-      background: $primary-accent;
+      background-image: linear-gradient(to bottom right, $primary-accent 0%, #00f2fe 100%);
       height: 100%;
-      min-height: 50vh;
       border-radius: 3px;
       display: flex;
       justify-content: center;
@@ -98,6 +95,7 @@
       color: #fff;
       width: 100%;
       margin: 0 auto;
+      max-width: 400px;
 
       
       h3 {
@@ -111,4 +109,59 @@
       }
     }
   } 
+}
+
+@media screen and (max-width: 767px) {
+  .Balance {
+    padding-top: 175px;
+    padding-bottom: 25px;
+    margin-top: 25px;
+  }
+
+  .UpdateMobile {
+    padding-top: 100px;
+  }
+
+  .BalanceMobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .BalanceCurrent {
+    max-width: 540px !important;
+    min-height: 250px;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .Balance {
+    min-height: 50vh;
+    align-items: center;
+  
+
+    p {
+      display: none;
+    }
+  }  
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .Balance {
+    padding: 120px 0 75px 0;
+  
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .Balance  {
+    min-height: 90vh;
+
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .BalanceMain {
+    align-items: center;
+  }
 }

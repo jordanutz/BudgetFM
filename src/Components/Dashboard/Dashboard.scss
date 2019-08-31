@@ -11,6 +11,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
 
     .DashboardDetails {
       margin-bottom: 15px;
@@ -116,15 +118,15 @@
     }
 
     #Balance {
-      background: $primary-accent;
+      background-image: linear-gradient(to bottom right, $primary-accent 0%, #00f2fe 100%);
     } 
 
     #BalanceDarken {
-      background: darken($primary-accent, 20%);
+      background: darken($primary-accent, 10%);
     }
 
     #Income {
-      background: $secondary-color;
+      background-image: linear-gradient(to bottom right, $secondary-color 0%, #38f9d7 100%);
     }
 
     #IncomeDarken {
@@ -132,11 +134,12 @@
     }
 
     #Expenses {
-      background: $primary-color;
+      background: linear-gradient(to bottom right, $primary-color 0%, #FF698B 100%);
+      
     }
 
     #ExpensesDarken {
-      background: darken($primary-color, 20%);
+      background: darken($primary-color, 15%);
     }
 
     #SpendingGraph {
@@ -148,11 +151,11 @@
     }
 
     #Calendar {
-      background: #818181;
+      background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
 
     #CalendarDarken {
-      background: darken(#818181, 20%);
+      background: #1E1F22;
     }
   }
 }
@@ -164,7 +167,7 @@
 	}
 }
 
-@media screen and (min-width: 768px) and (max-width: 991px) {
+@media screen and (min-width: 768px) and (max-width: 1199px) {
   .Dashboard {
     padding: 100px 0;
   }

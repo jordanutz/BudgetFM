@@ -12,6 +12,7 @@ const Header = (props) => {
   const {user, setUser} = useContext(AuthContext)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     axios.get('/api/user')
     .then(res => {
       console.log('hit login header')
