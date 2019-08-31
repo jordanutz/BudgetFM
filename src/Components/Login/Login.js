@@ -79,7 +79,7 @@ const Login = (props) => {
               ) : <div className="no-error"></div>}
               
               <section className="SubmitLogin">
-                <p>Forgot password?</p>
+      
                 <button type="submit" disabled={isSubmitting}>Login</button>
               </section>
 

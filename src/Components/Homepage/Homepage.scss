@@ -170,6 +170,8 @@ main {
       animation: fade 1.5s, pizza 11s infinite linear;
     }
 
+    
+
     @keyframes pizza {
       from {
         transform: rotate(360deg)
@@ -182,6 +184,10 @@ main {
                    rotate(0deg);
       }
     }
+
+
+
+
 
     #YellowComment {
       color: #FDD019;
@@ -246,6 +252,7 @@ main {
         width: 100%;
         display: flex;
         justify-content: center;
+      
 
         input {
           width: 40%;
@@ -254,7 +261,9 @@ main {
           border-radius: 3px;
           border: 1px solid #ccc;
           color: $text-color;
+          z-index: 1;
         }
+        
       }
 
       h1 {
@@ -279,7 +288,6 @@ main {
         padding: 15px 20px;
         color: white;
         border: 1px solid #C3003E;
-        z-index: 1;
         font-weight: 700;
         border-radius: 3px;
         font-size: .9rem;
@@ -336,3 +344,31 @@ main {
   }
 }
 
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  main .Cover #Headphones {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  main .Cover .CoverDetails {
+    padding: 0;
+  } 
+
+  #BlueComment {
+    display: none;
+  }
+
+  #Pizza {
+    display: none;
+  }
+
+  #Headphones {
+    display: none;
+  }
+
+  #RedComment {
+    display: none;
+  }
+}

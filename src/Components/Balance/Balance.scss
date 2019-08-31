@@ -81,7 +81,14 @@
         font-family: 'Encode Sans Semi Condensed', sans-serif;
         position: absolute;
         bottom: 0;
+        transition: .5s;
+
+        &:hover {
+          background: darken($primary-accent, 10%);
+        }
       }
+
+     
 
     }
 

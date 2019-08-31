@@ -96,3 +96,25 @@ header {
   background: #FBFBFB;
   border-bottom: 1px solid #ccc;
 }
+
+@media screen and (max-width: 767px) {
+  header nav ul .HeaderMenu button {
+    display: none;
+  }
+
+  header nav {
+    min-width: auto;
+  }
+
+  header .Logo {
+    min-width: auto;
+  }
+
+  main .Cover .CoverDetails p {
+    max-width: 100%;
+  }
+
+  main .Cover .CoverDetails .CoverInput input {
+    display: none;
+  }
+}
