@@ -11,6 +11,7 @@ import UserCalendar from '../UserCalendar/UserCalendar'
 import AddExpense from '../AddExpense/AddExpense'
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
+import Search from '../Income/assets/search.svg'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -132,6 +133,7 @@ const Expenses = () => {
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="ExpenseSearch">
                     <input placeholder="Search" type="text" />
+                    <img src={Search} />
                     <Pagination
                       onChange={handlePageChange}
                       current={currentPage}
