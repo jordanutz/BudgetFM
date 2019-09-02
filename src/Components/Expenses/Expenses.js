@@ -27,16 +27,26 @@ const Expenses = () => {
   const [sum, setSum] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(5)
+  const [search, setSearch] = useState('')
   
 
   useEffect( () => {
-    axios.get(`/api/expense?date=${date}`)
-    .then(res => { 
-      setExpenses(res.data.getExpense)
-      setSum(res.data.sumExpense)
-    })
-    .catch(err => console.log(err))
-  }, [date])
+
+    if (search) {
+      axios.get(`/api/expense/search?date=${date}&search=${search}`)
+      .then(res => setExpenses(res.data))
+      .catch(err => console.log(err))
+    } else {
+      getExpense()
+    }
+
+  }, [date, search])
+
+  const getExpense = async () => {
+    const res = await axios.get(`/api/expense?date=${date}`)
+    setExpenses(res.data.getExpense)
+    setSum(res.data.sumExpense)
+  }
 
   const toggleAdd = () => {
     setToggle(!toggle)
@@ -107,8 +117,8 @@ const Expenses = () => {
           <h2>{single.description}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3} className="ExpenseCategory">
-            <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
-            <h2 className="MobileNone">{single.type}</h2>
+            <i className={single.icon} style={{backgroundColor: colorSelection[single.category.toLowerCase()]}}></i>
+            <h2 className="MobileNone">{single.category}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2><span>$</span>{parseFloat(Math.round(single.amount * 100) / 100).toFixed(2)}</h2>
@@ -132,7 +142,7 @@ const Expenses = () => {
               <Row className="ExpenseList">
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="ExpenseSearch">
-                    <input placeholder="Search" type="text" />
+                    <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} />
                     <img src={Search} />
                     <Pagination
                       onChange={handlePageChange}

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useLayoutEffect} from 'react'
 import './Income.scss'
 import CountUp from 'react-countup'
 import axios from 'axios'
@@ -28,19 +28,35 @@ const Income = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(5)
   const [results, setResults] = useState(0)
+  const [search, setSearch] = useState('')
+
+  const lastIndex = currentPage * postsPerPage;
+  const firstIndex = lastIndex - postsPerPage;
+  const currentPosts = income && income.slice(firstIndex, lastIndex)
+  const totalPosts = income && income.length
 
   useEffect( () => {
-    const getIncome = async () => {
-      const res = await axios.get(`/api/income?date=${date}`)
-      setIncome(res.data.getIncome)
-      setSum(res.data.sumIncome)
-      setResults(postsPerPage)
+
+    if (search) {
+      axios.get(`/api/income/search?date=${date}&search=${search}`)
+      .then(res => setIncome(res.data))
+      .catch(err => console.log(err))
+    } else {
+      getIncome();
     }
-    getIncome();
-  }, [date])
+
+  }, [date, search])
+
 
   const toggleAdd = () => {
     setToggle(!toggle)
+  }
+
+  const getIncome = async () => {
+    const res = await axios.get(`/api/income?date=${date}`)
+    setIncome(res.data.getIncome)
+    setSum(res.data.sumIncome)
+    setResults(postsPerPage)
   }
 
   const deleteEntry = (e, id, amount) => {
@@ -61,10 +77,6 @@ const Income = () => {
     salary: '#18C6E1', 
     other: '#FFE826'
   }
-
-  const lastIndex = currentPage * postsPerPage;
-  const firstIndex = lastIndex - postsPerPage;
-  const currentPosts = income && income.slice(firstIndex, lastIndex)
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -105,8 +117,8 @@ const Income = () => {
           <h2>{single.description}</h2>
         </Col>  
         <Col xs={12} sm={12} md={3} lg={3} className="IncomeCategory">
-            <i className={single.icon} style={{backgroundColor: colorSelection[single.type.toLowerCase()]}}></i>
-            <h2 className="MobileNone">{single.type}</h2>
+            <i className={single.icon} style={{backgroundColor: colorSelection[single.category.toLowerCase()]}}></i>
+            <h2 className="MobileNone">{single.category}</h2>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3} style={{position: 'relative'}}>
           <h2><span>$</span>{parseFloat(Math.round(single.amount * 100) / 100).toFixed(2)}</h2>
@@ -115,8 +127,6 @@ const Income = () => {
       </Row>
     )
   })
-
-  const totalPosts = income && income.length
 
   const displayIncome = user ? 
     <div className="Income">
@@ -132,7 +142,7 @@ const Income = () => {
               <Row className="IncomeList">
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="IncomeSearch">
-                    <input placeholder="Search" type="text" />
+                    <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} value={search} />
                     <img src={Search} />
                     <Pagination
                       onChange={handlePageChange}

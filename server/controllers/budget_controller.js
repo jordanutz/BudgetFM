@@ -144,7 +144,23 @@ module.exports = {
     }
 
     res.status(200).send(userExpense)
+  }, 
 
+  searchIncome: async (req, res) => {
+    const db = req.app.get('db')
+    const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
+    const searchIncome = await db.budget.search_income([req.session.user[0].id, formatDate, req.query.search])
+    
+    res.status(200).send(searchIncome)
 
+  }, 
+
+  searchExpense: async (req, res) => {
+    const db = req.app.get('db')
+    const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
+    const searchExpense = await db.budget.search_expense([req.session.user[0].id, formatDate, req.query.search])
+    
+    res.status(200).send(searchExpense)
   }
+
 }

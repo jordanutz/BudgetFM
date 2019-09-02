@@ -14,8 +14,6 @@ const UserCalendar = (props) => {
 
   const timeStamp = <Moment format="M/YY" style={{fontWeight: '800'}}>{props.date}</Moment>
 
-  console.log(props)
-
   return (
     <section id="Calendar" className={ 
       props.match.path === '/user/:id/income' || 

@@ -90,7 +90,8 @@
         color: white;
         letter-spacing: .5px;
         font-size: .8rem;
-        border-radius: 3px;
+        border-bottom-left-radius: 3px;
+	      border-bottom-right-radius: 3px;
         height: 5vh;
         display: flex;
         justify-content: flex-end;

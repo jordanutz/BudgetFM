@@ -40,18 +40,18 @@ CREATE TABLE user_expense (
 
 CREATE TABLE income_category (
   id serial primary key, 
-  type text not null, 
+  category text not null, 
   icon text not null
 )
 
 CREATE TABLE expense_category (
   id serial primary key, 
-  type text not null, 
+  category text not null, 
   icon text not null
 )
 
 INSERT INTO expense_category
-(type, icon)
+(category, icon)
 values
 ('Payments', 'fas fa-money-check'), 
 ('Food', 'fas fa-pizza-slice'), 
@@ -63,7 +63,7 @@ values
 ('Other', 'fab fa-superpowers')
 
 INSERT INTO income_category
-(type, icon)
+(category, icon)
 values
 ('Gift', 'fas fa-gift'), 
 ('Investment', 'fas fa-coins'), 

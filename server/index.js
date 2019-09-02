@@ -43,12 +43,13 @@ app.get('/api/dashboard', budget.getDashboard)
 app.get('/api/income', budget.getIncome)
 app.post('/api/income', budget.postIncome)
 app.delete('/api/income', budget.deleteIncome)
+app.get('/api/income/search', budget.searchIncome)
 
 // Expenses
 app.get('/api/expense', budget.getExpense)
 app.post('/api/expense', budget.postExpense)
 app.delete('/api/expense', budget.deleteExpense)
-
+app.get('/api/expense/search', budget.searchExpense)
 
 PORT = 6800;
 
