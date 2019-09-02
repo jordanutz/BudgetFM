@@ -12,12 +12,15 @@ import AddIncome from '../AddIncome/AddIncome'
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import Search from './assets/search.svg'
+import Moment from 'react-moment'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
 import {ProfileContext} from '../../Context/ProfileContext'
 
 const Income = () => {
+
+  // Component State
 
   const {user} = useContext(AuthContext)
   const {setBalance} = useContext(ProfileContext)
@@ -29,6 +32,9 @@ const Income = () => {
   const [postsPerPage] = useState(5)
   const [results, setResults] = useState(0)
   const [search, setSearch] = useState('')
+  const [toggleDate, setToggleDate] = useState(false)
+
+  // Pagination & Results
 
   const lastIndex = currentPage * postsPerPage;
   const firstIndex = lastIndex - postsPerPage;
@@ -45,7 +51,7 @@ const Income = () => {
       getIncome();
     }
 
-  }, [date, search])
+  }, [date, search, toggleDate])
 
 
   const toggleAdd = () => {
@@ -53,7 +59,7 @@ const Income = () => {
   }
 
   const getIncome = async () => {
-    const res = await axios.get(`/api/income?date=${date}`)
+    const res = await axios.get(`/api/income?date=${date}&dateOrder=${toggleDate}`)
     setIncome(res.data.getIncome)
     setSum(res.data.sumIncome)
     setResults(postsPerPage)
@@ -76,6 +82,10 @@ const Income = () => {
     rewards: '#18E12D', 
     salary: '#18C6E1', 
     other: '#FFE826'
+  }
+
+  const handleDateToggle = () => {
+    setToggleDate(!toggleDate)
   }
 
   const handlePageChange = (pageNumber) => {
@@ -111,7 +121,7 @@ const Income = () => {
     return (
       <Row className="HeadingRow IncomeLog" key={single.income}>
         <Col xs={12} sm={12} md={3} lg={3}>
-          <h2>{single.date_posted}</h2>
+          <Moment format="MM/DD/YYYY" style={{fontWeight: '800'}}><h2>{single.date_posted}</h2></Moment>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
@@ -154,7 +164,7 @@ const Income = () => {
                 </Col>
                 <Row className="HeadingRow MobileNone">
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Date</h2>
+                    <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
                     <h2>Description</h2>

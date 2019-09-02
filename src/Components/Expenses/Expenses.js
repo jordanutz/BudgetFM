@@ -12,6 +12,7 @@ import AddExpense from '../AddExpense/AddExpense'
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import Search from '../Income/assets/search.svg'
+import Moment from 'react-moment'
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -28,6 +29,7 @@ const Expenses = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(5)
   const [search, setSearch] = useState('')
+  const [toggleDate, setToggleDate] = useState(false)
   
 
   useEffect( () => {
@@ -40,10 +42,10 @@ const Expenses = () => {
       getExpense()
     }
 
-  }, [date, search])
+  }, [date, search, toggleDate])
 
   const getExpense = async () => {
-    const res = await axios.get(`/api/expense?date=${date}`)
+    const res = await axios.get(`/api/expense?date=${date}&dateOrder=${toggleDate}`)
     setExpenses(res.data.getExpense)
     setSum(res.data.sumExpense)
   }
@@ -72,6 +74,10 @@ const Expenses = () => {
     recreation: '#18C6E1', 
     transportation: '#B318E1', 
     other: '#FFE826'
+  }
+
+  const handleDateToggle = () => {
+    setToggleDate(!toggleDate)
   }
 
   const lastIndex = currentPage * postsPerPage;
@@ -111,7 +117,7 @@ const Expenses = () => {
     return (
       <Row className="HeadingRow ExpenseLog" key={single.expenses}>
         <Col xs={12} sm={12} md={3} lg={3}>
-          <h2>{single.date_posted}</h2>
+          <Moment format="MM/DD/YYYY" style={{fontWeight: '800'}}>{single.date_posted}</Moment>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
@@ -155,7 +161,7 @@ const Expenses = () => {
                 </Col>
                 <Row className="HeadingRow MobileNone">
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Date</h2>
+                    <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
                     <h2>Description</h2>

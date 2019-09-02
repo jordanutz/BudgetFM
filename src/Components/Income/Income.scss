@@ -172,6 +172,11 @@
   position: absolute;
   right: 20px;
   cursor: pointer;
+  transition: .5s;
+}
+
+#DeleteLog:hover {
+  color: #35BAA0;
 }
 
 @media screen and (max-width: 767px) {
