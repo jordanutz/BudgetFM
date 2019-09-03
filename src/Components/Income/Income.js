@@ -28,18 +28,15 @@ const Income = () => {
   const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(null)
   const [sum, setSum] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage] = useState(5)
-  const [results, setResults] = useState(0)
   const [search, setSearch] = useState('')
   const [toggleDate, setToggleDate] = useState(false)
 
   // Pagination & Results
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(5)
   const lastIndex = currentPage * postsPerPage;
   const firstIndex = lastIndex - postsPerPage;
   const currentPosts = income && income.slice(firstIndex, lastIndex)
-  const totalPosts = income && income.length
 
   useEffect( () => {
 
@@ -50,7 +47,6 @@ const Income = () => {
     } else {
       getIncome();
     }
-
   }, [date, search, toggleDate])
 
 
@@ -62,8 +58,8 @@ const Income = () => {
     const res = await axios.get(`/api/income?date=${date}&dateOrder=${toggleDate}`)
     setIncome(res.data.getIncome)
     setSum(res.data.sumIncome)
-    setResults(postsPerPage)
   }
+
 
   const deleteEntry = (e, id, amount) => {
     e.preventDefault()
@@ -159,6 +155,7 @@ const Income = () => {
                       current={currentPage}
                       total={income && income.length}
                       pageSize={postsPerPage}
+                      showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
                       />
                   </section>
                 </Col>

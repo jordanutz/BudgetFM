@@ -155,7 +155,7 @@ const Expenses = () => {
                       current={currentPage}
                       total={expenses && expenses.length}
                       pageSize={postsPerPage}
-
+                      showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
                     />
                   </section>
                 </Col>
