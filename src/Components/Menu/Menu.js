@@ -37,8 +37,8 @@ const Menu = (props) => {
       <Link to={`/user/${user.id}/expenses`}>
         <i className={props.location.pathname === `/user/${user.id}/expenses` ? 'fas fa-circle active' : 'fas fa-pause-circle'}></i>
       </Link>
-      <Link to={`/user/${user.id}/previous-goals`}>
-        <i className={props.location.pathname === `/user/${user.id}/previous-goals` ? 'fas fa-user active' : 'fas fa-user'}></i>
+      <Link to={`/user/${user.id}/summary`}>
+        <i className={props.location.pathname === `/user/${user.id}/summary` ? 'fas fa-user active' : 'fas fa-user'}></i>
       </Link>
       <button onClick={userLogout}><i className="fas fa-power-off"></i></button>
     </section>

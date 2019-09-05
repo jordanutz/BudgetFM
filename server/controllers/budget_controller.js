@@ -172,6 +172,70 @@ module.exports = {
     const searchExpense = await db.budget.search_expense([req.session.user[0].id, formatDate, req.query.search])
     
     res.status(200).send(searchExpense)
-  }
+  }, 
 
+  getSummary: async (req, res) => {
+    const db = req.app.get('db')
+    const formatDate = moment(new Date(req.query.date)).format('MM/YYYY')
+
+    const incomeSummary = await db.budget.get_income_summary([req.session.user[0].id, formatDate])
+    const expenseSummary = await db.budget.get_expense_summary([req.session.user[0].id, formatDate])
+    let totalIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
+    let totalExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
+
+    incomeSummary.forEach(entry => {
+      if (entry.sum) {
+        entry.sum = parseInt(entry.sum) 
+      }
+    })
+
+    expenseSummary.forEach(entry => {
+      if (entry.sum) {
+        entry.sum = parseInt(entry.sum)
+      }
+    })
+
+     totalIncome = parseInt(totalIncome[0].sum)
+     totalExpense = parseInt(totalExpense[0].sum)
+
+    // Income Categories
+    const gift = incomeSummary[0].sum ? Math.round((incomeSummary[0].sum  / totalIncome) * 100) : 0
+    const investment = incomeSummary[1].sum ? Math.round((incomeSummary[1].sum  / totalIncome) * 100) : 0
+    const otherIncome = incomeSummary[2].sum ? Math.round((incomeSummary[2].sum  / totalIncome) * 100) : 0
+    const reward = incomeSummary[3].sum ? Math.round((incomeSummary[3].sum  / totalIncome) * 100) : 0
+    const salary = incomeSummary[4].sum ? Math.round((incomeSummary[4].sum  / totalIncome) * 100) : 0
+  
+    // Expense Categories
+    const clothing = expenseSummary[0].sum ? Math.round((expenseSummary[0].sum  / totalExpense) * 100) : 0
+    const education = expenseSummary[1].sum ? Math.round((expenseSummary[1].sum  / totalExpense) * 100) : 0
+    const food = expenseSummary[2].sum ? Math.round((expenseSummary[2].sum  / totalExpense) * 100) : 0
+    const home = expenseSummary[3].sum ? Math.round((expenseSummary[3].sum  / totalExpense) * 100) : 0
+    const otherExpense = expenseSummary[4].sum ? Math.round((expenseSummary[4].sum  / totalExpense) * 100) : 0
+    const payment = expenseSummary[5].sum ? Math.round((expenseSummary[5].sum  / totalExpense) * 100) : 0
+    const recreation = expenseSummary[6].sum ? Math.round((expenseSummary[6].sum  / totalExpense) * 100) : 0
+    const transportation = expenseSummary[7].sum ? Math.round((expenseSummary[7].sum  / totalExpense) * 100) : 0
+
+    const summary = {
+      income: {
+        gift, 
+        investment, 
+        otherIncome, 
+        reward, 
+        salary
+      },
+      expense: {
+        clothing, 
+        education, 
+        food, 
+        home, 
+        otherExpense, 
+        payment, 
+        recreation, 
+        transportation
+      }
+    }
+
+    res.status(200).send(summary)
+  
+  }
 }

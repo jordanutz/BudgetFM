@@ -115,7 +115,7 @@ const Expenses = () => {
 
   const expensesLog = currentPosts && currentPosts.map(single => {
     return (
-      <Row className="HeadingRow ExpenseLog" key={single.expenses}>
+      <Row className="HeadingRow ExpenseLog" key={single.expense}>
         <Col xs={12} sm={12} md={3} lg={3}>
           <Moment format="MM/DD/YYYY" style={{fontWeight: '800'}}>{single.date_posted}</Moment>
         </Col>
@@ -150,13 +150,13 @@ const Expenses = () => {
                   <section className="ExpenseSearch">
                     <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} />
                     <img src={Search} />
-                    <Pagination
+                    {expenses && <Pagination
                       onChange={handlePageChange}
                       current={currentPage}
                       total={expenses && expenses.length}
                       pageSize={postsPerPage}
                       showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
-                    />
+                    /> }
                   </section>
                 </Col>
                 <Row className="HeadingRow MobileNone">
@@ -180,7 +180,7 @@ const Expenses = () => {
             <section className="ExpenseCard">
               <h3>$<span><CountUp
                   start={0}
-                  end={sum ? sum[0].sum : 0}
+                  end={sum ? parseInt(sum[0].sum) : 0}
                   delay={0}
                   decimals={0}
                   duration={1}

@@ -150,13 +150,13 @@ const Income = () => {
                   <section className="IncomeSearch">
                     <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} value={search} />
                     <img src={Search} />
-                    <Pagination
+                    {income && <Pagination
                       onChange={handlePageChange}
                       current={currentPage}
                       total={income && income.length}
                       pageSize={postsPerPage}
                       showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
-                      />
+                      />}
                   </section>
                 </Col>
                 <Row className="HeadingRow MobileNone">
