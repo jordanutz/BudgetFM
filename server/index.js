@@ -52,7 +52,8 @@ app.delete('/api/expense', budget.deleteExpense)
 app.get('/api/expense/search', budget.searchExpense)
 
 // Summary
-app.get('/api/summary', budget.getSummary)
+app.get('/api/summary/income', budget.getIncomeSummary)
+app.get('/api/summary/expense', budget.getExpenseSummary)
 
 PORT = 6800;
 

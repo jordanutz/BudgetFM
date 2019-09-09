@@ -54,6 +54,35 @@
           letter-spacing: .5px;
           color: $text-color;
         }
+        
+       .center {
+         text-align: center;
+         margin-bottom: 20px;
+       }
+
+        button {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: none;
+          width: 175px;
+          padding: 10px 20px;
+          color: #f7f7f7;
+          z-index: 1;
+          font-weight: 700;
+          border-radius: 3px;
+          font-size: .9rem;
+          text-transform: uppercase;
+          font-family: 'Encode Sans Semi Condensed', sans-serif;
+          transition: .5s;
+          border: none;
+          background: $dashboard-menu;
+          
+          &:hover {
+            background: darken($dashboard-menu, 5%);
+            
+          }
+        }
 
         .IncomeSearch {
           display: flex;
@@ -103,21 +132,7 @@
             text-transform: none;
           }
 
-          .IncomeCategory {
-            display: flex;
-
-            i {
-              margin-right: 15px;
-              color: #fff;
-              width: 25px;
-              height: 25px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 1rem;
-              border-radius: 50%;
-            }
-          }
+        
         }
 
         .HeadingRow > div {
@@ -270,5 +285,22 @@
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .Income {
     padding-top: 100px;
+  }
+}
+
+.IncomeCategory {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-right: 15px;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 50%;
   }
 }

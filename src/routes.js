@@ -8,7 +8,6 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import Balance from './Components/Balance/Balance'
 import Expenses from './Components/Expenses/Expenses'
 import Income from './Components/Income/Income'
-import Summary from './Components/Summary/Summary'
 
 export default (
   <Switch>
@@ -18,6 +17,5 @@ export default (
     <Route path='/user/:id/balance' component={Balance} />
     <Route path='/user/:id/expenses' component={Expenses} />
     <Route path='/user/:id/income' component={Income} />
-    <Route path='/user/:id/summary' component={Summary} />
   </Switch>
 )

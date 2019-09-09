@@ -13,6 +13,7 @@ import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import Search from './assets/search.svg'
 import Moment from 'react-moment'
+import { Doughnut } from 'react-chartjs-2';
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -30,6 +31,8 @@ const Income = () => {
   const [sum, setSum] = useState(0)
   const [search, setSearch] = useState('')
   const [toggleDate, setToggleDate] = useState(false)
+  const [summary, setSummary] = useState(null)
+  const [toggleSummary, setToggleSummary] = useState(false)
 
   // Pagination & Results
   const [currentPage, setCurrentPage] = useState(1)
@@ -46,6 +49,7 @@ const Income = () => {
       .catch(err => console.log(err))
     } else {
       getIncome();
+      getSummary();
     }
   }, [date, search, toggleDate])
 
@@ -60,6 +64,11 @@ const Income = () => {
     setSum(res.data.sumIncome)
   }
 
+  const getSummary = async () => {
+    const res = await axios.get(`/api/summary/income?date=${date}`)
+    console.log(res.data)
+    setSummary(res.data)
+  }
 
   const deleteEntry = (e, id, amount) => {
     e.preventDefault()
@@ -73,11 +82,31 @@ const Income = () => {
   }
 
   const colorSelection = {
-    gift: '#F14135', 
+    gift: '#F52F57', 
     investment: '#5218E1', 
-    rewards: '#18E12D', 
-    salary: '#18C6E1', 
-    other: '#FFE826'
+    other: '#FFE826',
+    rewards: '#16E697', 
+    salary: '#18C6E1'
+    
+  }
+
+  console.log(summary)
+
+
+
+  // Income Summary 
+  const incomeSummary  = {
+    labels: [
+      'Gift', 
+      'Investment', 
+      'Other', 
+      'Rewards', 
+      'Salary'
+    ], 
+    datasets: [{
+      data: [summary && summary.gift, summary && summary.investment, summary && summary.otherIncome, summary && summary.reward, summary && summary.salary],
+      backgroundColor: ['#F52F57', '#5218E1', '#FFE826', '#16E697', '#18C6E1']
+    }]
   }
 
   const handleDateToggle = () => {
@@ -113,11 +142,15 @@ const Income = () => {
       <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} />
     </div>
 
+    const handleSummaryToggle = () => {
+      setToggleSummary(!toggleSummary);
+    }
+
   const incomeLog = currentPosts && currentPosts.map(single => {
     return (
       <Row className="HeadingRow IncomeLog" key={single.income}>
         <Col xs={12} sm={12} md={3} lg={3}>
-          <Moment format="MM/DD/YYYY" style={{fontWeight: '800'}}><h2>{single.date_posted}</h2></Moment>
+        <Moment format="MM/DD/YYYY" style={{fontWeight: '800'}}>{single.date_posted}</Moment>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3}>
           <h2>{single.description}</h2>
@@ -134,6 +167,55 @@ const Income = () => {
     )
   })
 
+  const displaySummary = 
+    <Container fluid className="Summary">
+      <Row style={{marginTop: '30px'}} >
+        <Col xs={12} lg={8} style={{display: 'flex', justifyContent: 'center'}}>
+          <Doughnut data={incomeSummary}
+            width={100}
+            height={100}
+            options={{
+              legend: {
+                display:false
+              },
+                maintainAspectRatio: true
+            }}/>
+        </Col>
+        <Col xs={12} lg={4}>
+          <h2 className="center">Categories</h2>
+
+          <section className="IncomeCategory mb-3">
+            <i className="fas fa-gift" style={{backgroundColor: colorSelection['gift']}}></i>
+            <h2>Gift</h2>
+          </section>
+
+          <section className="IncomeCategory mb-3">
+            <i className="fas fa-coins" style={{backgroundColor: colorSelection['investment']}}></i>
+            <h2>Investment</h2>
+          </section>
+
+          <section className="IncomeCategory mb-3">
+            <i className="fab fa-superpowers" style={{backgroundColor: colorSelection['other']}}></i>
+            <h2>Other</h2>
+          </section>
+
+          <section className="IncomeCategory mb-3">
+            <i className="fas fa-seedling" style={{backgroundColor: colorSelection['rewards']}}></i>
+            <h2>Rewards</h2>
+          </section>
+
+          <section className="IncomeCategory mb-3">
+            <i className="fas fa-dollar-sign" style={{backgroundColor: colorSelection['salary']}}></i>
+            <h2>Salary</h2>
+          </section>
+
+         
+
+        </Col>
+      </Row>
+    </Container>
+
+
   const displayIncome = user ? 
     <div className="Income">
       <Menu />
@@ -145,7 +227,8 @@ const Income = () => {
                 <h1>Income</h1>
                 <button onClick={toggleAdd}>Add New Income</button>    
               </section>
-              <Row className="IncomeList">
+             <Row className="IncomeList">
+              {!toggleSummary &&
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="IncomeSearch">
                     <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} value={search} />
@@ -157,9 +240,13 @@ const Income = () => {
                       pageSize={postsPerPage}
                       showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
                       />}
+                    
                   </section>
+                  
                 </Col>
-                <Row className="HeadingRow MobileNone">
+              }
+
+                {!toggleSummary && <Row className="HeadingRow MobileNone">
                   <Col xs={12} sm={12} md={3} lg={3}>
                     <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
@@ -173,7 +260,10 @@ const Income = () => {
                     <h2>Amount</h2>
                   </Col>
                 </Row>
-                {incomeLog}
+                }
+                
+                {toggleSummary ? displaySummary : incomeLog}
+                <button onClick={handleSummaryToggle}>{toggleSummary ? 'View Log' : 'View Summary'}</button> 
               </Row>
           </Col>
           <Col xs={12} sm={12} md={12} lg={4} className="MobileIncome">

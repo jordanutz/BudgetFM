@@ -1,3 +1,5 @@
-select category, sum(amount) from expense_category
-left JOIN user_expense ON user_expense.category_id = expense_category.id
-where user_id = $1 and calendar = $2 or user_expense.id is null group by category 
+select ec.category, sum(amount) from expense_category as ec
+left join (
+    select amount, category_id from user_expense
+    where user_id = $1 and calendar = $2
+) as ue ON ue.category_id = ec.id group by ec.category, ue.category_id

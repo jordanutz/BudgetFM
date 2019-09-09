@@ -13,6 +13,7 @@ import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import Search from '../Income/assets/search.svg'
 import Moment from 'react-moment'
+import { Doughnut } from 'react-chartjs-2';
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -30,7 +31,8 @@ const Expenses = () => {
   const [postsPerPage] = useState(5)
   const [search, setSearch] = useState('')
   const [toggleDate, setToggleDate] = useState(false)
-  
+  const [summary, setSummary] = useState(null)
+  const [toggleSummary, setToggleSummary] = useState(false)
 
   useEffect( () => {
 
@@ -40,6 +42,7 @@ const Expenses = () => {
       .catch(err => console.log(err))
     } else {
       getExpense()
+      getSummary();
     }
 
   }, [date, search, toggleDate])
@@ -54,6 +57,12 @@ const Expenses = () => {
     setToggle(!toggle)
   }
 
+  const getSummary = async () => {
+    const res = await axios.get(`/api/summary/expense?date=${date}`)
+    console.log(res.data)
+    setSummary(res.data)
+  }
+
   const deleteEntry = (e, id, amount) => {
     e.preventDefault()
     const deleteExpense = async () => {
@@ -66,10 +75,10 @@ const Expenses = () => {
   }
 
   const colorSelection = {
-    payments: '#F14135', 
+    payments: '#F52F57', 
     food: '#E118A7', 
     home: '#5218E1', 
-    clothing: '#18E12D', 
+    clothing: '#16E697', 
     education: '#1843E1', 
     recreation: '#18C6E1', 
     transportation: '#B318E1', 
@@ -113,6 +122,37 @@ const Expenses = () => {
       <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} />
     </div>
 
+  const handleSummaryToggle = () => {
+    setToggleSummary(!toggleSummary);
+  }
+
+  const expenseSummary = {
+    labels: [
+      'Clothing', 
+      'Education', 
+      'Food', 
+      'Home', 
+      'Other', 
+      'Payments', 
+      'Recreation', 
+      'Transportation'
+    ], 
+    datasets: [{
+      data: [
+        summary && summary.clothing, 
+        summary && summary.education, 
+        summary && summary.food, 
+        summary && summary.home, 
+        summary && summary.otherExpense, 
+        summary && summary.payments, 
+        summary && summary.recreation, 
+        summary && summary.transportation 
+      ], 
+      backgroundColor: [ '#16E697', '#1843E1', '#E118A7', '#5218E1', '#FFE826', '#F52F57', '#18C6E1', '#B318E1']
+    }]
+  }
+
+
   const expensesLog = currentPosts && currentPosts.map(single => {
     return (
       <Row className="HeadingRow ExpenseLog" key={single.expense}>
@@ -134,6 +174,67 @@ const Expenses = () => {
     )
   })
 
+  const displaySummary = 
+    <Container fluid className="Summary">
+      <Row style={{marginTop: '10px'}} >
+        <Col xs={12} lg={8} style={{display: 'flex', justifyContent: 'center'}}>
+          <Doughnut data={expenseSummary}
+            width={100}
+            height={100}
+            options={{
+              legend: {
+                display:false
+              },
+                maintainAspectRatio: true
+            }}/>
+        </Col>
+        <Col xs={12} lg={4}>
+          <h2 className="center">Categories</h2>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-tshirt" style={{backgroundColor: colorSelection['clothing']}}></i>
+            <h2>Clothing</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-pizza-slice" style={{backgroundColor: colorSelection['food']}}></i>
+            <h2>Food</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-graduation-cap" style={{backgroundColor: colorSelection['education']}}></i>
+            <h2>Education</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-home" style={{backgroundColor: colorSelection['home']}}></i>
+            <h2>Home</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fab fa-superpowers" style={{backgroundColor: colorSelection['other']}}></i>
+            <h2>Other</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-money-check" style={{backgroundColor: colorSelection['payments']}}></i>
+            <h2>Payments</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-futbol" style={{backgroundColor: colorSelection['recreation']}}></i>
+            <h2>Recreation</h2>
+          </section>
+
+          <section className="ExpenseCategory mb-2">
+            <i className="fas fa-car" style={{backgroundColor: colorSelection['transportation']}}></i>
+            <h2>Transportation</h2>
+          </section>
+
+        </Col>
+      </Row>
+    </Container>
+
   const displayExpenses = user ? 
     <div className="Expense">
       <Menu />
@@ -146,6 +247,7 @@ const Expenses = () => {
                 <button onClick={toggleAdd}>Add New Expense</button>    
               </section>
               <Row className="ExpenseList">
+              {!toggleSummary &&
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
                   <section className="ExpenseSearch">
                     <input placeholder="Search" type="text" onChange={(e) => setSearch(e.target.value)} />
@@ -159,7 +261,8 @@ const Expenses = () => {
                     /> }
                   </section>
                 </Col>
-                <Row className="HeadingRow MobileNone">
+              }
+                { !toggleSummary && <Row className="HeadingRow MobileNone">
                   <Col xs={12} sm={12} md={3} lg={3}>
                     <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
@@ -173,7 +276,10 @@ const Expenses = () => {
                     <h2>Amount</h2>
                   </Col>
                 </Row>
-                {expensesLog}
+                }
+                
+                {toggleSummary ? displaySummary : expensesLog}
+                <button onClick={handleSummaryToggle}>{toggleSummary ? 'View Log' : 'View Summary'}</button> 
               </Row>
           </Col>
           <Col xs={12} sm={12} md={12} lg={4} className="MobileExpense">

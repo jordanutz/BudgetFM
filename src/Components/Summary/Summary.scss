@@ -5,22 +5,22 @@
   display: flex;
   position: relative;
 
+
   .SummaryMain {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
     position: relative;
+    padding: 2rem;
 
-    .SummaryDetails {
+    h1 {
+      font-size: 1.75rem;
       margin-bottom: 15px;
-
-      h1 {
-        font-size: 1.5rem;
-      }
     }
+
+
 
     .SummaryPrevious {
       min-height: 250px;
@@ -35,15 +35,14 @@
     }
 
     .SummaryModule {
-      min-height: 400px;
-      margin-bottom: 20px;
+      height: 250px;
       border-radius: 3px;
       box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.05), 0px 4px 5px 0px rgba(0, 0, 0, 0.05), 0px 1px 10px 0px rgba(0, 0, 0, 0.05);
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      background-image: #f7f7f7;
 
       h2 {
         padding: 1rem;

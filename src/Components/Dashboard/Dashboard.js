@@ -119,9 +119,6 @@ const Dashboard = () => {
                   duration={1}
                 >
                 </CountUp>%</h2>
-                <section id="SpendingDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/summary`}><h4>Details</h4></Link>
-                </section>
               </section>
             </Col>
           </Row>

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, Fragment} from 'react'
 import './Summary.scss'
 
 // Components
@@ -8,7 +8,6 @@ import {Container, Row, Col} from 'react-bootstrap'
 import UserCalendar from '../UserCalendar/UserCalendar'
 import axios from 'axios'
 import { Doughnut } from 'react-chartjs-2';
-
 
 // Context
 import {AuthContext} from '../../Context/AuthContext'
@@ -21,6 +20,7 @@ const Summary = () => {
   const [expense, setExpense] = useState(null)
 
   useEffect(() => {
+    console.log()
     axios.get(`/api/summary?date=${date}`)
     .then(res => {
       setIncome(res.data.income)
@@ -29,20 +29,9 @@ const Summary = () => {
     .catch(err => console.log(err))
   }, [date])
 
+ 
 
-  const incomeSummary  = {
-    labels: [
-      'Gift', 
-      'Investment', 
-      'Other', 
-      'Rewards', 
-      'Salary'
-    ], 
-    datasets: [{
-      data: [income && income.gift, income && income.investment, income && income.otherIncome, income && income.reward, income && income.salary],
-      backgroundColor: ['#F14135', '#5218E1', '#FFE826', '#18E12D', '#18C6E1']
-    }]
-  }
+
 
   const expenseSummary = {
     labels: [
@@ -70,56 +59,53 @@ const Summary = () => {
     }]
   }
 
-  console.log(income && income)
-
   const displaySummary = user ? 
     <div className="Summary">
       <Menu />
+
+     
+
       <section className="SummaryMain">
         <Container>
-          <Row className="SummaryDetails">
-            <Col xs={12} sm={12} md={8} lg={8}>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
               <h1>Summary</h1>
             </Col>
+          </Row>
+  
+          <Row>
             <Col xs={12} sm={12} md={4} lg={4}>
               <UserCalendar 
                 date={date}
                 setDate={setDate}
               />
             </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <section className="SummaryPrevious">
-              </section>     
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={12} md={12} lg={6}>
+            <Col xs={12} sm={12} md={6} lg={6}>
               <section className="SummaryModule"> 
-
-              <Doughnut data={incomeSummary}
-                width={100}
-                height={100}
-                options={{
-		                maintainAspectRatio: true
-	              }}/>
-
-
+                <Doughnut data={incomeSummary}
+                  width={100}
+                  height={100}
+                  options={{
+                    legend: {
+                      display:false
+                    },
+                      maintainAspectRatio: true
+                  }}/>
               </section>
             </Col>
-            <Col xs={12} sm={12} md={12} lg={6}>
-              <section className="SummaryModule"> 
-
+            <Col xs={12} sm={12} md={6} lg={6}>
+            <section className="SummaryModule"> 
               <Doughnut data={expenseSummary}
                 width={100}
                 height={100}
                 options={{
-		                maintainAspectRatio: true
-	              }}/>
-
-              </section>
-            </Col>   
+                  legend: {
+                      display:false
+                    },
+                    maintainAspectRatio: true
+                }}/>
+            </section>
+            </Col>
           </Row>
         </Container>
       </section>
@@ -130,9 +116,10 @@ const Summary = () => {
     <NoAccess />
 
   return (
-    <React.Fragment>
+    <Fragment>
+      
       {displaySummary}
-    </React.Fragment>
+    </Fragment>
   )
 }
 
