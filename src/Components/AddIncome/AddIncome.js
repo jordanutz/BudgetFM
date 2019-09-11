@@ -14,7 +14,6 @@ const AddIncome = (props) => {
 const [description, setDescription] = useState('')
 const [category, setCategory] = useState(null)
 const [amount, setAmount] = useState('')
-const [date, setDate] = useState(new Date())
 
 const incomeCategory = {
   gift: 1, 
@@ -54,7 +53,7 @@ const incomeCategory = {
           <span>$</span>
           <input placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </section>
-        <button className="btn-income" onClick={(e) => props.submitIncome(e, description, incomeCategory[category], amount, date)}>Submit</button>
+        <button className="btn-income" onClick={(e) => props.submitIncome(e, description, incomeCategory[category], amount, props.date)}>Submit</button>
       </section>
       <img onClick={() => props.setToggle(false)} src={Delete}/>
     </div>

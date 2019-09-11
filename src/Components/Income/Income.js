@@ -66,7 +66,6 @@ const Income = () => {
 
   const getSummary = async () => {
     const res = await axios.get(`/api/summary/income?date=${date}`)
-    console.log(res.data)
     setSummary(res.data)
   }
 
@@ -87,12 +86,7 @@ const Income = () => {
     other: '#FFE826',
     rewards: '#16E697', 
     salary: '#18C6E1'
-    
   }
-
-  console.log(summary)
-
-
 
   // Income Summary 
   const incomeSummary  = {
@@ -117,8 +111,11 @@ const Income = () => {
     setCurrentPage(pageNumber)
   }
 
+
   const submitIncome = (e, description, category, amount, date) => {
     e.preventDefault()
+
+    console.log(date)
   
     let income = {
       description, 
@@ -137,9 +134,11 @@ const Income = () => {
     .catch(err => console.log(err))
   }
 
+  console.log(date)
+
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} />
+      <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} date={date}/>
     </div>
 
     const handleSummaryToggle = () => {
@@ -171,15 +170,17 @@ const Income = () => {
     <Container fluid className="Summary">
       <Row style={{marginTop: '30px'}} >
         <Col xs={12} lg={8} style={{display: 'flex', justifyContent: 'center'}}>
-          <Doughnut data={incomeSummary}
-            width={100}
-            height={100}
-            options={{
-              legend: {
-                display:false
-              },
-                maintainAspectRatio: true
-            }}/>
+          <section style={{ width: '300px', height: '300px'}}>
+            <Doughnut data={incomeSummary}
+              width={100}
+              height={100}
+              options={{
+                legend: {
+                  display:false
+                },
+                  maintainAspectRatio: true
+              }}/>
+            </section>
         </Col>
         <Col xs={12} lg={4}>
           <h2 className="center">Categories</h2>

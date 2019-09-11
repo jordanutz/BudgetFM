@@ -12,7 +12,6 @@ const AddExpense = (props) => {
 const [description, setDescription] = useState('')
 const [category, setCategory] = useState(null)
 const [amount, setAmount] = useState('')
-const [date, setDate] = useState(new Date())
 
 const expenseCategory = {
   payments: 1, 
@@ -68,7 +67,7 @@ const expenseCategory = {
           <span>$</span>
           <input placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </section>
-        <button className="btn-expense" onClick={(e) => props.submitExpense(e, description, expenseCategory[category], amount, date)}>Submit</button>
+        <button className="btn-expense" onClick={(e) => props.submitExpense(e, description, expenseCategory[category], amount, props.date)}>Submit</button>
       </section>
       <img onClick={() => props.setToggle(false)} src={Delete}/>
     </div>

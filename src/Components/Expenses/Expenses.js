@@ -119,7 +119,7 @@ const Expenses = () => {
   
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} />
+      <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} date={date} />
     </div>
 
   const handleSummaryToggle = () => {
@@ -178,15 +178,17 @@ const Expenses = () => {
     <Container fluid className="Summary">
       <Row style={{marginTop: '10px'}} >
         <Col xs={12} lg={8} style={{display: 'flex', justifyContent: 'center'}}>
-          <Doughnut data={expenseSummary}
-            width={100}
-            height={100}
-            options={{
-              legend: {
-                display:false
-              },
-                maintainAspectRatio: true
-            }}/>
+          <section style={{ width: '300px', height: '300px'}}>
+            <Doughnut data={expenseSummary}
+              width={100}
+              height={100}
+              options={{
+                legend: {
+                  display:false
+                },
+                  maintainAspectRatio: true
+              }}/>
+            </section> 
         </Col>
         <Col xs={12} lg={4}>
           <h2 className="center">Categories</h2>

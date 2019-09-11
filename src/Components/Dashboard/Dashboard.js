@@ -15,6 +15,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 import Menu from '../Menu/Menu'
 import NoAccess from '../NoAccess/NoAccess'
 import UserCalendar from '../UserCalendar/UserCalendar'
+import { Line } from 'react-chartjs-2';
 
 // Images
 import Current from './assets/current.svg'
@@ -29,15 +30,35 @@ const Dashboard = () => {
   const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(0)
   const [expense, setExpense] = useState(0)
+  const [previous, setPrevious] = useState(null)
 
   useEffect(() => {
-    axios.get(`/api/dashboard?date=${date}`)
-    .then(res => {
-      setIncome(res.data.getIncome)
-      setExpense(res.data.getExpense)
-    })
-    .catch(err => console.log(err))
+    getDashboard()
+    getPrevious()
   }, [date])
+
+  const getDashboard = async () => {
+    const res = await axios.get(`/api/dashboard?date=${date}`)
+    setIncome(res.data.getIncome)
+    setExpense(res.data.getExpense)
+  }
+
+  const getPrevious = async () => {
+    const res = await axios.get(`/api/dashboard/previous?date=${date}`)
+    setPrevious(res.data)
+  }
+
+  const previousSummary  = {
+    labels: [
+      'Second Month Prior',
+      'Previous Month', 
+      'Current Month'
+    ], 
+    datasets: [{
+      data: [previous && previous.secondNet, previous && previous.previousNet, previous && previous.currentNet],
+      borderColor: '#F52F57'
+    }], 
+  }
 
   const displayDashboard = user ? 
     <div className="Dashboard">
@@ -110,7 +131,22 @@ const Dashboard = () => {
             </Col>
             <Col xs={12} sm={12} md={12} lg={8}>
               <section id="SpendingGraph" className="DashboardModule">
-                <img src={User} />
+
+              <Line data={previousSummary}
+                width={100}
+                height={100}
+                options={{
+                  legend: {
+                    display:false
+                  },
+                  maintainAspectRatio: true,
+                  scales: {
+                    yAxes: [{
+                        display: false
+                    }]
+                  }   
+               }}/>
+
                 <h2 id="SpendingHeader">$<CountUp
                   start={1}
                   end={37}

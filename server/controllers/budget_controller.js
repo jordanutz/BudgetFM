@@ -190,11 +190,11 @@ module.exports = {
     totalIncome = totalIncome && parseInt(totalIncome[0].sum)
      
     // Income Categories
-    const reward = incomeSummary ? Math.round((incomeSummary[0].sum  / totalIncome) * 100) : 0
+    const gift = incomeSummary ? Math.round((incomeSummary[0].sum  / totalIncome) * 100) : 0
     const investment = incomeSummary ? Math.round((incomeSummary[1].sum  / totalIncome) * 100) : 0
     const otherIncome = incomeSummary ? Math.round((incomeSummary[2].sum  / totalIncome) * 100) : 0
-    const salary = incomeSummary ? Math.round((incomeSummary[3].sum  / totalIncome) * 100) : 0
-    const gift = incomeSummary ? Math.round((incomeSummary[4].sum  / totalIncome) * 100) : 0
+    const reward = incomeSummary ? Math.round((incomeSummary[3].sum  / totalIncome) * 100) : 0
+    const salary = incomeSummary ? Math.round((incomeSummary[4].sum  / totalIncome) * 100) : 0
   
     const summary = {
 
@@ -227,14 +227,14 @@ module.exports = {
     totalExpense = totalExpense && parseInt(totalExpense[0].sum)
 
      // Expense Categories
-    const home = expenseSummary ? Math.round((expenseSummary[0].sum  / totalExpense) * 100) : 0
-    const payments = expenseSummary ? Math.round((expenseSummary[1].sum  / totalExpense) * 100) : 0
-    const clothing = expenseSummary ? Math.round((expenseSummary[2].sum  / totalExpense) * 100) : 0
-    const otherExpense = expenseSummary ? Math.round((expenseSummary[3].sum  / totalExpense) * 100) : 0
-    const transportation = expenseSummary ? Math.round((expenseSummary[4].sum  / totalExpense) * 100) : 0
-    const recreation = expenseSummary ? Math.round((expenseSummary[5].sum  / totalExpense) * 100) : 0
-    const food = expenseSummary ? Math.round((expenseSummary[6].sum  / totalExpense) * 100) : 0
-    const education = expenseSummary ? Math.round((expenseSummary[7].sum  / totalExpense) * 100) : 0
+    const clothing = expenseSummary ? Math.round((expenseSummary[0].sum  / totalExpense) * 100) : 0
+    const education = expenseSummary ? Math.round((expenseSummary[1].sum  / totalExpense) * 100) : 0
+    const food = expenseSummary ? Math.round((expenseSummary[2].sum  / totalExpense) * 100) : 0
+    const home = expenseSummary ? Math.round((expenseSummary[3].sum  / totalExpense) * 100) : 0
+    const otherExpense = expenseSummary ? Math.round((expenseSummary[4].sum  / totalExpense) * 100) : 0
+    const payments = expenseSummary ? Math.round((expenseSummary[5].sum  / totalExpense) * 100) : 0
+    const recreation= expenseSummary ? Math.round((expenseSummary[6].sum  / totalExpense) * 100) : 0
+    const transportation = expenseSummary ? Math.round((expenseSummary[7].sum  / totalExpense) * 100) : 0
 
     const summary = {
 
@@ -250,5 +250,76 @@ module.exports = {
     }
 
     res.status(200).send(summary)
+  }, 
+  getPrevious: async (req, res) => {
+    const db = req.app.get('db')
+
+    const previousDate = moment(new Date(req.query.date)).subtract(1,'months').format('MM/YYYY')
+    const secondMonth = moment(new Date(req.query.date)).subtract(2,'months').format('MM/YYYY')
+    const currentDate = moment(new Date(req.query.date)).format('MM/YYYY')
+
+
+    let sumIncomePrevious =  await db.budget.get_income_sum([req.session.user[0].id, previousDate])
+    let sumExpensePrevious = await db.budget.get_expense_sum([req.session.user[0].id, previousDate])
+    let sumIncomeCurrent = await db.budget.get_income_sum([req.session.user[0].id, currentDate])
+    let sumExpenseCurrent = await db.budget.get_expense_sum([req.session.user[0].id, currentDate]) 
+    let sumIncomeSecond = await db.budget.get_income_sum([req.session.user[0].id, secondMonth])
+    let sumExpenseSecond = await db.budget.get_income_sum([req.session.user[0].id, secondMonth])
+
+    if (!sumIncomePrevious[0].sum) {
+      sumIncomePrevious[0].sum = 0
+    } else {
+      sumIncomePrevious[0].sum = parseInt(sumIncomePrevious[0].sum)
+    }
+
+    if (!sumExpensePrevious[0].sum) {
+      sumExpensePrevious[0].sum = 0
+    } else {
+      sumExpensePrevious[0].sum = parseInt(sumExpensePrevious[0].sum)
+    }
+
+    if (!sumExpenseCurrent[0].sum) {
+      sumExpenseCurrent[0].sum = 0 
+    } else {
+      sumExpenseCurrent[0].sum = parseInt(sumExpenseCurrent[0].sum)
+    }
+
+    if (!sumIncomeCurrent[0].sum) {
+      sumIncomeCurrent[0].sum = 0
+    } else {
+      sumIncomeCurrent[0].sum = parseInt(sumIncomeCurrent[0].sum)
+    }
+
+    if (!sumIncomeSecond[0].sum) {
+      sumIncomeSecond[0].sum = 0
+    } else {
+      sumIncomeSecond[0].sum = parseInt(sumIncomeSecond[0].sum)
+    }
+
+    if (!sumExpenseSecond[0].sum) {
+      sumExpenseSecond[0].sum = 0
+    } else {
+      sumExpenseSecond[0].sum = parseInt(sumExpenseSecond[0].sum)
+    }
+
+    
+    const secondNet = sumIncomeSecond[0].sum + (-Math.abs(sumExpenseSecond[0].sum))
+    const previousNet = sumIncomePrevious[0].sum + (-Math.abs(sumExpensePrevious[0].sum))
+    const currentNet = sumIncomeCurrent[0].sum + (-Math.abs(sumExpenseCurrent[0].sum))
+
+    const previous = {
+      previousNet,
+      currentNet, 
+      secondNet
+    }
+
+    res.status(200).send(previous)
+
+
+
+
+
+    // console.log(sumIncomePrevious, sumExpensePrevious)
+    // console.log(sumIncomeCurrent, sumExpenseCurrent)
   }
 }

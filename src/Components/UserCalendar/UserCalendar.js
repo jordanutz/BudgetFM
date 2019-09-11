@@ -11,7 +11,6 @@ const UserCalendar = (props) => {
     props.setDate(active.activeStartDate)
    }
 
-
   const timeStamp = <Moment format="M/YY" style={{fontWeight: '800'}}>{props.date}</Moment>
 
   return (
