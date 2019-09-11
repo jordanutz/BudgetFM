@@ -35,7 +35,7 @@ const Menu = (props) => {
         <i className={props.location.pathname === `/user/${user.id}/income` ? 'fas fa-signal active' : 'fas fa-signal'}></i>
       </Link>
       <Link to={`/user/${user.id}/expenses`}>
-        <i className={props.location.pathname === `/user/${user.id}/expenses` ? 'fas fa-circle active' : 'fas fa-pause-circle'}></i>
+        <i className={props.location.pathname === `/user/${user.id}/expenses` ? 'fas fa-pause-circle active' : 'fas fa-pause-circle'}></i>
       </Link>
       <button onClick={userLogout}><i className="fas fa-power-off"></i></button>
     </section>
