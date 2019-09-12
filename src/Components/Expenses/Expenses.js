@@ -190,7 +190,7 @@ const Expenses = (props) => {
               }}/>
             </section> 
         </Col>
-        <Col xs={12} lg={4}>
+        <Col xs={12} lg={4} className="more-pd">
           <h2 className="center">Categories</h2>
 
           <section className="ExpenseCategory mb-2">

@@ -192,6 +192,10 @@
 
 @media screen and (max-width: 767px) {
 
+  .more-pd {
+    padding-bottom: 50px !important;
+  }
+
   .Expense .ExpenseMain .ExpenseDetails .ExpenseList button {
     width: 100%;
   }
