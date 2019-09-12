@@ -79,6 +79,11 @@
 }
 
 @media screen and (max-width: 767px) {
+
+  .CalendarModule {
+    margin-bottom:20px;
+  }
+  
   .CalendarIncome {
     max-width: 352px;
     margin: 0 auto;
@@ -86,6 +91,11 @@
 }
 
 @media screen and (min-width: 767px) and (max-width: 991px) {
+
+  .CalendarModule {
+    height: 22vh;
+  }
+
   .CalendarIncome {
     width: 45%;
     z-index: 1;

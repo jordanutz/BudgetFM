@@ -196,6 +196,15 @@
 
 @media screen and (max-width: 767px) {
 
+  .IncomeHeader {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .IncomeHeader h1 {
+    margin-bottom: 15px;
+  }
+
   .Income .IncomeMain .IncomeDetails .IncomeList .IncomeLog {
     position: relative;
   }
@@ -224,7 +233,17 @@
   }
 
   .Income .IncomeMain .IncomeDetails .IncomeList .IncomeSearch input {
-    width: 70%;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .Income .IncomeMain .IncomeDetails .IncomeList .IncomeSearch {
+    flex-direction: column;
+  }
+
+  .Income .IncomeMain .IncomeHeader button {
+    width: 100%;
+    margin-bottom: 5px;
   }
 
   .Income .IncomeMain .IncomeDetails .IncomeList .IncomeLog .IncomeCategory {
@@ -249,6 +268,14 @@
     display: none;
   }
 
+  .IncomeLog:last-of-type {
+    padding-bottom: 50px !important;
+  }
+
+  .Income .IncomeMain .IncomeDetails .IncomeList button {
+    width: 100%;
+  }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -263,8 +290,10 @@
       width: 45%;
       max-width: 352px;
     }
+  }
 
-  
+  .IncomeLog:last-of-type {
+    padding-bottom: 50px !important;
   }
 
   .MobileIncome {
