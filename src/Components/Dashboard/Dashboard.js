@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const {user} = useContext(AuthContext)
   const {balance} = useContext(ProfileContext)
-  const [date, setDate] = useState(new Date())
+  const {date, setDate} = useContext(ProfileContext)
   const [income, setIncome] = useState(0)
   const [expense, setExpense] = useState(0)
   const [previous, setPrevious] = useState(null)
@@ -85,7 +85,9 @@ const Dashboard = () => {
                 <h3><span>Current</span> Balance</h3>
                 <img src={Current} />
                 <section id="BalanceDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/balance`}><h4>Update</h4></Link>
+                  <Link to={{
+                    pathname: `/user/${user.id}/balance`,     
+                    }}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>
@@ -102,7 +104,7 @@ const Dashboard = () => {
                 <h3><span>Monthly</span> Income</h3>
                 <img src={Income} />
                 <section id="IncomeDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/income`}><h4>Update</h4></Link>
+                  <Link to={{pathname: `/user/${user.id}/income`}}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>
@@ -119,7 +121,7 @@ const Dashboard = () => {
                 <h3><span>Monthly</span> Expenses</h3>
                 <img src={Expenses} />
                 <section id="ExpensesDarken" className="ModuleFooter">
-                  <Link to={`/user/${user.id}/expenses`}><h4>Update</h4></Link>
+                  <Link to={{pathname: `/user/${user.id}/expenses`,}}><h4>Update</h4></Link>
                 </section>
               </section>
             </Col>
@@ -131,7 +133,6 @@ const Dashboard = () => {
             </Col>
             <Col xs={12} sm={12} md={12} lg={8}>
               <section id="SpendingGraph" className="DashboardModule">
-
               <Line data={previousSummary}
                 width={100}
                 height={100}
@@ -143,18 +144,23 @@ const Dashboard = () => {
                   scales: {
                     yAxes: [{
                         display: false
-                    }]
+                    }], 
+                    xAxes: [{
+                      display: false
+                  }]
                   }   
                }}/>
 
                 <h2 id="SpendingHeader">$<CountUp
                   start={1}
-                  end={37}
+                  end={previous && previous.currentNet}
                   delay={0}
                   decimals={0}
                   duration={1}
                 >
-                </CountUp>%</h2>
+                </CountUp></h2>
+
+                <h3>Net Income</h3>
               </section>
             </Col>
           </Row>

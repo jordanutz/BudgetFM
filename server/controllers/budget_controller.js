@@ -302,22 +302,19 @@ module.exports = {
       sumExpenseSecond[0].sum = parseInt(sumExpenseSecond[0].sum)
     }
 
-    
     const secondNet = sumIncomeSecond[0].sum + (-Math.abs(sumExpenseSecond[0].sum))
     const previousNet = sumIncomePrevious[0].sum + (-Math.abs(sumExpensePrevious[0].sum))
     const currentNet = sumIncomeCurrent[0].sum + (-Math.abs(sumExpenseCurrent[0].sum))
+    const percentageChange = ((currentNet - previousNet) / Math.abs(previousNet)) * 100;
 
     const previous = {
       previousNet,
       currentNet, 
-      secondNet
+      secondNet, 
+      percentageChange
     }
 
     res.status(200).send(previous)
-
-
-
-
 
     // console.log(sumIncomePrevious, sumExpensePrevious)
     // console.log(sumIncomeCurrent, sumExpenseCurrent)

@@ -19,12 +19,11 @@ import { Doughnut } from 'react-chartjs-2';
 import {AuthContext} from '../../Context/AuthContext'
 import {ProfileContext} from '../../Context/ProfileContext'
 
-const Expenses = () => {
+const Expenses = (props) => {
 
   const {user} = useContext(AuthContext)
-  const {setBalance} = useContext(ProfileContext)
+  const {setBalance, date} = useContext(ProfileContext)
   const [toggle, setToggle] = useState(false)
-  const [date, setDate] = useState(new Date())
   const [expenses, setExpenses] = useState(null)
   const [sum, setSum] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -59,7 +58,6 @@ const Expenses = () => {
 
   const getSummary = async () => {
     const res = await axios.get(`/api/summary/expense?date=${date}`)
-    console.log(res.data)
     setSummary(res.data)
   }
 
@@ -70,6 +68,7 @@ const Expenses = () => {
       setExpenses(res.data.getExpense)
       setSum(res.data.sumExpense)
       setBalance(res.data.updatedBalance)
+      getSummary();
     }
     deleteExpense();
   }
@@ -113,6 +112,7 @@ const Expenses = () => {
       setExpenses(res.data.getExpense)
       setSum(res.data.sumExpense)
       setBalance(res.data.updatedBalance)
+      getSummary();
     })
     .catch(err => console.log(err))
   }
@@ -296,10 +296,7 @@ const Expenses = () => {
                 </CountUp></span></h3>
             </section>
  
-            <UserCalendar 
-              date={date}
-              setDate={setDate}
-            />
+            <UserCalendar />
           </Col>
         </Row>
       </Container>  

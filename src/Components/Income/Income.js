@@ -19,20 +19,20 @@ import { Doughnut } from 'react-chartjs-2';
 import {AuthContext} from '../../Context/AuthContext'
 import {ProfileContext} from '../../Context/ProfileContext'
 
-const Income = () => {
+const Income = (props) => {
 
   // Component State
 
   const {user} = useContext(AuthContext)
-  const {setBalance} = useContext(ProfileContext)
+  const {setBalance, date} = useContext(ProfileContext)
   const [toggle, setToggle] = useState(false)
-  const [date, setDate] = useState(new Date())
   const [income, setIncome] = useState(null)
   const [sum, setSum] = useState(0)
   const [search, setSearch] = useState('')
   const [toggleDate, setToggleDate] = useState(false)
   const [summary, setSummary] = useState(null)
   const [toggleSummary, setToggleSummary] = useState(false)
+  
 
   // Pagination & Results
   const [currentPage, setCurrentPage] = useState(1)
@@ -52,7 +52,6 @@ const Income = () => {
       getSummary();
     }
   }, [date, search, toggleDate])
-
 
   const toggleAdd = () => {
     setToggle(!toggle)
@@ -78,6 +77,7 @@ const Income = () => {
       setBalance(res.data.updatedBalance)
     }
     deleteIncome();
+    getSummary();
   }
 
   const colorSelection = {
@@ -115,8 +115,6 @@ const Income = () => {
   const submitIncome = (e, description, category, amount, date) => {
     e.preventDefault()
 
-    console.log(date)
-  
     let income = {
       description, 
       category, 
@@ -130,11 +128,10 @@ const Income = () => {
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
       setBalance(res.data.updatedBalance)
+      getSummary();
     })
     .catch(err => console.log(err))
   }
-
-  console.log(date)
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
@@ -228,6 +225,7 @@ const Income = () => {
                 <h1>Income</h1>
                 <button onClick={toggleAdd}>Add New Income</button>    
               </section>
+    
              <Row className="IncomeList">
               {!toggleSummary &&
                 <Col xs={12} sm={12} md={12} lg={12} style={{padding: '0'}}>
@@ -266,6 +264,7 @@ const Income = () => {
                 {toggleSummary ? displaySummary : incomeLog}
                 <button onClick={handleSummaryToggle}>{toggleSummary ? 'View Log' : 'View Summary'}</button> 
               </Row>
+            
           </Col>
           <Col xs={12} sm={12} md={12} lg={4} className="MobileIncome">
             <section className="IncomeCard">
@@ -278,9 +277,11 @@ const Income = () => {
                 >
                 </CountUp></span></h3>
             </section>
-            <UserCalendar date={date} setDate={setDate} />
+            <UserCalendar />
           </Col>
         </Row>
+
+
       </Container>  
     </section>
     {displayToggle}
