@@ -128,6 +128,7 @@ const Income = (props) => {
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
       setBalance(res.data.updatedBalance)
+      getIncome();
       getSummary();
     })
     .catch(err => console.log(err))

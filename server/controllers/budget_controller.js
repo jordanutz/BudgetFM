@@ -51,11 +51,23 @@ module.exports = {
   postIncome: async (req, res) => {
     const db = req.app.get('db')
     const {income} = req.body
-    
-    const formatDate = moment(income.date).format('MM/YYYY')
+
+    let formatDate;
+    let submitDate;
+    let userDate = moment(income.date).format('M')
+    let checkDate = moment(new Date()).format('M')
+  
+    if (userDate === checkDate) {
+      formatDate = moment().format('MM/YYYY')
+      submitDate = moment().format();
+    } else {
+      submitDate = income.date
+      formatDate = moment(income.date).format('MM/YYYY')
+    }
+
     income.amount = parseInt(income.amount)
 
-    const postIncome = await db.budget.post_income([req.session.user[0].id, income.date, income.description, income.category, income.amount, formatDate])
+    const postIncome = await db.budget.post_income([req.session.user[0].id, submitDate, income.description, income.category, income.amount, formatDate])
     const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
     const sumIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
 
@@ -96,11 +108,23 @@ module.exports = {
   postExpense: async (req, res) => {
     const db = req.app.get('db')
     const {expense} = req.body
-    const formatDate = moment(expense.date).format('MM/YYYY')
+
+    let formatDate;
+    let submitDate;
+    let userDate = moment(expense.date).format('M')
+    let checkDate = moment(new Date()).format('M')
+  
+    if (userDate === checkDate) {
+      formatDate = moment().format('MM/YYYY')
+      submitDate = moment().format();
+    } else {
+      submitDate = expense.date
+      formatDate = moment(expense.date).format('MM/YYYY')
+    }
     
     expense.amount = parseInt(expense.amount)
 
-    const postExpense = await db.budget.post_expense([req.session.user[0].id, expense.date, expense.description, expense.category, expense.amount, formatDate])
+    const postExpense = await db.budget.post_expense([req.session.user[0].id, submitDate, expense.description, expense.category, expense.amount, formatDate])
     const getExpense = await db.budget.get_monthly_expense([req.session.user[0].id, formatDate])
     const sumExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
 
