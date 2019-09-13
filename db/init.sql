@@ -15,7 +15,7 @@ CREATE TABLE user_account (
 CREATE TABLE user_balance (
   id serial primary key, 
   user_id integer references user_account(id), 
-  balance integer not null
+  balance DECIMAL(4,2) not null
 )
 
 CREATE TABLE user_income (
@@ -24,7 +24,7 @@ CREATE TABLE user_income (
   date_posted text not null, 
   description varchar(255), 
   category_id integer references income_category(id), 
-  amount integer not null, 
+  amount DECIMAL(4,2) not null, 
   calendar text not null
 )
 
@@ -34,7 +34,7 @@ CREATE TABLE user_expense (
   date_posted text not null, 
   description varchar(255), 
   category_id integer references expense_category(id), 
-  amount integer not null, 
+  amount DECIMAL(4,2) not null, 
   calendar text not null
 )
 

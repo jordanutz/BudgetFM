@@ -288,9 +288,9 @@ const Expenses = (props) => {
             <section className="ExpenseCard">
               <h3>$<span><CountUp
                   start={0}
-                  end={sum ? parseInt(sum[0].sum) : 0}
+                  end={sum ? parseFloat(sum[0].sum) : 0}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></span></h3>

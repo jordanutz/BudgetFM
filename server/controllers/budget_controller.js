@@ -65,7 +65,7 @@ module.exports = {
       formatDate = moment(income.date).format('MM/YYYY')
     }
 
-    income.amount = parseInt(income.amount)
+    income.amount = parseFloat(income.amount)
 
     const postIncome = await db.budget.post_income([req.session.user[0].id, submitDate, income.description, income.category, income.amount, formatDate])
     const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
@@ -122,7 +122,7 @@ module.exports = {
       formatDate = moment(expense.date).format('MM/YYYY')
     }
     
-    expense.amount = parseInt(expense.amount)
+    expense.amount = parseFloat(expense.amount)
 
     const postExpense = await db.budget.post_expense([req.session.user[0].id, submitDate, expense.description, expense.category, expense.amount, formatDate])
     const getExpense = await db.budget.get_monthly_expense([req.session.user[0].id, formatDate])
@@ -148,7 +148,7 @@ module.exports = {
     const getIncome = await db.budget.get_monthly_income([req.session.user[0].id, formatDate])
     const sumIncome = await db.budget.get_income_sum([req.session.user[0].id, formatDate])
 
-    const updatedBalance = await db.budget.remove_income([req.session.user[0].id, parseInt(req.query.amount)])
+    const updatedBalance = await db.budget.remove_income([req.session.user[0].id, parseFloat(req.query.amount)])
     req.session.user[1].balance = updatedBalance[0].balance
 
     const userIncome = {
@@ -169,7 +169,7 @@ module.exports = {
     const getExpense = await db.budget.get_monthly_expense([req.session.user[0].id, formatDate])
     const sumExpense = await db.budget.get_expense_sum([req.session.user[0].id, formatDate])
 
-    const updatedBalance = await db.budget.remove_expense([req.session.user[0].id, parseInt(req.query.amount)])
+    const updatedBalance = await db.budget.remove_expense([req.session.user[0].id, parseFloat(req.query.amount)])
     req.session.user[1].balance = updatedBalance[0].balance
 
     const userExpense = {
@@ -207,11 +207,11 @@ module.exports = {
 
     incomeSummary.forEach(entry => {
       if (entry.sum) {
-        entry.sum = parseInt(entry.sum) 
+        entry.sum = parseFloat(entry.sum) 
       }
     })
 
-    totalIncome = totalIncome && parseInt(totalIncome[0].sum)
+    totalIncome = totalIncome && parseFloat(totalIncome[0].sum)
      
     // Income Categories
     const gift = incomeSummary ? Math.round((incomeSummary[0].sum  / totalIncome) * 100) : 0
@@ -244,11 +244,11 @@ module.exports = {
 
     expenseSummary.forEach(entry => {
       if (entry.sum) {
-        entry.sum = parseInt(entry.sum)
+        entry.sum = parseFloat(entry.sum)
       }
     })
 
-    totalExpense = totalExpense && parseInt(totalExpense[0].sum)
+    totalExpense = totalExpense && parseFloat(totalExpense[0].sum)
 
      // Expense Categories
     const clothing = expenseSummary ? Math.round((expenseSummary[0].sum  / totalExpense) * 100) : 0
@@ -293,37 +293,37 @@ module.exports = {
     if (!sumIncomePrevious[0].sum) {
       sumIncomePrevious[0].sum = 0
     } else {
-      sumIncomePrevious[0].sum = parseInt(sumIncomePrevious[0].sum)
+      sumIncomePrevious[0].sum = parseFloat(sumIncomePrevious[0].sum)
     }
 
     if (!sumExpensePrevious[0].sum) {
       sumExpensePrevious[0].sum = 0
     } else {
-      sumExpensePrevious[0].sum = parseInt(sumExpensePrevious[0].sum)
+      sumExpensePrevious[0].sum = parseFloat(sumExpensePrevious[0].sum)
     }
 
     if (!sumExpenseCurrent[0].sum) {
       sumExpenseCurrent[0].sum = 0 
     } else {
-      sumExpenseCurrent[0].sum = parseInt(sumExpenseCurrent[0].sum)
+      sumExpenseCurrent[0].sum = parseFloat(sumExpenseCurrent[0].sum)
     }
 
     if (!sumIncomeCurrent[0].sum) {
       sumIncomeCurrent[0].sum = 0
     } else {
-      sumIncomeCurrent[0].sum = parseInt(sumIncomeCurrent[0].sum)
+      sumIncomeCurrent[0].sum = parseFloat(sumIncomeCurrent[0].sum)
     }
 
     if (!sumIncomeSecond[0].sum) {
       sumIncomeSecond[0].sum = 0
     } else {
-      sumIncomeSecond[0].sum = parseInt(sumIncomeSecond[0].sum)
+      sumIncomeSecond[0].sum = parseFloat(sumIncomeSecond[0].sum)
     }
 
     if (!sumExpenseSecond[0].sum) {
       sumExpenseSecond[0].sum = 0
     } else {
-      sumExpenseSecond[0].sum = parseInt(sumExpenseSecond[0].sum)
+      sumExpenseSecond[0].sum = parseFloat(sumExpenseSecond[0].sum)
     }
 
     const secondNet = sumIncomeSecond[0].sum + (-Math.abs(sumExpenseSecond[0].sum))
@@ -340,7 +340,5 @@ module.exports = {
 
     res.status(200).send(previous)
 
-    // console.log(sumIncomePrevious, sumExpensePrevious)
-    // console.log(sumIncomeCurrent, sumExpenseCurrent)
   }
 }

@@ -78,7 +78,7 @@ const Dashboard = () => {
                   start={0}
                   end={balance}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -95,9 +95,9 @@ const Dashboard = () => {
               <section id="Income" className="DashboardModule">
                 <h2>$<CountUp
                   start={0}
-                  end={income ? parseInt(income[0].sum) : 0}
+                  end={income ? parseFloat(income[0].sum) : 0}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -112,9 +112,9 @@ const Dashboard = () => {
               <section id="Expenses" className="DashboardModule">
               <h2>$<CountUp
                   start={0}
-                  end={expense ? parseInt(expense[0].sum) : 0}
+                  end={expense ? parseFloat(expense[0].sum) : 0}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -155,7 +155,7 @@ const Dashboard = () => {
                   start={1}
                   end={previous && previous.currentNet}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></h2>

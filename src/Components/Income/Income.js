@@ -111,7 +111,6 @@ const Income = (props) => {
     setCurrentPage(pageNumber)
   }
 
-
   const submitIncome = (e, description, category, amount, date) => {
     e.preventDefault()
 
@@ -207,9 +206,6 @@ const Income = (props) => {
             <i className="fas fa-dollar-sign" style={{backgroundColor: colorSelection['salary']}}></i>
             <h2>Salary</h2>
           </section>
-
-         
-
         </Col>
       </Row>
     </Container>
@@ -271,9 +267,9 @@ const Income = (props) => {
             <section className="IncomeCard">
               <h3>$<span><CountUp
                   start={0}
-                  end={sum ? parseInt(sum[0].sum) : 0}
+                  end={sum ? parseFloat(sum[0].sum) : 0}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></span></h3>
