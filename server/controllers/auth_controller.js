@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 
 module.exports = {
+
   userRegister: async (req, res) => {
     const db = req.app.get('db')
     const {name, email, password} = req.body
@@ -38,26 +39,34 @@ module.exports = {
 
     const authedUser = bcrypt.compareSync(password, findExistingUser[0].password)
 
-    if (authedUser) {
+    try {
 
-      const findBalance = await db.auth.user_balance([findExistingUser[0].id])
+      if (authedUser) {
 
-      req.session.user = [
-        { 
-          id: findExistingUser[0].id, 
-          name: findExistingUser[0].name, 
-          email: findExistingUser[0].email
-        },
-      {   
-          balance: findBalance[0].balance 
-        }
-      ]
-      
-      return res.status(200).send(req.session.user)
-    } else {
-      return res.status(401).send('Incorrect email or password')
+        const findBalance = await db.auth.user_balance([findExistingUser[0].id])
+
+        req.session.user = [
+          { 
+            id: findExistingUser[0].id, 
+            name: findExistingUser[0].name, 
+            email: findExistingUser[0].email
+          },
+        {   
+            balance: findBalance[0].balance 
+          }
+        ]
+        
+        return res.status(200).send(req.session.user)
+      } else {
+        return res.status(401).send('Incorrect email or password')
+      }
     }
-  }, 
+
+    catch (err) {
+      console.log
+    }
+  }
+  , 
   getUser: (req, res) => {
     if (req.session.user) {
       res.status(200).send(req.session.user)

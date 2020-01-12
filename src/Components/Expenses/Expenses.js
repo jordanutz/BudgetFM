@@ -32,12 +32,15 @@ const Expenses = (props) => {
   const [toggleDate, setToggleDate] = useState(false)
   const [summary, setSummary] = useState(null)
   const [toggleSummary, setToggleSummary] = useState(false)
+  const [previous, setPrevious] = useState(null)
 
   useEffect( () => {
 
     if (search) {
       axios.get(`/api/expense/search?date=${date}&search=${search}`)
-      .then(res => setExpenses(res.data))
+      .then(res => {
+        setExpenses(res.data)
+      })
       .catch(err => console.log(err))
     } else {
       getExpense()
@@ -46,29 +49,36 @@ const Expenses = (props) => {
 
   }, [date, search, toggleDate])
 
-  const getExpense = async () => {
-    const res = await axios.get(`/api/expense?date=${date}&dateOrder=${toggleDate}`)
-    setExpenses(res.data.getExpense)
-    setSum(res.data.sumExpense)
+  const getExpense = () => {
+    axios.get(`/api/expense?date=${date}&dateOrder=${toggleDate}`)
+    .then(res => {
+      setExpenses(res.data.getExpense)
+      setSum(res.data.sumExpense)
+    })
+    .catch(err => console.log(err))
   }
 
   const toggleAdd = () => {
     setToggle(!toggle)
   }
 
-  const getSummary = async () => {
-    const res = await axios.get(`/api/summary/expense?date=${date}`)
-    setSummary(res.data)
+  const getSummary = () => {
+    axios.get(`/api/summary/expense?date=${date}`)
+    .then(res => setSummary(res.data))
+    .catch(err => console.log(err))
   }
 
   const deleteEntry = (e, id, amount) => {
     e.preventDefault()
-    const deleteExpense = async () => {
-      const res = await axios.delete(`/api/expense?id=${id}&date=${date}&amount=${amount}`)
-      setExpenses(res.data.getExpense)
-      setSum(res.data.sumExpense)
-      setBalance(res.data.updatedBalance)
-      getSummary();
+
+    const deleteExpense = () => {
+      axios.delete(`/api/expense?id=${id}&date=${date}&amount=${amount}`)
+      .then(res => {
+        setExpenses(res.data.getExpense)
+        setSum(res.data.sumExpense)
+        setBalance(res.data.updatedBalance)
+        getSummary();
+      }).catch(err => console.log(err))
     }
     deleteExpense();
   }
@@ -103,7 +113,8 @@ const Expenses = (props) => {
       description, 
       category, 
       amount, 
-      date
+      date, 
+      previous
     }
   
     axios.post('/api/expense', {expense})
@@ -112,6 +123,7 @@ const Expenses = (props) => {
       setExpenses(res.data.getExpense)
       setSum(res.data.sumExpense)
       setBalance(res.data.updatedBalance)
+      setPrevious(res.data.previous)
       getSummary();
     })
     .catch(err => console.log(err))
@@ -119,7 +131,11 @@ const Expenses = (props) => {
   
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddExpense colorSelection={colorSelection} submitExpense={submitExpense} setToggle={setToggle} date={date} />
+      <AddExpense 
+        colorSelection={colorSelection} 
+        submitExpense={submitExpense} 
+        setToggle={setToggle} 
+        date={date} />
     </div>
 
   const handleSummaryToggle = () => {
@@ -264,22 +280,21 @@ const Expenses = (props) => {
                   </section>
                 </Col>
               }
-                { !toggleSummary && <Row className="HeadingRow MobileNone">
+                { !toggleSummary && <Row className="HeadingRow MobileNone" style={{background: '#1E1F22'}}>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
+                    <h2 style={{cursor: 'pointer', color: '#eee'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Description</h2>
+                    <h2 style={{color: '#eee'}}>Description</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                      <h2>Category</h2>
+                      <h2 style={{color: '#eee'}}>Category</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Amount</h2>
+                    <h2 style={{color: '#eee'}}>Amount</h2>
                   </Col>
                 </Row>
-                }
-                
+                }       
                 {toggleSummary ? displaySummary : expensesLog}
                 <button onClick={handleSummaryToggle}>{toggleSummary ? 'View Log' : 'View Summary'}</button> 
               </Row>

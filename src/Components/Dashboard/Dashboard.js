@@ -21,13 +21,11 @@ import { Line } from 'react-chartjs-2';
 import Current from './assets/current.svg'
 import Expenses from './assets/expenses.svg'
 import Income from './assets/income.svg'
-import User from './assets/user.svg'
 
 const Dashboard = () => {
 
   const {user} = useContext(AuthContext)
-  const {balance} = useContext(ProfileContext)
-  const {date, setDate} = useContext(ProfileContext)
+  const {date, setDate,  balance, setBalance} = useContext(ProfileContext)
   const [income, setIncome] = useState(0)
   const [expense, setExpense] = useState(0)
   const [previous, setPrevious] = useState(null)
@@ -37,15 +35,20 @@ const Dashboard = () => {
     getPrevious()
   }, [date])
 
-  const getDashboard = async () => {
-    const res = await axios.get(`/api/dashboard?date=${date}`)
-    setIncome(res.data.getIncome)
-    setExpense(res.data.getExpense)
+  const getDashboard = () => {
+    axios.get(`/api/dashboard?date=${date}`)
+    .then(res => {
+      setIncome(res.data.monthlyIncome)
+      setExpense(res.data.monthlyExpense)
+      setBalance(res.data.balance)
+    })
+    .catch(err => console.log(err))
   }
 
-  const getPrevious = async () => {
-    const res = await axios.get(`/api/dashboard/previous?date=${date}`)
-    setPrevious(res.data)
+  const getPrevious = () => {
+    axios.get(`/api/dashboard/previous?date=${date}`)
+    .then(res => setPrevious(res.data))
+    .catch(err => console.log(err))
   }
 
   const previousSummary  = {
@@ -76,9 +79,9 @@ const Dashboard = () => {
               <section id="Balance" className="DashboardModule">
                 <h2>$<CountUp
                   start={0}
-                  end={balance}
+                  end={parseFloat(balance) ? parseFloat(balance) : 0}
                   delay={0}
-                  decimals={2}
+                  decimals={0}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -86,8 +89,11 @@ const Dashboard = () => {
                 <img src={Current} />
                 <section id="BalanceDarken" className="ModuleFooter">
                   <Link to={{
-                    pathname: `/user/${user.id}/balance`,     
-                    }}><h4>Update</h4></Link>
+                    pathname: `/user/${user.id}/balance`,    
+                    state: {
+                      balance: balance
+                    } 
+                    }}><h4>View Details</h4></Link>
                 </section>
               </section>
             </Col>
@@ -95,9 +101,9 @@ const Dashboard = () => {
               <section id="Income" className="DashboardModule">
                 <h2>$<CountUp
                   start={0}
-                  end={income ? parseFloat(income[0].sum) : 0}
+                  end={income && parseFloat(income)}
                   delay={0}
-                  decimals={2}
+                  decimals={0}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -112,9 +118,9 @@ const Dashboard = () => {
               <section id="Expenses" className="DashboardModule">
               <h2>$<CountUp
                   start={0}
-                  end={expense ? parseFloat(expense[0].sum) : 0}
+                  end={expense && parseFloat(expense)}
                   delay={0}
-                  decimals={2}
+                  decimals={0}
                   duration={1}
                 >
                 </CountUp></h2>
@@ -152,10 +158,10 @@ const Dashboard = () => {
                }}/>
 
                 <h2 id="SpendingHeader">$<CountUp
-                  start={1}
-                  end={previous && previous.currentNet}
+                  start={0}
+                  end={previous ? parseInt(previous.currentNet) : 0}
                   delay={0}
-                  decimals={2}
+                  decimals={0}
                   duration={1}
                 >
                 </CountUp></h2>

@@ -12,16 +12,14 @@ import Navigation from './Components/Navigation/Navigation'
 import AuthContextProvider from './Context/AuthContext'
 import ProfileContextProvider from './Context/ProfileContext'
 
-const App = (props) => {
 
+const App = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   })
 
   const displayNavigation = props.location.pathname === '/' || 
     props.location.pathname === '/auth' ? <Header /> : <Navigation />
-
-
 
   return (
       <div className="App">

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import './Balance.scss'
 
 // Components
@@ -6,26 +6,14 @@ import Menu from '../Menu/Menu'
 import NoAccess from '../NoAccess/NoAccess'
 import {Container, Row, Col} from 'react-bootstrap'
 import CountUp from 'react-countup'
-import axios from 'axios'
-
-// Context
 import {AuthContext} from '../../Context/AuthContext'
 import {ProfileContext} from '../../Context/ProfileContext'
 
-const Balance = () => {
+const Balance = (props) => {
 
-  const {user, setUser} = useContext(AuthContext)
-  const {balance, setBalance} = useContext(ProfileContext)
-  const [input, setInput] = useState('')
+  const {user} = useContext(AuthContext)
+  const {balance} = useContext(ProfileContext)
 
-  const submitBalance = (e, balance) => {
-    e.preventDefault()
-    let userBalance = {balance: parseInt(input)}
-    axios.put('/api/balance', userBalance).then(res => {
-      setBalance(res.data.balance)
-    })
-  }
-  
   const displayBalance = user ? 
     <div className="Balance">
       <Menu />
@@ -36,8 +24,6 @@ const Balance = () => {
               <section className="BalanceUpdate UpdateMobile" >
                 <h1>Current Balance</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ornare arcu nec laoreet aliquam. Phasellus placerat purus nec consequat dapibus. Suspendisse bibendum tempor lacus a elementum. Proin vel dictum ante. Pellentesque ex ipsum, scelerisque ut eros sit amet, aliquet feugiat lectus. </p>
-                <span>$<input type="text" value={input} placeholder={balance} onChange={(e) => setInput(e.target.value)} /></span>
-                <button onClick={(e) => submitBalance(e, balance)}>Update Balance</button>
               </section>
             </Col>
             <Col sm={12} md={6} lg={6} className="BalanceMobile">
@@ -46,7 +32,7 @@ const Balance = () => {
                   start={0}
                   end={balance}
                   delay={0}
-                  decimals={0}
+                  decimals={2}
                   duration={1}
                 >
                 </CountUp></span></h3>

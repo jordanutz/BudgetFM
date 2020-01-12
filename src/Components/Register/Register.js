@@ -22,6 +22,7 @@ const Register = (props) => {
               setUser(res.data)
               props.history.push(`/user/${res.data.id}`)
             })
+            .catch(err => console.log(err))
         }}
 
     validationSchema = { Yup.object().shape({

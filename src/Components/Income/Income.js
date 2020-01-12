@@ -32,8 +32,8 @@ const Income = (props) => {
   const [toggleDate, setToggleDate] = useState(false)
   const [summary, setSummary] = useState(null)
   const [toggleSummary, setToggleSummary] = useState(false)
+  const [previous, setPrevious] = useState(null)
   
-
   // Pagination & Results
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(5)
@@ -57,25 +57,34 @@ const Income = (props) => {
     setToggle(!toggle)
   }
 
-  const getIncome = async () => {
-    const res = await axios.get(`/api/income?date=${date}&dateOrder=${toggleDate}`)
-    setIncome(res.data.getIncome)
-    setSum(res.data.sumIncome)
+  const getIncome = () => {
+    axios.get(`/api/income?date=${date}&dateOrder=${toggleDate}`)
+    .then(res => {
+      setIncome(res.data.getIncome)
+      setSum(res.data.sumIncome)
+    })
+    .catch(err => console.log(err))
   }
 
-  const getSummary = async () => {
-    const res = await axios.get(`/api/summary/income?date=${date}`)
-    setSummary(res.data)
+  const getSummary = () => {
+    axios.get(`/api/summary/income?date=${date}`)
+    .then(res => setSummary(res.data))
+    .catch(err => console.log(err))
   }
 
   const deleteEntry = (e, id, amount) => {
     e.preventDefault()
-    const deleteIncome = async () => {
-      const res = await axios.delete(`/api/income?id=${id}&date=${date}&amount=${amount}`)
-      setIncome(res.data.getIncome)
-      setSum(res.data.sumIncome)
-      setBalance(res.data.updatedBalance)
+
+    const deleteIncome = () => {
+      axios.delete(`/api/income?id=${id}&date=${date}&amount=${amount}`)
+      .then(res => {
+        setIncome(res.data.getIncome)
+        setSum(res.data.sumIncome)
+        setBalance(res.data.updatedBalance)
+      })
+      .catch(err => console.log(err))
     }
+
     deleteIncome();
     getSummary();
   }
@@ -112,21 +121,24 @@ const Income = (props) => {
   }
 
   const submitIncome = (e, description, category, amount, date) => {
+
     e.preventDefault()
 
     let income = {
       description, 
       category, 
       amount, 
-      date
+      date, 
+      previous
     }
-  
+
     axios.post('/api/income', {income})
     .then(res => {
       setToggle(false)
       setIncome(res.data.getIncome)
       setSum(res.data.sumIncome)
       setBalance(res.data.updatedBalance)
+      setPrevious(res.data.previous)
       getIncome();
       getSummary();
     })
@@ -135,7 +147,11 @@ const Income = (props) => {
 
   const displayToggle = toggle &&
     <div className="ToggleOverlay">
-      <AddIncome colorSelection={colorSelection} submitIncome={submitIncome} setToggle={setToggle} date={date}/>
+      <AddIncome 
+        colorSelection={colorSelection} 
+        submitIncome={submitIncome} 
+        setToggle={setToggle} 
+        date={date}/>
     </div>
 
     const handleSummaryToggle = () => {
@@ -209,8 +225,7 @@ const Income = (props) => {
         </Col>
       </Row>
     </Container>
-
-
+    
   const displayIncome = user ? 
     <div className="Income">
       <Menu />
@@ -235,29 +250,26 @@ const Income = (props) => {
                       total={income && income.length}
                       pageSize={postsPerPage}
                       showTotal={(total, range) => `Displaying ${range[1]} of ${total}`}
-                      />}
-                    
+                      />}           
                   </section>
-                  
                 </Col>
               }
 
-                {!toggleSummary && <Row className="HeadingRow MobileNone">
+                {!toggleSummary && <Row className="HeadingRow MobileNone" style={{background: '#1E1F22'}}>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2 style={{cursor: 'pointer'}} onClick={handleDateToggle}>Date</h2>
+                    <h2 style={{cursor: 'pointer', color: '#eee'}} onClick={handleDateToggle}>Date</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Description</h2>
+                    <h2 style={{color: '#eee'}}>Description</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                      <h2>Category</h2>
+                      <h2 style={{color: '#eee'}}>Category</h2>
                   </Col>
                   <Col xs={12} sm={12} md={3} lg={3}>
-                    <h2>Amount</h2>
+                    <h2 style={{color: '#eee'}}>Amount</h2>
                   </Col>
                 </Row>
-                }
-                
+                } 
                 {toggleSummary ? displaySummary : incomeLog}
                 <button onClick={handleSummaryToggle}>{toggleSummary ? 'View Log' : 'View Summary'}</button> 
               </Row>
@@ -265,20 +277,20 @@ const Income = (props) => {
           </Col>
           <Col xs={12} sm={12} md={12} lg={4} className="MobileIncome">
             <section className="IncomeCard">
-              <h3>$<span><CountUp
-                  start={0}
+              <h3>$<span>
+                <CountUp
+                  start={previous ? parseFloat(previous) : 0}
                   end={sum ? parseFloat(sum[0].sum) : 0}
                   delay={0}
                   decimals={2}
                   duration={1}
                 >
-                </CountUp></span></h3>
+                </CountUp>
+                </span></h3>
             </section>
             <UserCalendar />
           </Col>
         </Row>
-
-
       </Container>  
     </section>
     {displayToggle}

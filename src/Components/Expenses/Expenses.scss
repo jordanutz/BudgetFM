@@ -39,7 +39,8 @@
     .ExpenseDetails {
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        font-weight: 600;
       }
 
       .ExpenseList {
@@ -157,7 +158,7 @@
 
     h3 {
       font-weight: 800;
-      font-size: 4.5rem;
+      font-size: 3.75rem;
       letter-spacing: -1px;
       color: #fff;
 
@@ -296,10 +297,6 @@
   }
 }
 
-.ExpenseLog:last-of-type {
-  padding-bottom: 50px !important;
-}
-
 @media screen and (min-width: 992px) {
   .Expense {
     min-height: 90vh;
@@ -327,4 +324,8 @@
     border-radius: 50%;
   }
 
+}
+
+.Expense .ExpenseMain .ExpenseDetails .ExpenseList .ExpenseLog:nth-child(even) {
+  background: #eee;
 }
